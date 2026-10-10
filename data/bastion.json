@@ -1,0 +1,48 @@
+{
+ "nom": "Le Relais de la Marche",
+ "maj": "Session 3",
+ "installations": [
+  {
+   "nom": "Dortoirs",
+   "type": "Base",
+   "etat": "Actif",
+   "effet": "Logement des membres entre deux expéditions."
+  },
+  {
+   "nom": "Salle commune",
+   "type": "Base",
+   "etat": "Actif",
+   "effet": "Tableau des contrats et carte murale de la frontière."
+  },
+  {
+   "nom": "Forge",
+   "type": "Spéciale",
+   "etat": "Actif",
+   "effet": "Fabrique armes et armures non magiques. Armes en argent si la guilde tient la mine."
+  },
+  {
+   "nom": "Bibliothèque",
+   "type": "Spéciale",
+   "etat": "En construction",
+   "effet": "Recherches sur le mystère de la frontière. Prête dans 2 sessions."
+  }
+ ],
+ "ordres": [
+  {
+   "installation": "Forge",
+   "ordre": "Fabriquer 2 cottes de mailles",
+   "statut": "En cours"
+  },
+  {
+   "installation": "Bibliothèque",
+   "ordre": "Terminer la construction",
+   "statut": "En cours"
+  }
+ ],
+ "prochaine": {
+  "nom": "Jardin d'herboriste",
+  "cout": 500,
+  "effet": "Potions de soins moins chères pour les membres."
+ },
+ "note": "Les améliorations se votent au conseil de guilde, sur Discord."
+}

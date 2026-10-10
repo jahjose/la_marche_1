@@ -1,0 +1,109 @@
+{
+ "maj": "Session 3",
+ "echoppes": [
+  {
+   "nom": "Comptoir de Hilda",
+   "description": "Équipement d'aventure et provisions.",
+   "objets": [
+    {
+     "nom": "Rations (1 jour)",
+     "rarete": "Ordinaire",
+     "prix": 0.5,
+     "stock": "Abondant"
+    },
+    {
+     "nom": "Corde de chanvre (15 m)",
+     "rarete": "Ordinaire",
+     "prix": 1,
+     "stock": "Abondant"
+    },
+    {
+     "nom": "Trousse de soins",
+     "rarete": "Ordinaire",
+     "prix": 5,
+     "stock": "4"
+    },
+    {
+     "nom": "Torche",
+     "rarete": "Ordinaire",
+     "prix": 0.01,
+     "stock": "Abondant"
+    }
+   ]
+  },
+  {
+   "nom": "Apothicaire du Gué",
+   "description": "Potions et remèdes. Moins cher si la guilde construit un jardin d'herboriste.",
+   "objets": [
+    {
+     "nom": "Potion de guérison",
+     "rarete": "Courant",
+     "prix": 50,
+     "stock": "5"
+    },
+    {
+     "nom": "Potion d'escalade",
+     "rarete": "Courant",
+     "prix": 100,
+     "stock": "2"
+    },
+    {
+     "nom": "Potion de guérison (importante)",
+     "rarete": "Peu courant",
+     "prix": 400,
+     "stock": "1"
+    }
+   ]
+  },
+  {
+   "nom": "Curiosités de Pell",
+   "description": "Objets étranges rapportés par des voyageurs. Stock renouvelé chaque semaine.",
+   "objets": [
+    {
+     "nom": "Bourse à épices d'Huard",
+     "rarete": "Courant",
+     "prix": 100,
+     "stock": "1"
+    },
+    {
+     "nom": "Corde d'ascension",
+     "rarete": "Peu courant",
+     "prix": 400,
+     "stock": "1"
+    },
+    {
+     "nom": "Sac sans fond",
+     "rarete": "Peu courant",
+     "prix": 400,
+     "stock": "Vendu"
+    }
+   ]
+  },
+  {
+   "nom": "Forge de Brann",
+   "description": "Armes et armures. Brann attend du minerai pour travailler l'argent.",
+   "objets": [
+    {
+     "nom": "Épée longue",
+     "rarete": "Ordinaire",
+     "prix": 15,
+     "stock": "3"
+    },
+    {
+     "nom": "Cotte de mailles",
+     "rarete": "Ordinaire",
+     "prix": 75,
+     "stock": "1"
+    },
+    {
+     "nom": "Arme en argent",
+     "rarete": "Courant",
+     "prix": 100,
+     "stock": "Verrouillé",
+     "condition": "La guilde doit tenir la mine du Puits-Gris"
+    }
+   ]
+  }
+ ],
+ "note": "Pour acheter, annoncez-le dans #coffre-de-la-guilde. Le MJ de votre prochaine session valide l'achat."
+}

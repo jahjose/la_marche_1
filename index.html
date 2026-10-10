@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Le Relais de la Marche</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* Layout : en-tête nommé + barre d'onglets ; chaque onglet est une colonne de lecture ou une grille carte/panneau */
+:root{
+  --bg:#e6e8e1; --panel:#f3f4ef; --ink:#232a35; --muted:#5d6572; --line:#c4c8bd; --accent:#2f5d62; --gold:#9a7634;
+  --fog:#9aa0a8; --ok:#3f7a45; --warn:#a8843f; --off:#8b8f96;
+  --t-ville:#c4a06a; --t-collines:#b0a273; --t-foret:#6a8560; --t-plaine:#c2c18a; --t-marais:#7c9a90;
+  --t-montagne:#8d8a85; --t-mer:#9db8bf; --water:#5f8fa3; --guilde:#9a7634; --disc:#f7f6f0;
+  --r-ordinaire:#8b8f96; --r-courant:#5d6572; --r-peu:#3f7a45; --r-rare:#2f5d9c;
+  --display:"IM Fell English SC",Georgia,serif; --body:Spectral,Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1a1f28; --panel:#232a35; --ink:#e4e6e0; --muted:#9aa2ae; --line:#3a4350; --accent:#7fb2b5; --gold:#d1aa5c;
+  --fog:#4b525d; --ok:#79b77e; --warn:#d6b062; --off:#6b7380;
+  --t-ville:#a9864e; --t-collines:#857955; --t-foret:#476042; --t-plaine:#8f8e5e; --t-marais:#536f6c;
+  --t-montagne:#68655f; --t-mer:#2f4a54; --water:#7fb0c4; --guilde:#d1aa5c; --disc:#2b3340;
+  --r-ordinaire:#8b929c; --r-courant:#b3b9c2; --r-peu:#79b77e; --r-rare:#86a8e0; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1a1f28; --panel:#232a35; --ink:#e4e6e0; --muted:#9aa2ae; --line:#3a4350; --accent:#7fb2b5; --gold:#d1aa5c;
+  --fog:#4b525d; --ok:#79b77e; --warn:#d6b062; --off:#6b7380;
+  --t-ville:#a9864e; --t-collines:#857955; --t-foret:#476042; --t-plaine:#8f8e5e; --t-marais:#536f6c;
+  --t-montagne:#68655f; --t-mer:#2f4a54; --water:#7fb0c4; --guilde:#d1aa5c; --disc:#2b3340;
+  --r-ordinaire:#8b929c; --r-courant:#b3b9c2; --r-peu:#79b77e; --r-rare:#86a8e0; color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:16px}
+header.top{padding-block:1.4rem .2rem}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2rem,6vw,3rem);margin:0;line-height:1;text-wrap:balance}
+.sub{color:var(--muted);margin:.35rem 0 0;font-style:italic}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-top:.8rem}
+nav.tabs .wrap{display:flex;gap:.2rem;overflow-x:auto}
+nav.tabs button{font:inherit;font-size:1.02rem;background:none;border:0;color:var(--muted);padding:.65rem .9rem;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+main{padding-block:1.4rem 3rem}
+h2{font-family:var(--display);font-weight:400;font-size:1.65rem;margin:0;line-height:1.15;text-wrap:balance}
+h3{font-family:var(--display);font-weight:400;font-size:1.25rem;margin:0}
+.meta{color:var(--muted);font-size:.92rem;margin:.15rem 0 0}
+.stack{display:grid;gap:1.6rem}
+.grid2{display:grid;gap:1.25rem;grid-template-columns:1fr}
+@media(min-width:880px){.grid2{grid-template-columns:minmax(0,1.55fr) minmax(0,1fr)}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:1.1rem 1.2rem;min-width:0}
+.note{color:var(--muted);font-size:.93rem;max-width:65ch;margin:0}
+.pill{display:inline-block;font-size:.8rem;line-height:1.5;padding:0 .55rem;border-radius:999px;border:1px solid currentColor;white-space:nowrap;font-variant-numeric:tabular-nums}
+.st-ok{color:var(--ok)} .st-warn{color:var(--warn)} .st-off{color:var(--off)}
+/* carte */
+.mapwrap{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:.5rem;overflow-x:auto}
+svg.map{width:100%;min-width:520px;height:auto;display:block}
+.hex{cursor:pointer}.hex .shape{stroke:var(--bg);stroke-width:2}
+.hex.sel .shape{stroke:var(--ink);stroke-width:3}
+.hex:focus{outline:none}.hex:focus-visible .shape{stroke:var(--accent);stroke-width:3}
+.hexid{font-size:8px;fill:var(--ink);opacity:.5;font-family:var(--body)}
+.lbl{font-family:var(--display);font-size:12px;fill:var(--ink);text-anchor:middle;paint-order:stroke;stroke:var(--panel);stroke-width:3px;stroke-linejoin:round}
+.q{font-family:var(--display);font-size:24px;fill:var(--ink);text-anchor:middle;opacity:.8}
+.rumor{border-left:3px solid var(--gold);padding:.25rem 0 .25rem .8rem;margin:.9rem 0 0;font-style:italic}
+.legend{display:flex;flex-wrap:wrap;gap:.3rem 1rem;font-size:.88rem;color:var(--muted);margin-top:1rem}
+.legend span{display:inline-flex;align-items:center;gap:.35rem}
+.sw{width:.75rem;height:.75rem;border-radius:2px;display:inline-block}
+/* listes */
+.rows{list-style:none;margin:0;padding:0}
+.rows li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.2rem 1rem;padding:.75rem 0;border-bottom:1px solid var(--line);align-items:baseline}
+.rows li:last-child{border-bottom:0}
+.rows .name{font-weight:600}
+.rows .desc{grid-column:1/-1;color:var(--muted);font-size:.94rem;max-width:62ch}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+.tablewrap{overflow-x:auto}
+th{text-align:left;font-weight:600;color:var(--muted);font-size:.85rem;padding:.4rem .6rem .4rem 0;border-bottom:1px solid var(--line)}
+td{padding:.55rem .6rem .55rem 0;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.rar{font-size:.85rem;white-space:nowrap}
+.rar::before{content:"";display:inline-block;width:.5rem;height:.5rem;border-radius:50%;background:currentColor;margin-right:.35rem;vertical-align:1px}
+.r-ordinaire{color:var(--r-ordinaire)}.r-courant{color:var(--r-courant)}.r-peu{color:var(--r-peu)}.r-rare{color:var(--r-rare)}
+tr.locked td{color:var(--muted)}
+.cond{display:block;font-size:.85rem;font-style:italic;color:var(--muted)}
+.shops{display:grid;gap:1.25rem;grid-template-columns:1fr}
+@media(min-width:880px){.shops{grid-template-columns:1fr 1fr}}
+/* trésor */
+.treasure{display:flex;flex-wrap:wrap;align-items:baseline;gap:.3rem 1rem}
+.treasure .amount{font-family:var(--display);font-size:clamp(2.6rem,9vw,3.6rem);line-height:1;color:var(--gold);font-variant-numeric:tabular-nums}
+.treasure .unit{font-family:var(--display);font-size:1.3rem;color:var(--gold)}
+.plus{color:var(--ok)}.minus{color:var(--warn)}
+.progress{height:.55rem;background:var(--bg);border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:.6rem 0 .3rem}
+.progress span{display:block;height:100%;background:var(--gold)}
+.empty{color:var(--muted);font-style:italic}
+.err{color:var(--warn)}
+</style>
+</head>
+<body>
+
+
+<header class="top wrap">
+  <h1>Le Relais de la Marche</h1>
+  <p class="sub" id="maj">Le site de la guilde des aventuriers.</p>
+</header>
+<nav class="tabs" aria-label="Sections">
+  <div class="wrap" role="tablist">
+    <button role="tab" id="t-carte" data-tab="carte" aria-selected="true">Carte</button>
+    <button role="tab" id="t-bastion" data-tab="bastion" aria-selected="false">Bastion</button>
+    <button role="tab" id="t-marchand" data-tab="marchand" aria-selected="false">Marchand</button>
+    <button role="tab" id="t-butin" data-tab="butin" aria-selected="false">Butin de la guilde</button>
+  </div>
+</nav>
+<main class="wrap">
+  <section id="p-carte" role="tabpanel" aria-labelledby="t-carte">
+    <div class="grid2">
+      <div class="mapwrap"><svg class="map" id="map" role="group" aria-label="Carte de la frontière"></svg></div>
+      <aside class="panel" id="info" aria-live="polite"><p class="empty">Chargement de la carte…</p></aside>
+    </div>
+  </section>
+  <section id="p-bastion" role="tabpanel" aria-labelledby="t-bastion" hidden></section>
+  <section id="p-marchand" role="tabpanel" aria-labelledby="t-marchand" hidden></section>
+  <section id="p-butin" role="tabpanel" aria-labelledby="t-butin" hidden></section>
+</main>
+
+<script>
+(function(){
+"use strict";
+const D={};
+const TERR={ville:"Ville",plaine:"Plaine",foret:"Forêt",collines:"Collines",montagne:"Montagne",marais:"Marais",mer:"Mer"};
+const RAR={"Ordinaire":"r-ordinaire","Courant":"r-courant","Peu courant":"r-peu","Rare":"r-rare"};
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const nf=new Intl.NumberFormat("fr-FR");
+function prix(po){ if(po>=1) return nf.format(po)+" po"; if(po>=0.1) return Math.round(po*10)+" pa"; return Math.round(po*100)+" pc"; }
+function stPill(s){ const k=/actif|disponible|abondant|^\d/i.test(s)?"st-ok":/cours|réclamé/i.test(s)?"st-warn":"st-off"; return `<span class="pill ${k}">${esc(s)}</span>`; }
+
+/* ---------- Carte ---------- */
+const S=32,R3=Math.sqrt(3),PAD=8; let sel=null, byId={};
+const ctr=h=>({x:PAD+S*R3*(h.col+0.5*(h.row&1))+S*R3/2, y:PAD+S+S*1.5*h.row});
+function poly(c,s){const p=[];for(let i=0;i<6;i++){const a=Math.PI/180*(60*i-30);p.push((c.x+s*Math.cos(a)).toFixed(1)+","+(c.y+s*Math.sin(a)).toFixed(1));}return p.join(" ");}
+function glyph(t,c){const x=c.x,y=c.y,o='stroke="var(--ink)" stroke-opacity=".45" fill="none" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"';
+  return {plaine:`<path ${o} d="M${x-10} ${y+3}h6M${x+1} ${y-2}h8M${x-4} ${y+8}h7"/>`,
+  foret:`<path ${o} d="M${x-8} ${y-6}l-5 11h10zM${x+6} ${y-9}l-5 11h10zM${x-1} ${y+1}l-5 11h10z"/>`,
+  collines:`<path ${o} d="M${x-14} ${y+5}q7-12 14 0M${x-2} ${y+5}q8-14 16 0"/>`,
+  montagne:`<path ${o} d="M${x-15} ${y+8}l9-17 6 9 5-7 10 15z"/>`,
+  marais:`<path ${o} d="M${x-12} ${y+5}c3-2 6 2 9 0s6 2 9 0 6 2 6 0M${x-5} ${y+5}v-9M${x-1} ${y+5}v-12M${x+5} ${y+5}v-7"/>`,
+  mer:`<path ${o} d="M${x-11} ${y-3}q3-3 6 0t6 0t6 0M${x-6} ${y+5}q3-3 6 0t6 0t6 0"/>`}[t]||"";}
+function mark(c,guilde){const x=c.x,y=c.y;return `<circle cx="${x}" cy="${y}" r="11" fill="var(--disc)" stroke="${guilde?"var(--guilde)":"var(--ink)"}" stroke-opacity="${guilde?1:.35}" stroke-width="${guilde?2.2:1}"/><circle cx="${x}" cy="${y}" r="3" fill="var(--ink)"/>`;}
+function renderMap(){
+  const M=D.carte, svg=document.getElementById("map");
+  const W=PAD*2+S*R3*(M.largeur+0.5), H=PAD*2+S*2+S*1.5*(M.hauteur-1);
+  svg.setAttribute("viewBox",`0 0 ${W.toFixed(0)} ${H.toFixed(0)}`);
+  let base="",over="",lab="";
+  const C="ABCDEFGHIJKLMNOP";
+  for(let r=0;r<M.hauteur;r++) for(let col=0;col<M.largeur;col++){
+    const id=C[col]+(r+1), h=byId[id], c=ctr({col,row:r});
+    const known=!!h, rum=M.rumeurs[id];
+    base+=`<g class="hex${id===sel?" sel":""}" data-id="${id}" tabindex="0" role="button" aria-label="${id}${known?(h.lieu?", "+esc(h.lieu.nom):", "+TERR[h.terrain]):", inexplorée"}${rum?", rumeur":""}">`;
+    base+=`<polygon class="shape" points="${poly(c,S)}" fill="${known?`var(--t-${h.terrain})`:"var(--fog)"}"/>`;
+    if(known && !h.lieu) base+=glyph(h.terrain,c);
+    if(!known && rum) base+=`<text class="q" x="${c.x}" y="${c.y+8}">?</text>`;
+    base+=`<text class="hexid" x="${(c.x-6).toFixed(1)}" y="${(c.y-S+12).toFixed(1)}">${id}</text></g>`;
+    if(known && h.lieu){ over+=mark(c,h.controle==="guilde"); if(h.terrain==="ville"||id===sel) lab+=`<text class="lbl" x="${c.x}" y="${(c.y+S*0.8).toFixed(1)}">${esc(h.lieu.nom)}</text>`; }
+  }
+  const pts=(M.riviere||[]).filter(i=>byId[i]).map(i=>ctr(byId[i]));
+  let river=""; if(pts.length>1){river=`M${pts[0].x} ${pts[0].y}`;for(let i=1;i<pts.length;i++){const a=pts[i-1],b=pts[i];river+=` Q${a.x} ${a.y} ${(a.x+b.x)/2} ${(a.y+b.y)/2}`;}const l=pts[pts.length-1];river+=` L${l.x} ${l.y}`;}
+  svg.innerHTML=base+`<path d="${river}" fill="none" stroke="var(--water)" stroke-width="4.5" stroke-linecap="round" pointer-events="none"/><g pointer-events="none">${over}${lab}</g>`;
+  svg.querySelectorAll(".hex").forEach(el=>{el.addEventListener("click",()=>selectHex(el.dataset.id));el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();selectHex(el.dataset.id);}});});
+}
+function renderInfo(){
+  const h=byId[sel], rum=D.carte.rumeurs[sel], box=document.getElementById("info");
+  let html;
+  if(h){
+    html=`<h2>${esc(h.lieu?h.lieu.nom:TERR[h.terrain])}</h2><p class="meta">Case ${sel}, ${TERR[h.terrain].toLowerCase()}${h.session?`, découverte en session ${h.session}`:", connue depuis la fondation"}</p>`;
+    if(h.lieu) html+=`<p>${esc(h.lieu.description)}</p>`; else html+=`<p class="note">Rien de notable signalé ici.</p>`;
+    if(h.controle==="guilde") html+=`<p><span class="pill" style="color:var(--guilde)">Tenu par la guilde</span></p>`;
+  } else {
+    html=`<h2>Terres inexplorées</h2><p class="meta">Case ${sel}</p><p>Personne à la guilde n'en est encore revenu avec des informations fiables.</p>`;
+  }
+  if(rum) html+=`<div class="rumor">On raconte : « ${esc(rum)} »</div>`;
+  html+=`<div class="legend"><span><span class="sw" style="background:var(--fog)"></span>Inexploré</span><span>? Rumeur</span><span><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" fill="var(--disc)" stroke="var(--guilde)" stroke-width="2"/></svg>Lieu tenu par la guilde</span></div>`;
+  box.innerHTML=html;
+}
+function selectHex(id){sel=id;renderMap();renderInfo();}
+
+/* ---------- Bastion ---------- */
+function renderBastion(){
+  const B=D.bastion, tresor=D.butin?tresorTotal():null, p=B.prochaine;
+  const pct=tresor==null?0:Math.min(100,Math.round(tresor/p.cout*100));
+  document.getElementById("p-bastion").innerHTML=`<div class="stack">
+   <div><h2>${esc(B.nom)}</h2><p class="meta">Le siège de la guilde. ${esc(B.note)}</p></div>
+   <div class="grid2">
+    <div class="panel"><h3>Installations</h3><ul class="rows">${B.installations.map(i=>`<li><span class="name">${esc(i.nom)} <span class="meta">(${esc(i.type)})</span></span>${stPill(i.etat)}<span class="desc">${esc(i.effet)}</span></li>`).join("")}</ul></div>
+    <div class="stack">
+      <div class="panel"><h3>Prochaine amélioration</h3>
+        <p style="margin:.4rem 0 0"><strong>${esc(p.nom)}</strong>, ${nf.format(p.cout)} po</p><p class="note">${esc(p.effet)}</p>
+        ${tresor==null?"":`<div class="progress" role="img" aria-label="Trésor : ${pct} % du coût"><span style="width:${pct}%"></span></div><p class="note">${tresor>=p.cout?`Le trésor (${nf.format(tresor)} po) suffit. À voter au conseil.`:`Il manque ${nf.format(p.cout-tresor)} po au trésor.`}</p>`}
+      </div>
+      <div class="panel"><h3>Ordres en cours</h3><ul class="rows">${B.ordres.map(o=>`<li><span>${esc(o.ordre)} <span class="meta">(${esc(o.installation)})</span></span>${stPill(o.statut)}</li>`).join("")}</ul></div>
+    </div>
+   </div></div>`;
+}
+
+/* ---------- Marchand ---------- */
+function renderMarchand(){
+  const M=D.marchand;
+  document.getElementById("p-marchand").innerHTML=`<div class="stack">
+   <div><h2>Le marché de Pont-de-Marche</h2><p class="meta">${esc(M.note)}</p></div>
+   <div class="shops">${M.echoppes.map(e=>`<div class="panel"><h3>${esc(e.nom)}</h3><p class="note">${esc(e.description)}</p>
+     <div class="tablewrap"><table><thead><tr><th>Objet</th><th>Rareté</th><th class="num">Prix</th><th class="num">Stock</th></tr></thead><tbody>
+     ${e.objets.map(o=>{const lock=o.stock==="Verrouillé"||o.stock==="Vendu";return `<tr class="${lock?"locked":""}"><td>${esc(o.nom)}${o.condition?`<span class="cond">${esc(o.condition)}</span>`:""}</td><td><span class="rar ${RAR[o.rarete]||""}">${esc(o.rarete)}</span></td><td class="num">${prix(o.prix)}</td><td class="num">${stPill(o.stock)}</td></tr>`;}).join("")}
+     </tbody></table></div></div>`).join("")}</div></div>`;
+}
+
+/* ---------- Butin ---------- */
+const tresorTotal=()=>D.butin.mouvements.reduce((s,m)=>s+m.montant,0);
+function renderButin(){
+  const B=D.butin, t=tresorTotal(), dispo=B.coffre.filter(o=>o.statut==="Disponible").length;
+  document.getElementById("p-butin").innerHTML=`<div class="stack">
+   <div class="treasure"><span class="amount">${nf.format(t)}</span><span class="unit">po au trésor</span></div>
+   <p class="note" style="margin-top:-1rem">${esc(B.regle)}</p>
+   <div class="panel"><h3>Coffre de la guilde</h3><p class="note">${dispo} objet${dispo>1?"s":""} disponible${dispo>1?"s":""}. Pour en réclamer un, demandez-le dans #coffre-de-la-guilde.</p>
+     <div class="tablewrap"><table><thead><tr><th>Objet</th><th>Rareté</th><th>Origine</th><th>Rapporté par</th><th>Statut</th></tr></thead><tbody>
+     ${B.coffre.map(o=>`<tr><td>${esc(o.nom)}</td><td><span class="rar ${RAR[o.rarete]||""}">${esc(o.rarete)}</span></td><td>${esc(o.origine)} <span class="meta">(session ${o.session})</span></td><td>${esc(o.rapporte)}</td><td>${stPill(o.statut)}</td></tr>`).join("")}
+     </tbody></table></div></div>
+   <div class="panel"><h3>Mouvements du trésor</h3>
+     <div class="tablewrap"><table><thead><tr><th>Session</th><th>Mouvement</th><th class="num">Montant</th></tr></thead><tbody>
+     ${B.mouvements.slice().reverse().map(m=>`<tr><td class="num" style="text-align:left">${m.session}</td><td>${esc(m.libelle)}</td><td class="num ${m.montant<0?"minus":"plus"}">${m.montant>0?"+":"−"}${nf.format(Math.abs(m.montant))} po</td></tr>`).join("")}
+     </tbody></table></div></div></div>`;
+}
+
+/* ---------- Onglets ---------- */
+const TABS=["carte","bastion","marchand","butin"];
+function show(tab,push){
+  if(!TABS.includes(tab)) tab="carte";
+  TABS.forEach(t=>{document.getElementById("t-"+t).setAttribute("aria-selected",t===tab?"true":"false");document.getElementById("p-"+t).hidden=t!==tab;});
+  if(push){try{history.replaceState(null,"","#"+tab);}catch(e){}}
+}
+document.querySelectorAll("nav.tabs button").forEach(b=>b.addEventListener("click",()=>show(b.dataset.tab,true)));
+document.querySelector('[role="tablist"]').addEventListener("keydown",e=>{
+  if(e.key!=="ArrowRight"&&e.key!=="ArrowLeft") return;
+  const cur=TABS.findIndex(t=>document.getElementById("t-"+t).getAttribute("aria-selected")==="true");
+  const n=TABS[(cur+(e.key==="ArrowRight"?1:-1)+TABS.length)%TABS.length]; show(n,true); document.getElementById("t-"+n).focus();
+});
+
+/* ---------- Chargement des données ---------- */
+Promise.all(TABS.map(n=>fetch("data/"+n+".json",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error(n);return r.json();}).then(j=>D[n]=j)))
+.then(()=>{
+  D.carte.hexes.forEach(h=>byId[h.id]=h); sel=D.carte.ville;
+  document.getElementById("maj").textContent=`Le site de la guilde des aventuriers. Dernière mise à jour : ${D.carte.maj}.`;
+  renderMap();renderInfo();renderBastion();renderMarchand();renderButin();
+  show((location.hash||"").slice(1),false);
+  window.addEventListener("hashchange",()=>show(location.hash.slice(1),false));
+})
+.catch(err=>{document.getElementById("info").innerHTML=`<p class="err">Impossible de charger le fichier data/${esc(err.message)}.json. Vérifiez qu'il est bien présent dans le dossier data du site.</p>`;});
+})();
+</script>
+
+</body>
+</html>
