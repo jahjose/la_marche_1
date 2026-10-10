@@ -1,109 +1,1091 @@
 {
- "maj": "Session 3",
- "echoppes": [
+ "maj": "Lancement",
+ "note": "Prix à venir. Pour acheter, annoncez-le dans #marchand-et-coffre ; le MJ de votre prochaine session valide l'achat.",
+ "objets": [
   {
-   "nom": "Comptoir de Hilda",
-   "description": "Équipement d'aventure et provisions.",
-   "objets": [
-    {
-     "nom": "Rations (1 jour)",
-     "rarete": "Ordinaire",
-     "prix": 0.5,
-     "stock": "Abondant"
-    },
-    {
-     "nom": "Corde de chanvre (15 m)",
-     "rarete": "Ordinaire",
-     "prix": 1,
-     "stock": "Abondant"
-    },
-    {
-     "nom": "Trousse de soins",
-     "rarete": "Ordinaire",
-     "prix": 5,
-     "stock": "4"
-    },
-    {
-     "nom": "Torche",
-     "rarete": "Ordinaire",
-     "prix": 0.01,
-     "stock": "Abondant"
-    }
-   ]
+   "nom": "Amulette de sombre éclat",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/amulette-de-sombre-eclat"
   },
   {
-   "nom": "Apothicaire du Gué",
-   "description": "Potions et remèdes. Moins cher si la guilde construit un jardin d'herboriste.",
-   "objets": [
-    {
-     "nom": "Potion de guérison",
-     "rarete": "Courant",
-     "prix": 50,
-     "stock": "5"
-    },
-    {
-     "nom": "Potion d'escalade",
-     "rarete": "Courant",
-     "prix": 100,
-     "stock": "2"
-    },
-    {
-     "nom": "Potion de guérison (importante)",
-     "rarete": "Peu courant",
-     "prix": 400,
-     "stock": "1"
-    }
-   ]
+   "nom": "Amulette mécanique",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/amulette-mecanique"
   },
   {
-   "nom": "Curiosités de Pell",
-   "description": "Objets étranges rapportés par des voyageurs. Stock renouvelé chaque semaine.",
-   "objets": [
-    {
-     "nom": "Bourse à épices d'Huard",
-     "rarete": "Courant",
-     "prix": 100,
-     "stock": "1"
-    },
-    {
-     "nom": "Corde d'ascension",
-     "rarete": "Peu courant",
-     "prix": 400,
-     "stock": "1"
-    },
-    {
-     "nom": "Sac sans fond",
-     "rarete": "Peu courant",
-     "prix": 400,
-     "stock": "Vendu"
-    }
-   ]
+   "nom": "Arme en argent",
+   "type": "Arme",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/arme-en-argent"
   },
   {
-   "nom": "Forge de Brann",
-   "description": "Armes et armures. Brann attend du minerai pour travailler l'argent.",
-   "objets": [
-    {
-     "nom": "Épée longue",
-     "rarete": "Ordinaire",
-     "prix": 15,
-     "stock": "3"
-    },
-    {
-     "nom": "Cotte de mailles",
-     "rarete": "Ordinaire",
-     "prix": 75,
-     "stock": "1"
-    },
-    {
-     "nom": "Arme en argent",
-     "rarete": "Courant",
-     "prix": 100,
-     "stock": "Verrouillé",
-     "condition": "La guilde doit tenir la mine du Puits-Gris"
-    }
-   ]
+   "nom": "Armure fumante",
+   "type": "Armure",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/armure-fumante"
+  },
+  {
+   "nom": "Armure impeccable",
+   "type": "Armure",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/armure-impeccable"
+  },
+  {
+   "nom": "Armure rapide",
+   "type": "Armure",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/armure-rapide"
+  },
+  {
+   "nom": "Baguette du chef d'orchestre",
+   "type": "Baguette",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/baguette-du-chef-d-orchestre"
+  },
+  {
+   "nom": "Baguette du pyrotechnicien",
+   "type": "Baguette",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/baguette-du-pyrotechnicien"
+  },
+  {
+   "nom": "Bottes aux empreintes factices",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/bottes-aux-empreintes-factices"
+  },
+  {
+   "nom": "Bouclier expressif",
+   "type": "Armure",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/bouclier-expressif"
+  },
+  {
+   "nom": "Bourse à épices d'Huard",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/bourse-a-epices-d-huard"
+  },
+  {
+   "nom": "Bâton des chants d'oiseaux",
+   "type": "Bâton",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/baton-des-chants-d-oiseaux"
+  },
+  {
+   "nom": "Bâton floral",
+   "type": "Bâton",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/baton-floral"
+  },
+  {
+   "nom": "Bâton ostensible",
+   "type": "Bâton",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/baton-ostensible"
+  },
+  {
+   "nom": "Cadenas sournois",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/cadenas-sournois"
+  },
+  {
+   "nom": "Canne du vétéran",
+   "type": "Arme",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/canne-du-veteran"
+  },
+  {
+   "nom": "Cape virevoltante",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/cape-virevoltante"
+  },
+  {
+   "nom": "Cape à la mode",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/cape-a-la-mode"
+  },
+  {
+   "nom": "Chandelle des profondeurs",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/chandelle-des-profondeurs"
+  },
+  {
+   "nom": "Chapeau de magicien",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/chapeau-de-magicien"
+  },
+  {
+   "nom": "Chapeau de vermine",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/chapeau-de-vermine"
+  },
+  {
+   "nom": "Chope de sobriété",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/chope-de-sobriete"
+  },
+  {
+   "nom": "Clef mystérieuse",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/clef-mysterieuse"
+  },
+  {
+   "nom": "Cor d'alarme silencieuse",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/cor-d-alarme-silencieuse"
+  },
+  {
+   "nom": "Corde remaillante",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/corde-remaillante"
+  },
+  {
+   "nom": "Cornet acoustique",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/cornet-acoustique"
+  },
+  {
+   "nom": "Dé du charlatan",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/de-du-charlatan"
+  },
+  {
+   "nom": "Grimoire résistant",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/grimoire-resistant"
+  },
+  {
+   "nom": "Habits autoréparateurs",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/habits-autoreparateurs"
+  },
+  {
+   "nom": "Heaume effrayant",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/heaume-effrayant"
+  },
+  {
+   "nom": "Instrument à illusions",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/instrument-a-illusions"
+  },
+  {
+   "nom": "Instrument à message",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/instrument-a-message"
+  },
+  {
+   "nom": "Membre artificiel",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/membre-artificiel"
+  },
+  {
+   "nom": "Orbe boussole",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/orbe-boussole"
+  },
+  {
+   "nom": "Orbe horloge",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/orbe-horloge"
+  },
+  {
+   "nom": "Parchemin de sort (sort mineur ou du 1er niveau)",
+   "type": "Parchemin",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/parchemin-de-sort"
+  },
+  {
+   "nom": "Parfum envoûtant",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/parfum-envoutant"
+  },
+  {
+   "nom": "Perche du pêcheur",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/perche-du-pecheur"
+  },
+  {
+   "nom": "Perche rétractable",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/perche-retractable"
+  },
+  {
+   "nom": "Perle désaltérante",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/perle-desalterante"
+  },
+  {
+   "nom": "Perle nutritive",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/perle-nutritive"
+  },
+  {
+   "nom": "Pipe des monstres de fumée",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/pipe-des-monstres-de-fumee"
+  },
+  {
+   "nom": "Pièce des rivaux",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/piece-des-rivaux"
+  },
+  {
+   "nom": "Pot d'éveil",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/pot-d-eveil"
+  },
+  {
+   "nom": "Potion d'escalade",
+   "type": "Potion",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/potion-d-escalade"
+  },
+  {
+   "nom": "Potion de compréhension",
+   "type": "Potion",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/potion-de-comprehension"
+  },
+  {
+   "nom": "Potion de guérison",
+   "type": "Potion",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/potion-de-guerison"
+  },
+  {
+   "nom": "Poupée qui parle",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/poupee-qui-parle"
+  },
+  {
+   "nom": "Projectile percutant",
+   "type": "Arme",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/projectile-percutant"
+  },
+  {
+   "nom": "Rubis du mage de guerre",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/rubis-du-mage-de-guerre"
+  },
+  {
+   "nom": "Serre sylvestre",
+   "type": "Arme",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/serre-sylvestre"
+  },
+  {
+   "nom": "Épée sélène",
+   "type": "Arme",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/epee-selene"
+  },
+  {
+   "nom": "Œil artificiel",
+   "type": "Objet merveilleux",
+   "rarete": "Courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/oeil-artificiel"
+  },
+  {
+   "nom": "Amulette d'antidétection",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/amulette-d-antidetection"
+  },
+  {
+   "nom": "Amulette de bonne santé",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/amulette-de-bonne-sante"
+  },
+  {
+   "nom": "Amulette de cicatrisation",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/amulette-de-cicatrisation"
+  },
+  {
+   "nom": "Anneau de barrière mentale",
+   "type": "Anneau",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/anneau-de-barriere-mentale"
+  },
+  {
+   "nom": "Anneau de chaleur constante",
+   "type": "Anneau",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/anneau-de-chaleur-constante"
+  },
+  {
+   "nom": "Anneau de marche sur l'eau",
+   "type": "Anneau",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/anneau-de-marche-sur-l-eau"
+  },
+  {
+   "nom": "Anneau de nage",
+   "type": "Anneau",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/anneau-de-nage"
+  },
+  {
+   "nom": "Anneau de saut",
+   "type": "Anneau",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/anneau-de-saut"
+  },
+  {
+   "nom": "Arme en adamantium",
+   "type": "Arme",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/arme-en-adamantium"
+  },
+  {
+   "nom": "Arme vigilante",
+   "type": "Arme",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/arme-vigilante"
+  },
+  {
+   "nom": "Arme, +1",
+   "type": "Arme",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/arme-1-2-ou-3"
+  },
+  {
+   "nom": "Arme-sortilège (sort mineur ou du 1er niveau)",
+   "type": "Arme",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/arme-sortilege"
+  },
+  {
+   "nom": "Armure de mithral",
+   "type": "Armure",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/armure-de-mithral"
+  },
+  {
+   "nom": "Armure du matelot",
+   "type": "Armure",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/armure-du-matelot"
+  },
+  {
+   "nom": "Armure en adamantium",
+   "type": "Armure",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/armure-en-adamantium"
+  },
+  {
+   "nom": "Armure-sortilège (sort mineur ou du 1er niveau)",
+   "type": "Armure",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/armure-sortilege"
+  },
+  {
+   "nom": "Baguette de détection de la magie",
+   "type": "Baguette",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/baguette-de-detection-de-la-magie"
+  },
+  {
+   "nom": "Baguette de projectiles magiques",
+   "type": "Baguette",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/baguette-de-projectiles-magiques"
+  },
+  {
+   "nom": "Baguette des secrets",
+   "type": "Baguette",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/baguette-des-secrets"
+  },
+  {
+   "nom": "Baguette des toiles",
+   "type": "Baguette",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/baguette-des-toiles"
+  },
+  {
+   "nom": "Baguette du mage de guerre, +1",
+   "type": "Baguette",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/baguette-du-mage-de-guerre-1-2-ou-3"
+  },
+  {
+   "nom": "Balai dansant de Baba Yaga",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/balai-dansant-de-baba-yaga"
+  },
+  {
+   "nom": "Balai volant",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/balai-volant"
+  },
+  {
+   "nom": "Bandages de pancrace, +1",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/bandages-de-pancrace"
+  },
+  {
+   "nom": "Bandeau d'intelligence",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/bandeau-d-intelligence"
+  },
+  {
+   "nom": "Baume de Keoghtom",
+   "type": "Potion",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/baume-de-keoghtom"
+  },
+  {
+   "nom": "Bottes ailées",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/bottes-ailees"
+  },
+  {
+   "nom": "Bottes de sept lieues",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/bottes-de-sept-lieues"
+  },
+  {
+   "nom": "Bottes des terres gelées",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/bottes-des-terres-gelees"
+  },
+  {
+   "nom": "Bottes elfiques",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/bottes-elfiques"
+  },
+  {
+   "nom": "Bouclier sentinelle",
+   "type": "Armure",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/bouclier-sentinelle"
+  },
+  {
+   "nom": "Bouclier, +1",
+   "type": "Armure",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/bouclier-1-2-ou-3"
+  },
+  {
+   "nom": "Bracelets d'archer",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/bracelets-d-archer"
+  },
+  {
+   "nom": "Broche de défense",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/broche-de-defense"
+  },
+  {
+   "nom": "Bâton de la vipère",
+   "type": "Bâton",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/baton-de-la-vipere"
+  },
+  {
+   "nom": "Bâton du python",
+   "type": "Bâton",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/baton-du-python"
+  },
+  {
+   "nom": "Bâton-sortilège (sort mineur ou du 1er niveau)",
+   "type": "Bâton",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/baton-sortilege"
+  },
+  {
+   "nom": "Cape de la raie manta",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/cape-de-la-raie-manta"
+  },
+  {
+   "nom": "Cape de protection",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/cape-de-protection"
+  },
+  {
+   "nom": "Cape elfique",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/cape-elfique"
+  },
+  {
+   "nom": "Capuchon de respiration aquatique",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/capuchon-de-respiration-aquatique"
+  },
+  {
+   "nom": "Carafe intarissable",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/carafe-intarissable"
+  },
+  {
+   "nom": "Carquois d'Ehlonna",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/carquois-d-ehlonna"
+  },
+  {
+   "nom": "Chapeau de déguisement",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/chapeau-de-deguisement"
+  },
+  {
+   "nom": "Chaussons de l'araignée",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/chaussons-de-l-araignee"
+  },
+  {
+   "nom": "Collier d'adaptation",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/collier-d-adaptation"
+  },
+  {
+   "nom": "Corde d'ascension",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/corde-d-ascension"
+  },
+  {
+   "nom": "Cruche alchimique",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/cruche-alchimique"
+  },
+  {
+   "nom": "Diadème de destruction",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/diademe-de-destruction"
+  },
+  {
+   "nom": "Figurine merveilleuse (corbeau d'argent)",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/figurine-merveilleuse"
+  },
+  {
+   "nom": "Flûte des égouts",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/flute-des-egouts"
+  },
+  {
+   "nom": "Flûte terrifiante",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/flute-terrifiante"
+  },
+  {
+   "nom": "Gantelets de puissance d'ogre",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/gantelets-de-puissance-d-ogre"
+  },
+  {
+   "nom": "Gants de chapardeur",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/gants-de-chapardeur"
+  },
+  {
+   "nom": "Gants de nage et d'escalade",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/gants-de-nage-et-d-escalade"
+  },
+  {
+   "nom": "Gants piégeurs de projectiles",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/gants-piegeurs-de-projectiles"
+  },
+  {
+   "nom": "Gemme d'illumination",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/gemme-d-illumination"
+  },
+  {
+   "nom": "Gemme élémentaire",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/gemme-elementaire"
+  },
+  {
+   "nom": "Globe flottant",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/globe-flottant"
+  },
+  {
+   "nom": "Heaume de compréhension des langues",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/heaume-de-comprehension-des-langues"
+  },
+  {
+   "nom": "Heaume de télépathie",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/heaume-de-telepathie"
+  },
+  {
+   "nom": "Huile d'insaisissabilité",
+   "type": "Potion",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/huile-d-insaisissabilite"
+  },
+  {
+   "nom": "Instrument des bardes (bandore de Fochlucan, luth de Doss ou cistre de MacFuirmidh)",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/instrument-des-bardes"
+  },
+  {
+   "nom": "Javeline de foudre",
+   "type": "Arme",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/javeline-de-foudre"
+  },
+  {
+   "nom": "Lanterne de révélation",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/lanterne-de-revelation"
+  },
+  {
+   "nom": "Lentilles de netteté",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/lentilles-de-nettete"
+  },
+  {
+   "nom": "Lunettes du nyctalope",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/lunettes-du-nyctalope"
+  },
+  {
+   "nom": "Mante de dame Nature",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/mante-de-dame-nature"
+  },
+  {
+   "nom": "Médaillon des pensées",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/medaillon-des-pensees"
+  },
+  {
+   "nom": "Parchemin de sort (sort du 2e ou 3e niveau)",
+   "type": "Parchemin",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/parchemin-de-sort"
+  },
+  {
+   "nom": "Perle de thaumaturgie",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/perle-de-thaumaturgie"
+  },
+  {
+   "nom": "Philtre d'amour",
+   "type": "Potion",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/philtre-d-amour"
+  },
+  {
+   "nom": "Pierre porte-bonheur",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/pierre-porte-bonheur"
+  },
+  {
+   "nom": "Pierres messagères",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/pierres-messageres"
+  },
+  {
+   "nom": "Plume de Quaal (ancre, arbre ou éventail)",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/plume-de-quaal"
+  },
+  {
+   "nom": "Potion d'agrandissement",
+   "type": "Potion",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/potion-d-agrandissement"
+  },
+  {
+   "nom": "Potion d'amitié avec les animaux",
+   "type": "Potion",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/potion-d-amitie-avec-les-animaux"
+  },
+  {
+   "nom": "Potion de force de géant (collines)",
+   "type": "Potion",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/potion-de-force-de-geant"
+  },
+  {
+   "nom": "Potion de guérison (importante)",
+   "type": "Potion",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/potion-de-guerison"
+  },
+  {
+   "nom": "Potion de respiration aquatique",
+   "type": "Potion",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/potion-de-respiration-aquatique"
+  },
+  {
+   "nom": "Potion de résistance",
+   "type": "Potion",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/potion-de-resistance"
+  },
+  {
+   "nom": "Potion de souffle enflammé",
+   "type": "Potion",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/potion-de-souffle-enflamme"
+  },
+  {
+   "nom": "Potion des pugilistes",
+   "type": "Potion",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/potion-des-pugilistes"
+  },
+  {
+   "nom": "Potion toxique",
+   "type": "Potion",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/potion-toxique"
+  },
+  {
+   "nom": "Poudre dessiccative",
+   "type": "Potion",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/poudre-dessiccative"
+  },
+  {
+   "nom": "Poudre à éternuer",
+   "type": "Potion",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/poudre-a-eternuer"
+  },
+  {
+   "nom": "Poussière de disparition",
+   "type": "Potion",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/poussiere-de-disparition"
+  },
+  {
+   "nom": "Projectile, +1",
+   "type": "Arme",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/projectile-1-2-ou-3"
+  },
+  {
+   "nom": "Regard charmeur",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/regard-charmeur"
+  },
+  {
+   "nom": "Robe du camelot",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/robe-du-camelot"
+  },
+  {
+   "nom": "Sac sans fond",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/sac-sans-fond"
+  },
+  {
+   "nom": "Sac à malices",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/sac-a-malices"
+  },
+  {
+   "nom": "Sceptre du gardien des pactes, +1",
+   "type": "Sceptre",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/sceptre-du-gardien-des-pactes-1-2-ou-3"
+  },
+  {
+   "nom": "Sceptre inamovible",
+   "type": "Sceptre",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/sceptre-inamovible"
+  },
+  {
+   "nom": "Selle du hussard",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/selle-du-hussard"
+  },
+  {
+   "nom": "Tarot fantasmagorique",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/tarot-fantasmagorique"
+  },
+  {
+   "nom": "Trident de domination aquatique",
+   "type": "Arme",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/trident-de-domination-aquatique"
+  },
+  {
+   "nom": "Urne fumigène",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/urne-fumigene"
+  },
+  {
+   "nom": "Yeux de lynx",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/yeux-de-lynx"
+  },
+  {
+   "nom": "Épée vengeresse",
+   "type": "Arme",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/epee-vengeresse"
+  },
+  {
+   "nom": "Éventail enchanté",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/eventail-enchante"
+  },
+  {
+   "nom": "Œil de guenaude",
+   "type": "Objet merveilleux",
+   "rarete": "Peu courant",
+   "prix": null,
+   "lien": "https://www.aidedd.org/magic-item/fr/oeil-de-guenaude"
   }
- ],
- "note": "Pour acheter, annoncez-le dans #coffre-de-la-guilde. Le MJ de votre prochaine session valide l'achat."
+ ]
 }

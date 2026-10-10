@@ -1,118 +1,99 @@
 {
- "largeur": 10,
- "hauteur": 10,
- "ville": "E5",
- "maj": "Session 3",
- "hexes": [
+ "maj": {
+  "session": 0,
+  "libelle": "Lancement",
+  "date": "2026-10-10"
+ },
+ "largeur": 20,
+ "hauteur": 20,
+ "camp": "J10",
+ "cases": [
   {
-   "id": "E5",
-   "col": 4,
-   "row": 4,
-   "terrain": "ville",
+   "id": "I10",
+   "terrain": "foret",
    "session": 0,
-   "controle": "neutre",
-   "lieu": {
-    "nom": "Pont-de-Marche",
-    "description": "Dernière ville avant les terres sauvages. Siège de la guilde, marché, auberge du Gué."
-   }
+   "historique": [
+    "Session 0 : connue depuis le camp"
+   ]
   },
   {
-   "id": "D5",
-   "col": 3,
-   "row": 4,
+   "id": "J10",
    "terrain": "plaine",
    "session": 0,
-   "controle": "neutre",
-   "lieu": {
-    "nom": "Ferme Marrow",
-    "description": "Ferme incendiée. Le fermier Marrow accuse des mercenaires aux capes rouges."
-   }
+   "historique": [
+    "Session 0 : connue depuis le camp"
+   ]
   },
   {
-   "id": "E4",
-   "col": 4,
-   "row": 3,
+   "id": "J11",
+   "terrain": "foret",
+   "session": 0,
+   "historique": [
+    "Session 0 : connue depuis le camp"
+   ]
+  },
+  {
+   "id": "J9",
    "terrain": "plaine",
    "session": 0,
-   "controle": "neutre"
+   "historique": [
+    "Session 0 : connue depuis le camp"
+   ]
   },
   {
-   "id": "D4",
-   "col": 3,
-   "row": 3,
-   "terrain": "plaine",
+   "id": "K10",
+   "terrain": "foret",
    "session": 0,
-   "controle": "neutre"
+   "historique": [
+    "Session 0 : connue depuis le camp"
+   ]
   },
   {
-   "id": "D6",
-   "col": 3,
-   "row": 5,
-   "terrain": "plaine",
+   "id": "K11",
+   "terrain": "foret",
    "session": 0,
-   "controle": "neutre"
+   "historique": [
+    "Session 0 : connue depuis le camp"
+   ]
   },
   {
-   "id": "E6",
-   "col": 4,
-   "row": 5,
-   "terrain": "collines",
-   "session": 1,
-   "controle": "neutre"
-  },
-  {
-   "id": "F5",
-   "col": 5,
-   "row": 4,
-   "terrain": "plaine",
-   "session": 2,
-   "controle": "guilde",
-   "lieu": {
-    "nom": "Moulin de la Berge",
-    "description": "Moulin à eau repris par la guilde. Avantage : repos long gratuit pour les membres."
-   }
-  },
-  {
-   "id": "F4",
-   "col": 5,
-   "row": 3,
-   "terrain": "plaine",
-   "session": 2,
-   "controle": "neutre"
-  },
-  {
-   "id": "F6",
-   "col": 5,
-   "row": 5,
-   "terrain": "plaine",
-   "session": 3,
-   "controle": "neutre",
-   "lieu": {
-    "nom": "Les Trois-Haies",
-    "description": "Hameau fortifié de palissades. Méfiant envers les étrangers."
-   }
-  },
-  {
-   "id": "D7",
-   "col": 3,
-   "row": 6,
-   "terrain": "marais",
-   "session": 3,
-   "controle": "neutre",
-   "lieu": {
-    "nom": "Port-aux-Saules",
-    "description": "Petit port de pêche à l'embouchure. Barques, filets, une taverne qui sent le sel."
-   }
+   "id": "K9",
+   "terrain": "foret",
+   "session": 0,
+   "historique": [
+    "Session 0 : connue depuis le camp"
+   ]
   }
  ],
- "riviere": [
-  "F4",
-  "F5",
-  "E6"
+ "lieux": [
+  {
+   "case": "J7",
+   "statut": "aperçu"
+  },
+  {
+   "case": "L11",
+   "statut": "aperçu"
+  },
+  {
+   "case": "I13",
+   "statut": "aperçu"
+  }
  ],
- "rumeurs": {
-  "E7": "Une brume épaisse monte du marais chaque soir.",
-  "G3": "On paie un « péage » à des bandits pour traverser le gué en amont.",
-  "H5": "Des tambours résonnent sous les collines de l'est."
- }
+ "rumeurs": [
+  {
+   "case": "N15",
+   "texte": "Un chasseur revenu du sud-est ne parle plus que du silence : une lande où les bêtes ne vont plus, des pierres fendues de part en part, et une odeur qu'il refuse de décrire. On dit que c'est la dernière trace du plus grand danger.",
+   "date": "2026-10-10"
+  },
+  {
+   "case": "M9",
+   "texte": "Une bâtisse abandonnée, mais la cheminée fume parfois près de M9.",
+   "date": "2026-10-10"
+  },
+  {
+   "case": "H9",
+   "texte": "Un lieu étrange que les bêtes contournent près de H9.",
+   "date": "2026-10-10"
+  }
+ ]
 }
