@@ -1,8 +1,8 @@
 {
  "maj": {
-  "session": 0,
-  "libelle": "Lancement",
-  "date": "2026-10-10"
+  "session": 1,
+  "libelle": "Session 1",
+  "date": "2026-10-18"
  },
  "largeur": 20,
  "hauteur": 20,
@@ -27,10 +27,12 @@
   {
    "id": "J11",
    "terrain": "foret",
-   "session": 0,
+   "session": 1,
    "historique": [
-    "Session 0 : connue depuis le camp"
-   ]
+    "Session 0 : connue depuis le camp",
+    "Session 1 : explorée par Kael, Lyra, Bram et Noa. Meute de loups chassée."
+   ],
+   "groupe": "Kael, Lyra, Bram, Noa"
   },
   {
    "id": "J9",
@@ -63,6 +65,24 @@
    "historique": [
     "Session 0 : connue depuis le camp"
    ]
+  },
+  {
+   "id": "I12",
+   "terrain": "foret",
+   "session": 1,
+   "groupe": "Kael, Lyra, Bram, Noa",
+   "historique": [
+    "Session 1 : aperçue depuis le vieux chêne de J11"
+   ]
+  },
+  {
+   "id": "J12",
+   "terrain": "foret",
+   "session": 1,
+   "groupe": "Kael, Lyra, Bram, Noa",
+   "historique": [
+    "Session 1 : aperçue depuis le vieux chêne de J11"
+   ]
   }
  ],
  "lieux": [
@@ -72,11 +92,13 @@
   },
   {
    "case": "L11",
-   "statut": "aperçu"
+   "statut": "aperçu",
+   "description": "Toit éventré, corbeaux qui tournent. Un trappeur nommé Silas s'y serait réfugié."
   },
   {
    "case": "I13",
-   "statut": "aperçu"
+   "statut": "aperçu",
+   "description": "Un éclat d'eau entre les arbres, beaucoup d'oiseaux."
   }
  ],
  "rumeurs": [
@@ -94,6 +116,11 @@
    "case": "H9",
    "texte": "Un lieu étrange que les bêtes contournent près de H9.",
    "date": "2026-10-10"
+  },
+  {
+   "case": "L11",
+   "texte": "Isaure Merle jure avoir vu de la fumée sortir du toit éventré de la cabane de l'est, comme si quelqu'un essayait d'envoyer un signal. Elle ne s'en approchera pas : « ce qui a fait fuir les loups est toujours là ».",
+   "date": "2026-10-18"
   }
  ]
 }
