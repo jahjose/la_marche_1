@@ -1,0 +1,12 @@
+{
+ "tresor": 1,
+ "regle": "10 % de l'or rapporté va au trésor de la guilde. Les objets magiques vont au coffre commun.",
+ "coffre": [],
+ "mouvements": [
+  {
+   "session": 1,
+   "libelle": "Part des peaux de loup (10 %)",
+   "montant": 1
+  }
+ ]
+}

@@ -1,0 +1,126 @@
+{
+ "maj": {
+  "session": 1,
+  "libelle": "Session 1",
+  "date": "2026-10-18"
+ },
+ "largeur": 20,
+ "hauteur": 20,
+ "camp": "J10",
+ "cases": [
+  {
+   "id": "I10",
+   "terrain": "foret",
+   "session": 0,
+   "historique": [
+    "Session 0 : connue depuis le camp"
+   ]
+  },
+  {
+   "id": "J10",
+   "terrain": "plaine",
+   "session": 0,
+   "historique": [
+    "Session 0 : connue depuis le camp"
+   ]
+  },
+  {
+   "id": "J11",
+   "terrain": "foret",
+   "session": 1,
+   "historique": [
+    "Session 0 : connue depuis le camp",
+    "Session 1 : explorée par Kael, Lyra, Bram et Noa. Meute de loups chassée."
+   ],
+   "groupe": "Kael, Lyra, Bram, Noa"
+  },
+  {
+   "id": "J9",
+   "terrain": "plaine",
+   "session": 0,
+   "historique": [
+    "Session 0 : connue depuis le camp"
+   ]
+  },
+  {
+   "id": "K10",
+   "terrain": "foret",
+   "session": 0,
+   "historique": [
+    "Session 0 : connue depuis le camp"
+   ]
+  },
+  {
+   "id": "K11",
+   "terrain": "foret",
+   "session": 0,
+   "historique": [
+    "Session 0 : connue depuis le camp"
+   ]
+  },
+  {
+   "id": "K9",
+   "terrain": "foret",
+   "session": 0,
+   "historique": [
+    "Session 0 : connue depuis le camp"
+   ]
+  },
+  {
+   "id": "I12",
+   "terrain": "foret",
+   "session": 1,
+   "groupe": "Kael, Lyra, Bram, Noa",
+   "historique": [
+    "Session 1 : aperçue depuis le vieux chêne de J11"
+   ]
+  },
+  {
+   "id": "J12",
+   "terrain": "foret",
+   "session": 1,
+   "groupe": "Kael, Lyra, Bram, Noa",
+   "historique": [
+    "Session 1 : aperçue depuis le vieux chêne de J11"
+   ]
+  }
+ ],
+ "lieux": [
+  {
+   "case": "J7",
+   "statut": "aperçu"
+  },
+  {
+   "case": "L11",
+   "statut": "aperçu",
+   "description": "Toit éventré, corbeaux qui tournent. Un trappeur nommé Silas s'y serait réfugié."
+  },
+  {
+   "case": "I13",
+   "statut": "aperçu",
+   "description": "Un éclat d'eau entre les arbres, beaucoup d'oiseaux."
+  }
+ ],
+ "rumeurs": [
+  {
+   "case": "N15",
+   "texte": "Un chasseur revenu du sud-est ne parle plus que du silence : une lande où les bêtes ne vont plus, des pierres fendues de part en part, et une odeur qu'il refuse de décrire. On dit que c'est la dernière trace du plus grand danger.",
+   "date": "2026-10-10"
+  },
+  {
+   "case": "M9",
+   "texte": "Une bâtisse abandonnée, mais la cheminée fume parfois près de M9.",
+   "date": "2026-10-10"
+  },
+  {
+   "case": "H9",
+   "texte": "Un lieu étrange que les bêtes contournent près de H9.",
+   "date": "2026-10-10"
+  },
+  {
+   "case": "L11",
+   "texte": "Isaure Merle jure avoir vu de la fumée sortir du toit éventré de la cabane de l'est, comme si quelqu'un essayait d'envoyer un signal. Elle ne s'en approchera pas : « ce qui a fait fuir les loups est toujours là ».",
+   "date": "2026-10-18"
+  }
+ ]
+}
