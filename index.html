@@ -1,0 +1,1340 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="favicon.png">
+<title>Les Chroniques de Valgris</title>
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Montserrat:wght@400;500;600&display=swap">
+<style>
+img{max-width:100%}
+
+/* Mise en page V2 : barre de navigation sombre collante, puis pour chaque onglet un bandeau peint compact (titre + chiffres clés) et le contenu tout de suite sur le parchemin. Un seul pied de page. Un seul thème clair. */
+:root{
+  --nuit:#0d1311;       /* barre, bandeaux */
+  --rose:#ecd7c6;       /* parchemin */
+  --rose-2:#f3e4d6;     /* surfaces posées sur le parchemin */
+  --encre:#33251c;      /* texte */
+  --sepia:#6b4f39;      /* étiquettes, texte secondaire (contraste renforcé) */
+  --filet:rgba(107,79,57,.38);
+  --noir:#1b1411;       /* boutons */
+  --creme:#f4ead9;      /* texte sur sombre */
+  --or:#b8893e;         /* accents dorés */
+  --vert:#2f5a4a;       /* états positifs */
+  --brun:#2a221b;       /* pied de page */
+  --f-titre:"Cormorant Garamond","Cormorant",Garamond,Georgia,serif;
+  --f-ui:"Montserrat","Helvetica Neue",Arial,sans-serif;
+  --colonne:clamp(1040px,64vw,1340px);   /* colonne commune des onglets de lecture */
+  --large:max(1440px,min(94vw,2400px)); /* largeur de l'onglet Carte */
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+html{background:#1b1411}
+html{scroll-padding-top:84px}
+body{background:var(--rose);color:var(--encre);font-family:var(--f-titre);font-weight:500;font-size:clamp(19px,calc(12px + .55vw),23px);line-height:1.5;font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}
+svg text{font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--nuit)}
+.gutter{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:var(--colonne);margin:0 auto}
+.wrap.large{max-width:var(--large)}
+body[data-page="carte"] .barre .wrap,body[data-page="carte"] .pied .wrap{max-width:var(--large)}
+a{color:inherit}
+button{font:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid #c7863f;outline-offset:2px}
+.ui{font-family:var(--f-ui)}
+
+/* ---------- barre collante */
+.barre{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(13,19,17,.96);backdrop-filter:blur(6px);color:var(--creme);border-bottom:1px solid rgba(184,137,62,.35)}
+.barre .wrap{display:flex;align-items:center;gap:22px;min-height:64px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:600;font-size:26px;color:var(--creme);text-decoration:none;white-space:nowrap;flex:none}
+.logo img{height:46px;width:auto}
+.tabs-z{position:relative;min-width:0;flex:1}
+.tabs-z::after{content:"";position:absolute;right:0;top:0;bottom:0;width:36px;background:linear-gradient(90deg,rgba(13,19,17,0),rgba(13,19,17,.96));pointer-events:none;opacity:var(--fade,0)}
+.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{font-family:var(--f-ui);font-weight:500;font-size:clamp(14px,calc(10px + .28vw),16px);color:rgba(244,234,217,.75);text-decoration:none;white-space:nowrap;padding:10px 11px;border-bottom:2px solid transparent}
+.tabs a:hover{color:var(--creme)}
+.tabs a[aria-current="page"]{color:var(--creme);border-bottom-color:var(--or)}
+.maj{flex:none;font-family:var(--f-ui);font-size:12px;color:rgba(244,234,217,.7);white-space:nowrap;border:1px solid rgba(244,234,217,.25);border-radius:999px;padding:5px 11px}
+.maj b{color:var(--creme);font-weight:600}
+
+/* ---------- bandeau peint compact */
+.hero{background:linear-gradient(90deg,rgba(8,10,9,.93) 0%,rgba(8,10,9,.72) 40%,rgba(8,10,9,.12) 76%),linear-gradient(0deg,rgba(8,10,9,.5),rgba(8,10,9,0) 55%),var(--nuit) var(--img) var(--pos,center 50%)/cover no-repeat;color:var(--creme)}
+.hero .wrap{padding-block:46px 50px}
+.surtitre{font-family:var(--f-ui);font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#e6b47e}
+.hero h1{font-weight:500;font-size:clamp(50px,6.6vw,82px);line-height:.95;margin:.12em 0 .14em;text-shadow:0 4px 22px rgba(0,0,0,.6)}
+.hero p{margin:0;font-size:clamp(21px,calc(13px + .6vw),26px);font-style:italic;max-width:46ch;color:rgba(244,234,217,.92);text-shadow:0 2px 10px rgba(0,0,0,.7)}
+.chiffres{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:18px;font-family:var(--f-ui);font-size:clamp(14px,calc(10px + .28vw),16px);color:rgba(244,234,217,.85)}
+.chiffres b{color:var(--creme);font-weight:600}
+
+/* ---------- parchemin */
+.parchemin{position:relative;isolation:isolate;background:var(--rose) url("parchemin.webp") center top/1600px;padding-block:40px 80px;overflow:hidden}
+.parchemin::before,.parchemin::after{content:"";position:absolute;z-index:-1;width:340px;height:416px;background:url("volute.webp") 0 0/contain no-repeat;opacity:.5;pointer-events:none}
+.parchemin::before{top:-8px;left:-12px}
+.parchemin::after{right:-12px;bottom:-8px;transform:rotate(180deg)}
+.titre-s{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;margin:64px 0 0}
+.titre-s:first-child{margin-top:8px}
+.titre-s svg{width:110px;height:18px;color:var(--sepia)}
+.titre-s h2{font-weight:500;font-size:clamp(34px,calc(16px + 1.6vw),54px);line-height:1;margin:0;color:#45322a;text-wrap:balance}
+.titre-s p{margin:2px 0 0;max-width:60ch;font-size:19px;color:var(--sepia)}
+.etiq{font-family:var(--f-ui);font-size:clamp(12px,calc(8.5px + .25vw),13.5px);font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--sepia)}
+
+/* ---------- feuille des onglets de lecture */
+.page:not(#p-carte) .parchemin{overflow:hidden;padding-block:clamp(30px,3vw,52px) 76px;background:#d6bda6 url("parchemin.webp") center top/1600px;background-blend-mode:multiply}
+.feuille{position:relative;z-index:1;margin-top:0;background:linear-gradient(rgba(255,251,244,.62),rgba(255,251,244,.62)),#efe0cf url("parchemin.webp") center/1200px;border:1px solid rgba(138,106,58,.6);border-radius:4px;box-shadow:0 0 0 7px rgba(239,224,207,.5),0 0 0 8px rgba(138,106,58,.3),0 26px 54px rgba(50,30,15,.3);padding:clamp(34px,3.6vw,68px) clamp(22px,3.8vw,76px) clamp(40px,4vw,76px)}
+.feuille::before{content:"";position:absolute;inset:11px;border:1px solid rgba(184,137,62,.45);border-radius:2px;pointer-events:none}
+.feuille .coin{position:absolute;width:46px;height:46px;pointer-events:none;opacity:.9}
+.feuille .coin.hg{top:3px;left:3px}.feuille .coin.hd{top:3px;right:3px;transform:scaleX(-1)}.feuille .coin.bg{bottom:3px;left:3px;transform:scaleY(-1)}.feuille .coin.bd{bottom:3px;right:3px;transform:scale(-1,-1)}
+.feuille .filtres{justify-content:flex-start;margin:0}
+.feuille .compte{text-align:left}
+.feuille .liste,.feuille .table-z,.feuille .catalogue,.feuille .outils-m,.feuille .regle,.feuille .tresor,.feuille .membres,.feuille .memorial,.feuille .lieux-c{max-width:none;margin-left:0;margin-right:0}
+.feuille .titre-s{align-items:flex-start;text-align:left}
+.feuille .titre-s:first-of-type{margin-top:0}
+.feuille .membres{justify-content:flex-start}
+.feuille .note{text-align:left;margin-left:0}
+.feuille .vide-etat{margin:14px 0;max-width:640px}
+.feuille .chantier{margin:0;max-width:none}
+.feuille #m-compte{max-width:none!important;margin:16px 0 0!important}
+.feuille .outils-m{justify-content:flex-start;gap:14px 28px}
+.feuille .memorial{text-align:left}
+/* ---------- commandes communes */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;font-family:var(--f-ui);font-weight:500;font-size:clamp(13px,calc(9px + .3vw),15px);line-height:1.2;color:var(--noir);background:rgba(244,234,217,.92);border:1px solid var(--noir);border-radius:4px;padding:8px 13px;cursor:pointer;text-decoration:none}
+.btn:hover{background:#fff6e6}
+.btn.plein{background:var(--noir);color:var(--creme)}
+.btn.plein:hover{background:#3a2c24}
+.btn.carre{width:36px;padding:8px 0;font-size:16px}
+.btn[aria-pressed="true"]{background:var(--noir);color:var(--creme)}
+.seg{display:inline-flex;flex-wrap:wrap;border:1px solid rgba(27,20,17,.7);border-radius:6px;overflow:hidden;background:rgba(244,234,217,.6)}
+.seg button{font-family:var(--f-ui);font-weight:500;font-size:clamp(13px,calc(9px + .3vw),15px);color:var(--noir);background:transparent;border:0;border-left:1px solid rgba(27,20,17,.25);padding:8px 15px;cursor:pointer}
+.seg button:first-child{border-left:0}
+.seg button:hover{background:rgba(255,250,240,.7)}
+.seg button[aria-pressed="true"]{background:var(--noir);color:var(--creme)}
+.lien{text-align:left}
+.lien{font-family:var(--f-ui);font-size:clamp(13px,calc(9px + .3vw),15px);font-weight:600;color:var(--noir);text-decoration:none;border-bottom:1px solid rgba(27,20,17,.35);cursor:pointer;background:none;border-top:0;border-left:0;border-right:0;padding:0}
+.lien:hover{border-bottom-color:var(--noir)}
+.groupe{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.pastille{font-family:var(--f-ui);font-size:clamp(11px,calc(8px + .22vw),12.5px);font-weight:600;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:3px 10px;white-space:nowrap;display:inline-block}
+.p-contour{color:#4a3a2c;border:1px solid rgba(74,58,44,.55)}
+.p-vert{color:var(--creme);background:var(--vert)}
+.p-sombre{color:var(--creme);background:var(--noir)}
+.p-pointille{color:var(--sepia);border:1px dashed rgba(107,79,57,.7)}
+.puce{font-family:var(--f-ui);font-size:clamp(12px,calc(8.5px + .25vw),14px);font-weight:500;color:var(--encre);border:1px solid rgba(51,37,28,.4);border-radius:999px;padding:3px 10px;background:rgba(255,250,240,.4);text-decoration:none;cursor:pointer}
+button.puce:hover,a.puce:hover{background:#fff6e6}
+.tampon{display:inline-flex;flex-direction:column;align-items:center;transform:rotate(-6deg);font-family:var(--f-ui);font-weight:600;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--noir);border:2px solid var(--noir);outline:1px solid var(--noir);outline-offset:2px;padding:3px 10px 2px;opacity:.85}
+.tampon small{font-size:9px;letter-spacing:.12em;font-weight:500}
+
+/* ---------- liste éditoriale commune */
+.liste{max-width:880px;margin:30px auto 0;list-style:none;padding:0}
+.ligne{display:grid;grid-template-columns:clamp(130px,10vw,180px) minmax(0,1fr);gap:28px;padding-block:30px;border-top:1px solid var(--filet)}
+.ligne:last-child{border-bottom:1px solid var(--filet)}
+.cote{font-family:var(--f-ui);font-size:clamp(12px,calc(8.5px + .25vw),14px);color:var(--sepia);display:flex;flex-direction:column;gap:6px;padding-top:8px}
+.cote .gros{font-family:var(--f-titre);font-weight:700;font-size:clamp(38px,calc(18px + 1.4vw),50px);line-height:1;color:var(--noir)}
+.cote .pal{font-weight:600;color:var(--encre)}
+.corps{min-width:0;display:flex;flex-direction:column;gap:10px}
+.corps h3{font-weight:600;font-size:clamp(30px,calc(14px + 1.1vw),40px);line-height:1.08;margin:0;color:var(--noir);text-wrap:balance}
+.corps p{margin:0;max-width:62ch}
+.corps .date{font-family:var(--f-ui);font-size:clamp(12px,calc(8.5px + .25vw),14px);color:var(--sepia)}
+.corps .discret{font-style:italic;color:var(--sepia);font-size:18px}
+.titre-l{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.estompe h3,.estompe p:not(.discret){color:#6b5444}
+.filtres{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin:28px auto 0}
+.compte{text-align:center;font-family:var(--f-ui);font-size:clamp(12px,calc(8.5px + .25vw),14px);color:var(--sepia);margin-top:10px}
+
+/* ---------- carte */
+.neuf{display:grid;grid-template-columns:auto repeat(4,minmax(0,1fr));gap:0;background:rgba(243,228,214,.7);border:1px solid var(--filet);margin-top:4px}
+.neuf>div{padding:14px 18px;border-left:1px solid var(--filet);min-width:0;display:flex;flex-direction:column;gap:3px}
+.neuf>div:first-child{border-left:0;justify-content:center;background:var(--noir);color:var(--creme)}
+.neuf>div:first-child .etiq{color:#e6b47e}
+.neuf .t{font-weight:600;font-size:21px;line-height:1.15;color:var(--noir)}
+.neuf>div:first-child .t{color:var(--creme)}
+.neuf .s{font-family:var(--f-ui);font-size:12px;color:var(--sepia)}
+.outils{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin:4px 0 26px}
+.aller{display:flex;gap:6px;align-items:center}
+.aller label{font-family:var(--f-ui);font-size:13px}
+.aller input{font-family:var(--f-ui);font-size:13px;width:86px;border:1px solid var(--noir);border-radius:4px;background:rgba(255,250,240,.7);padding:8px 10px;color:var(--noir);text-transform:uppercase}
+.calques{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-family:var(--f-ui);font-size:13px}
+.calques label{display:flex;align-items:center;gap:6px;cursor:pointer}
+.calques input{accent-color:var(--noir);width:15px;height:15px}
+.calques select{font-family:var(--f-ui);font-size:13px;border:1px solid var(--noir);border-radius:4px;background:rgba(255,250,240,.7);padding:5px 8px}
+.zone{position:relative;display:grid;grid-template-columns:minmax(0,1fr) clamp(300px,17vw,380px);gap:20px;align-items:start}
+.cadre-carte{position:relative;padding:18px;border-radius:6px;background:
+  radial-gradient(ellipse at 30% 0%,rgba(255,215,150,.12),transparent 60%),
+  repeating-linear-gradient(92deg,rgba(0,0,0,.08) 0 2px,transparent 2px 7px),
+  linear-gradient(160deg,#5a4130 0%,#3a281b 35%,#4a3424 65%,#2b1d13 100%);
+  box-shadow:0 22px 44px rgba(40,24,12,.4),0 0 0 1px #1d140d,inset 0 1px 0 rgba(255,225,170,.25),inset 0 -2px 6px rgba(0,0,0,.4)}
+.cadre-carte .coin{position:absolute;width:58px;height:58px;z-index:3;pointer-events:none;filter:drop-shadow(0 1px 1px rgba(0,0,0,.6))}
+.coin.hg{top:4px;left:4px}.coin.hd{top:4px;right:4px;transform:scaleX(-1)}.coin.bg{bottom:4px;left:4px;transform:scaleY(-1)}.coin.bd{bottom:4px;right:4px;transform:scale(-1,-1)}
+.cartouche{position:absolute;z-index:4;top:-15px;left:50%;transform:translateX(-50%);font-family:var(--f-titre);font-weight:700;font-size:20px;letter-spacing:.14em;text-transform:uppercase;color:#2b1d13;background:linear-gradient(#f1dfb8,#d9bf8a);border:1px solid #8a6a3a;box-shadow:0 0 0 3px #3a281b,0 0 0 4px #b8893e,0 6px 12px rgba(0,0,0,.35);padding:4px 26px 2px;border-radius:2px;white-space:nowrap;pointer-events:none}
+.vue{position:relative;height:clamp(440px,calc(100vh - 220px),1500px);overflow:hidden;background:#b7b19f;touch-action:none;cursor:grab;border-radius:2px;box-shadow:0 0 0 2px #c79a4c,0 0 0 5px #24180f,0 0 0 6px rgba(199,154,76,.55),inset 0 0 46px rgba(30,20,10,.45)}
+.vue.glisse{cursor:grabbing}
+.plan{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
+.plan img{display:block;max-width:none;user-select:none;-webkit-user-drag:none;pointer-events:none}
+.plan svg{position:absolute;inset:0;overflow:visible}
+.hex{fill:transparent;stroke:rgba(60,36,14,.2);stroke-width:1;vector-effect:non-scaling-stroke}
+.hex:hover{stroke:rgba(40,28,18,.55)}
+.hex.choisie{stroke:#f6e3b4;stroke-width:3;fill:rgba(246,227,180,.12)}
+.pal-n{font-family:var(--f-ui);font-size:15px;font-weight:600;fill:rgba(45,34,24,.5);text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.pal-n.loin{fill:rgba(45,34,24,.3)}
+.id-c{font-family:var(--f-ui);font-size:12px;font-weight:600;letter-spacing:.02em;fill:rgba(36,26,18,.82);stroke:rgba(244,234,217,.72);stroke-width:3px;paint-order:stroke;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.zoom-loin .g-id{display:none}
+.coord{font-family:var(--f-titre);font-size:30px;font-weight:700;fill:rgba(40,30,22,.7);text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.trajet{fill:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:2 11;opacity:.95}
+.trajet-fond{fill:none;stroke:rgba(244,234,217,.75);stroke-width:9;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:2 11}
+.marques g{pointer-events:none}
+.m-camp image{filter:drop-shadow(0 3px 3px rgba(30,18,8,.55))}
+.m-lieu image{filter:drop-shadow(0 3px 3px rgba(30,18,8,.6))}
+.m-camp text{font-family:var(--f-titre);font-weight:700;font-size:25px;letter-spacing:.02em;fill:#2b1f17;text-anchor:middle;dominant-baseline:central}
+.m-rumeur image,.m-apercu image{filter:drop-shadow(0 3px 3px rgba(30,18,8,.55))}
+.m-rumeur path{fill:#e8c46a;stroke:#3a2508;stroke-width:3;stroke-linejoin:round}
+.m-rumeur circle{fill:#3a2508}
+.m-apercu .anneau{fill:rgba(244,234,217,.75);stroke:#2b1f17;stroke-width:3;stroke-dasharray:7 6}
+.m-apercu .oeil{fill:#f4ead9;stroke:#2b1f17;stroke-width:3;stroke-linejoin:round}
+.m-apercu .pup{fill:#2b1f17}
+.m-lieu circle{fill:#1b1411;stroke:#f1e2c0;stroke-width:3}
+.m-lieu path{fill:none;stroke:#f1e2c0;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.m-mission .mat{stroke:#2b1f17;stroke-width:3}
+.m-mission .drap{fill:#2f5a4a;stroke:#13261f;stroke-width:2.5;stroke-linejoin:round}
+.m-mission .bord{fill:none;stroke:#2f5a4a;stroke-width:3;stroke-dasharray:4 5}
+.cache-paliers .pal-n,.cache-rumeurs .m-rumeur,.cache-lieux .m-lieu,.cache-lieux .m-apercu{display:none}
+.zoom-info{position:absolute;right:12px;bottom:10px;font-family:var(--f-ui);font-size:11px;color:#f4ead9;background:rgba(20,14,10,.6);padding:4px 8px;border-radius:3px;pointer-events:none}
+.commandes{position:absolute;z-index:4;top:12px;left:12px;display:flex;gap:6px;flex-wrap:wrap}
+.commandes .btn{box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.seul-plein{display:none!important}
+.fiche{position:relative;background:rgba(255,250,240,.6);border:1px solid var(--filet);padding:22px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.fiche h3{font-weight:700;font-size:46px;line-height:1;margin:0;color:var(--noir)}
+.fiche .sous{font-family:var(--f-ui);font-size:13px;color:var(--encre);margin-top:-4px}
+.fiche dl{margin:0;display:flex;flex-direction:column;gap:10px}
+.fiche .l{display:grid;grid-template-columns:92px minmax(0,1fr);gap:10px;font-size:18px;border-top:1px solid var(--filet);padding-top:10px}
+.fiche dt{font-family:var(--f-ui);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--sepia);padding-top:5px}
+.fiche dd{margin:0;min-width:0}
+.fiche dd em{color:var(--sepia)}
+.fiche ul{margin:0;padding-left:1.1em;font-size:17px}
+.fermer{display:none;position:absolute;top:8px;right:10px;font-family:var(--f-ui);font-size:20px;line-height:1;background:none;border:0;color:var(--sepia);cursor:pointer;padding:6px}
+.zone.plein{position:fixed;inset:0;z-index:100;display:block;background:#2c221a;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+.zone.plein .cadre-carte{height:100%;padding:0;border-radius:0;box-shadow:none}
+.zone.plein .coin,.zone.plein .cartouche{display:none}
+.zone.plein .vue{height:100%;border-radius:0;box-shadow:none}
+.zone.plein .seul-plein{display:inline-flex!important}
+.zone.plein .fiche{position:absolute;z-index:5;top:calc(16px + env(safe-area-inset-top,0px));right:calc(16px + env(safe-area-inset-right,0px));width:min(320px,calc(100% - 32px));max-height:calc(100% - 32px);overflow:auto;background:rgba(244,234,217,.96);box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.zone.plein .fiche.ferme{display:none}
+.zone.plein .fermer{display:block}
+html.plein-actif,html.plein-actif body{overflow:hidden}
+.astuce{font-family:var(--f-ui);font-size:12px;color:var(--sepia);margin:10px 0 0}
+.sous-carte{max-width:880px;margin:44px auto 0}
+.sous-carte h3{font-weight:600;font-size:30px;margin:0 0 10px;color:var(--noir)}
+.index{list-style:none;margin:0;padding:0}
+.index li{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:14px;align-items:baseline;padding:11px 0;border-top:1px solid var(--filet)}
+.index li:last-child{border-bottom:1px solid var(--filet)}
+.index .c{font-weight:700;font-size:24px;color:var(--noir);background:none;border:0;padding:0;cursor:pointer;text-align:left;text-decoration:underline;text-decoration-color:rgba(27,20,17,.25);text-underline-offset:4px}
+.index .n{font-size:19px;min-width:0}
+.index .n small{display:block;font-family:var(--f-ui);font-size:12px;color:var(--sepia)}
+.legende ul{list-style:none;padding:0;margin:12px 0 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px 22px;font-size:18px}
+.legende li{display:flex;align-items:center;gap:10px}
+.legende svg{flex:none}
+.legende summary{font-family:var(--f-ui);font-size:13px;font-weight:600;cursor:pointer;width:max-content}
+
+.panneau-c{position:absolute;z-index:4;top:12px;right:12px;display:flex;flex-direction:column;align-items:flex-end;gap:8px;max-width:calc(100% - 24px)}
+.panneau-c>.btn{box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.pc-corps{width:280px;max-width:100%;max-height:min(60vh,520px);overflow:auto;background:rgba(244,234,217,.97);border:1px solid rgba(107,79,57,.5);border-radius:6px;box-shadow:0 10px 26px rgba(0,0,0,.35);padding:14px 16px;cursor:auto;touch-action:auto}
+.pc-corps .calques{flex-direction:column;align-items:flex-start;gap:8px;margin-top:8px}
+.leg{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:17px;line-height:1.2}
+.leg li{display:flex;align-items:center;gap:10px}
+.leg .ic{width:44px;display:flex;justify-content:center;flex:none}
+.fiche-onglets{display:flex;border-bottom:1px solid var(--filet);margin:-4px 0 4px;gap:4px}
+.fiche-onglets button{font-family:var(--f-ui);font-size:13px;font-weight:600;color:var(--sepia);background:none;border:0;border-bottom:2px solid transparent;padding:8px 6px;cursor:pointer}
+.fiche-onglets button[aria-selected="true"]{color:var(--noir);border-bottom-color:var(--or)}
+#fc-case{display:flex;flex-direction:column;gap:12px}
+.fiche .index li{grid-template-columns:52px minmax(0,1fr);gap:4px 12px}
+.fiche .index li>.pastille{grid-column:2;justify-self:start}
+.fiche .index .c{font-size:22px}
+.fiche .index .n{font-size:18px}
+.passages{list-style:none;padding:0!important;display:flex;flex-direction:column;gap:8px}
+.passages .ses{display:block;font-family:var(--f-ui);font-size:11px;color:var(--sepia)}
+.poignee{display:none}
+/* ---------- onglet Carte en atlas */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.atlas{position:relative;isolation:isolate;overflow:hidden;background:#1a120c url("fond-table.webp") center/cover no-repeat;padding-block:22px 16px}
+.atlas-grille{--hcarte:max(520px,calc(100vh - var(--haut,100px) - 38px));max-width:var(--large);margin:0 auto;height:var(--hcarte);display:flex;justify-content:center;align-items:stretch;gap:clamp(14px,1.2vw,22px)}
+@supports (height:100dvh){.atlas-grille{--hcarte:max(520px,calc(100dvh - var(--haut,100px) - 38px))}}
+.atlas-grille>.col-g{flex:0 0 clamp(220px,14vw,270px)}
+.atlas-grille>.col-d{flex:0 0 clamp(270px,17vw,340px)}
+.centre{position:relative;min-width:0;min-height:0;padding-top:20px;flex:0 1 calc((var(--hcarte) - 44px) * 1.1336 + 24px)}
+.atlas .cadre-carte{height:100%;width:100%;padding:12px}
+.atlas .commandes{top:auto;bottom:10px;left:12px}
+.atlas .vue{height:100%;background:#9e8d73}
+.atlas .cartouche{display:flex;flex-direction:column;align-items:center;gap:1px;padding:5px 26px 5px}
+.atlas .cartouche .ct{line-height:1.1}
+.atlas .cartouche .cc{font-family:var(--f-ui);font-weight:500;font-size:11px;letter-spacing:.02em;text-transform:none;color:#5a4128;display:flex;gap:10px}
+.atlas .cartouche .cc b{font-weight:700;color:#2b1d13}
+.col{position:relative;isolation:isolate;min-height:0;overflow:auto;background:linear-gradient(rgba(255,251,244,.6),rgba(255,251,244,.6)),#efe0cf url("parchemin.webp") center/900px;border:1px solid rgba(138,106,58,.6);border-radius:4px;box-shadow:0 0 0 6px rgba(239,224,207,.5),0 0 0 7px rgba(138,106,58,.3),0 18px 40px rgba(50,30,15,.28);padding:22px 20px 22px;display:flex;flex-direction:column;gap:18px;scrollbar-width:thin;margin-top:20px}
+.col::before{content:"";position:absolute;z-index:-1;width:230px;height:281px;bottom:-6px;background:url("volute.webp") 0 0/contain no-repeat;opacity:.42;pointer-events:none}
+.col-g::before{left:-8px;transform:scaleY(-1)}
+.col-d::before{right:-8px;transform:rotate(180deg)}
+.col::after{content:"";position:absolute;inset:9px;border:1px solid rgba(184,137,62,.4);border-radius:2px;pointer-events:none;z-index:-1}
+.col>*{position:relative;z-index:1}
+.col::before,.col::after{content:"";position:absolute;z-index:0;pointer-events:none;background:url("volute.webp") 0 0/contain no-repeat}
+.col::before{width:88%;aspect-ratio:340/416;bottom:-6px;left:-8px;transform:scaleY(-1);opacity:.42}
+.col::after{width:46%;aspect-ratio:340/416;top:-6px;right:-8px;transform:scaleX(-1);opacity:.22}
+.col-d::before{left:auto;right:-8px;transform:scale(-1,-1)}
+.col-d::after{right:auto;left:-8px;transform:none}
+.bloc{display:flex;flex-direction:column;gap:9px}
+.bloc+.bloc{border-top:1px solid var(--filet);padding-top:16px}
+.bloc-t{margin:0;font-family:var(--f-ui);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--sepia)}
+.btn.large{width:100%;justify-content:flex-start}
+.zoom-g{align-items:center}
+.zoom-v{font-family:var(--f-ui);font-size:12px;color:var(--sepia);margin-left:4px}
+.col .aller{flex-wrap:wrap}
+.col .aller input{flex:1;min-width:0;width:auto}
+.col .calques{flex-direction:column;align-items:flex-start;gap:8px}
+.col .astuce{margin:0;font-size:12px}
+.col-x{display:none;position:absolute;top:6px;right:8px;font-family:var(--f-ui);font-size:22px;line-height:1;background:none;border:0;color:var(--sepia);cursor:pointer;padding:6px}
+.col-d .index li{grid-template-columns:48px minmax(0,1fr);gap:2px 10px;padding:9px 0}
+.col-d .index li>.pastille{grid-column:2;justify-self:start}
+.col-d .index .c{font-size:21px}
+.col-d .index .n{font-size:17px}
+.col-d .vide-mini{font-style:italic;color:var(--sepia);font-size:17px;margin:0}
+#fc-case{display:flex;flex-direction:column;gap:12px}
+.retour{align-self:flex-start;font-family:var(--f-ui);font-size:13px;font-weight:600;background:none;border:0;padding:0;color:var(--noir);cursor:pointer;border-bottom:1px solid rgba(27,20,17,.35)}
+.col-d h3{font-weight:700;font-size:46px;line-height:1;margin:0;color:var(--noir)}
+.col-d .sous{font-family:var(--f-ui);font-size:13px;color:var(--encre);margin-top:-4px}
+.col-d dl{margin:0;display:flex;flex-direction:column;gap:10px}
+.col-d .l{display:grid;grid-template-columns:92px minmax(0,1fr);gap:10px;font-size:18px;border-top:1px solid var(--filet);padding-top:10px}
+.col-d dt{font-family:var(--f-ui);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--sepia);padding-top:5px}
+.col-d dd{margin:0;min-width:0}
+.col-d dd em{color:var(--sepia)}
+.col-d ul{margin:0;padding-left:1.1em;font-size:17px}
+.mob-btns{display:none}
+.atlas-grille.plein{position:fixed;inset:0;z-index:100;max-width:none;height:100vh;height:100dvh;margin:0;padding:12px max(12px,env(safe-area-inset-right,0px)) max(12px,env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));background:#14100c}
+/* ---------- colonnes : feuilles de parchemin clouées */
+.atlas-grille>.col-g{--cw:clamp(220px,14vw,270px);flex-basis:var(--cw)}
+.atlas-grille>.col-d{--cw:clamp(270px,17vw,340px);flex-basis:var(--cw)}
+.atlas .col{background:none;border-radius:0;outline:0;box-shadow:none;
+  border-style:solid;border-color:transparent;
+  border-width:calc(var(--cw)*.187) calc(var(--cw)*.0898) calc(var(--cw)*.1496);
+  border-image:url("feuille.webp") 150 72 120 72 fill / calc(var(--cw)*.187) calc(var(--cw)*.0898) calc(var(--cw)*.1496) stretch;
+  padding:2px 8px 6px;filter:drop-shadow(0 4px 3px rgba(0,0,0,.45)) drop-shadow(0 18px 22px rgba(0,0,0,.5));
+  margin-top:14px;scrollbar-width:thin;scrollbar-color:rgba(107,79,57,.45) transparent}
+.atlas .col-g{transform:rotate(-.6deg)}
+.atlas .col-d{transform:rotate(.5deg)}
+.atlas .col::before,.atlas .col::after{display:none}
+.atlas .col .btn{background:rgba(255,248,232,.45)}
+.atlas .col .btn:hover{background:rgba(255,248,232,.8)}
+.atlas .col .btn.plein{background:var(--noir);color:var(--creme)}
+.atlas .col .aller input,.atlas .col .calques select{background:rgba(255,248,232,.5)}
+.atlas .col{gap:13px}
+.atlas .col .bloc+.bloc{padding-top:12px}
+.atlas .col-d .index li{padding:7px 0}
+.atlas .col-d .l{grid-template-columns:70px minmax(0,1fr);gap:8px;font-size:17px}
+.atlas .col-d h3{font-size:40px}
+@media (max-width:900px){
+  .atlas .col{--cw:100vw;transform:none;filter:drop-shadow(0 -8px 18px rgba(0,0,0,.55));border-radius:0;box-shadow:none}
+  .atlas .col{padding:8px 12px 10px}
+  .atlas .col .col-x{background:rgba(244,234,217,.95);top:0;margin:0 0 -36px 0}
+}
+/* ---------- onglets posés sur une table (fond peint, sans bandeau) */
+.page:not(#p-carte) .parchemin.sur-table{background:#120c08 url("fond-rumeurs.webp") center/cover fixed no-repeat;background-blend-mode:normal;min-height:calc(100vh - var(--haut,100px));padding-block:clamp(36px,4vw,64px) 90px}
+.tete-f{border-bottom:1px solid var(--filet);padding-bottom:22px;margin-bottom:26px}
+.tete-f .surtitre{color:#9a6a3a}
+.tete-f h1{font-weight:500;font-size:clamp(46px,5vw,70px);line-height:.95;margin:.14em 0 .16em;color:var(--noir)}
+.tete-f p{margin:0;font-size:clamp(20px,calc(13px + .5vw),24px);font-style:italic;max-width:52ch;color:var(--encre)}
+.tete-f .chiffres{color:var(--sepia)}
+.tete-f .chiffres b{color:var(--noir)}
+.sur-table .feuille{box-shadow:0 26px 60px rgba(0,0,0,.6),0 4px 12px rgba(0,0,0,.45)}
+.parchemin.sur-table::before,.parchemin.sur-table::after{display:none!important}
+@media (max-width:900px){.page:not(#p-carte) .parchemin.sur-table{background-attachment:scroll}}
+/* fonds par onglet */
+.page:not(#p-carte)#p-rapports .parchemin.sur-table{background-image:url("fond-rapports.webp")}
+.page:not(#p-carte)#p-campement .parchemin.sur-table{background-image:url("fond-campement.webp")}
+.page:not(#p-carte)#p-marchand .parchemin.sur-table{background-image:url("fond-marchand.webp")}
+.page:not(#p-carte)#p-inventaire .parchemin.sur-table{background-image:url("fond-inventaire.webp")}
+.page:not(#p-carte)#p-personnages .parchemin.sur-table{background-image:url("fond-personnages.webp")}
+.page:not(#p-carte)#p-guide .parchemin.sur-table{background-image:url("fond-guide.webp")}
+.barre .wrap,.pied .wrap{max-width:var(--large)}
+/* ---------- onglet Valgris (récit illustré sur la brume) */
+.valgris{position:relative;isolation:isolate;overflow:hidden;background:#0b0907;min-height:calc(100vh - var(--haut,100px));padding-block:clamp(44px,5vw,84px) 120px;color:var(--creme)}
+.v-brume{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.v-brume span{position:absolute;top:0;left:0;height:100%;background:url("brume-fond.webp") 0 0/auto 100% repeat-x;will-change:transform}
+.v-brume .b1{width:calc(100vw + 200vh);animation:v-derive 160s linear infinite}
+.v-brume .b2{width:calc(100vw + 260vh);top:-15%;height:130%;background-size:auto 100%;opacity:.55;mix-blend-mode:screen;transform:scaleY(-1);animation:v-derive2 110s linear infinite}
+.v-brume::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(11,9,7,0) 30%,rgba(11,9,7,.75) 100%)}
+@keyframes v-derive{from{transform:translateX(0)}to{transform:translateX(-200vh)}}
+@keyframes v-derive2{from{transform:scaleY(-1) translateX(-260vh)}to{transform:scaleY(-1) translateX(0)}}
+.v-tete{position:relative;text-align:center;max-width:820px;margin:0 auto clamp(40px,5vw,72px)}
+.v-tete .surtitre{color:#e6b47e}
+.v-tete h1{font-weight:500;font-size:clamp(60px,8vw,108px);line-height:.95;margin:.12em 0 .14em;letter-spacing:.02em;text-shadow:0 4px 30px rgba(0,0,0,.8)}
+.v-tete p{margin:0 auto;max-width:34ch;font-size:clamp(21px,calc(13px + .7vw),28px);font-style:italic;color:rgba(244,234,217,.9)}
+.v-defile{margin-top:28px;font-family:var(--f-ui);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#c9a46a}
+.v-defile span{display:block;font-size:18px;margin-top:4px;animation:v-bas 2.4s ease-in-out infinite}
+@keyframes v-bas{50%{transform:translateY(6px)}}
+.v-fil{position:relative;width:min(100%,clamp(320px,62vw,1040px));margin:0 auto;display:flex;flex-direction:column;align-items:center}
+.vcase{position:relative;margin:0;width:100%}
+.vcadre{position:relative;overflow:hidden;border:2px solid #b8893e;outline:1px solid rgba(184,137,62,.35);outline-offset:6px;box-shadow:0 30px 70px rgba(0,0,0,.75);background:#1a130e}
+.vcadre img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover}
+.vtexte{max-width:640px;margin:clamp(34px,4vw,56px) auto clamp(18px,2vw,28px);text-align:left;hyphens:auto;text-shadow:0 2px 12px rgba(0,0,0,.9)}
+.vtexte p{margin:0;font-size:clamp(20px,calc(12px + .62vw),26px);line-height:1.55;color:#f1e6d2}
+.vtexte p+p{margin-top:.8em}
+.lettrine{float:left;font-family:var(--f-titre);font-weight:700;font-size:4.2em;line-height:.82;margin:.06em .12em 0 0;color:#d9ab5c;text-shadow:0 2px 14px rgba(0,0,0,.8)}
+.fleuron{width:120px;height:20px;color:#b8893e;opacity:.8;margin:0 auto clamp(40px,5vw,72px)}
+.bulle{position:absolute;z-index:3;left:var(--x);top:var(--y);margin:0;max-width:min(36%,320px);background:#fffaf0;color:var(--encre);border:2px solid #2b1f17;border-radius:22px;padding:12px 18px 10px;box-shadow:0 8px 18px rgba(0,0,0,.45)}
+.bulle p{margin:0;font-family:var(--f-titre);font-weight:700;font-size:clamp(16px,calc(9px + .5vw),20px);line-height:1.25}
+.bulle cite{display:block;margin-top:4px;font-family:var(--f-ui);font-style:normal;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--sepia)}
+.bulle::after{content:"";position:absolute;bottom:-16px;right:34px;width:22px;height:18px;background:#fffaf0;border:2px solid #2b1f17;border-top:0;border-right:0;transform:skewX(35deg)}
+.brume-l .vcadre::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,rgba(60,56,50,.55),rgba(26,23,20,.96)),url("brume-fond.webp") center/cover;transition:opacity 1.8s ease .1s}
+.brume-l .vcadre img{filter:blur(8px) saturate(.5);transform:scale(1.04);transition:filter 1.9s ease,transform 2.4s ease}
+.brume-l .bulle{opacity:0;transform:translateY(8px);transition:opacity .8s ease 1.4s,transform .8s ease 1.4s}
+.brume-l.levee .vcadre::after{opacity:0}
+.brume-l.levee .vcadre img{filter:none;transform:none}
+.brume-l.levee .bulle{opacity:1;transform:none}
+.apparait p,.apparait .btn{opacity:0;transform:translateY(10px);transition:opacity 1.1s ease,transform 1.1s ease}
+.apparait p:nth-child(2){transition-delay:.45s}
+.apparait p:nth-child(3),.apparait .btn{transition-delay:.9s}
+.apparait.levee p,.apparait.levee .btn{opacity:1;transform:none}
+.v-fin{max-width:700px;margin:clamp(56px,6vw,96px) auto 0;text-align:center}
+.v-fin p{margin:0;font-size:clamp(24px,calc(14px + .9vw),34px);font-style:italic;line-height:1.45;color:#efe0c4;text-shadow:0 2px 14px rgba(0,0,0,.9)}
+.v-fin p+p{margin-top:.6em}
+.v-fin .btn{margin-top:40px}
+.btn.grand{font-size:15px;padding:14px 30px;background:linear-gradient(#cfa257,#a87b33);color:#1b1411;border:1px solid #e0b96e;font-weight:600}
+.btn.grand:hover{background:linear-gradient(#dcb066,#b4873b)}
+@media (max-width:900px){
+  .v-fil{width:100%}
+  .vcadre{outline:0}
+  .vtexte{padding:0 4px}
+  .vtexte p{font-size:19px}
+  .bulle{left:auto;right:10px;top:10px;max-width:70%;padding:8px 12px 7px;border-radius:16px}
+  .bulle::after{display:none}
+  .bulle p{font-size:14px}
+  .bulle cite{font-size:9px}
+}
+@media (prefers-reduced-motion: reduce){.v-brume span,.v-defile span{animation:none}}
+/* ---------- rapports : créatures */
+.table-z{max-width:880px;margin:24px auto 0;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th{font-family:var(--f-ui);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--sepia);text-align:left;padding:10px;border-bottom:1px solid rgba(51,37,28,.55)}
+td{padding:12px 10px;border-bottom:1px solid var(--filet);font-size:19px;vertical-align:baseline}
+td .en{font-family:var(--f-ui);font-size:12px;color:var(--sepia);margin-left:6px}
+.num{text-align:right;font-family:var(--f-ui);font-size:14px;font-weight:600;white-space:nowrap}
+.plus{color:var(--vert)}
+.resume.court{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.suite{align-self:flex-start}
+.bilan{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 28px;padding-top:12px;border-top:1px dashed var(--filet)}
+.bilan ul{margin:0;padding-left:1.05em;font-size:18px;line-height:1.45}
+.bilan li::marker{color:var(--or)}
+
+/* ---------- campement */
+.pnj-m{width:112px;height:112px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#3a2c22,#14100c 70%);border:3px solid var(--or);box-shadow:0 0 0 4px rgba(184,137,62,.22),0 10px 22px rgba(40,24,12,.3);display:flex;align-items:center;justify-content:center;color:#e3bf78}
+.pnj-m svg{width:54px;height:54px}
+.citation{font-style:italic;color:#5c4636;border-left:2px solid var(--or);padding-left:14px}
+.lieux-c{max-width:980px;margin:26px auto 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px 36px;list-style:none;padding:0}
+.lieux-c li{border-top:1px solid var(--filet);padding-top:12px}
+.lieux-c h4{margin:0 0 4px;font-weight:600;font-size:23px;color:var(--noir)}
+.lieux-c p{margin:0;font-size:18px;line-height:1.45}
+.note{text-align:center;font-style:italic;color:var(--sepia);margin:34px auto 0;max-width:56ch;font-size:19px}
+
+/* ---------- marchand */
+.regle{max-width:880px;margin:0 auto;font-size:19px;font-style:italic;color:#5c4636;border-left:2px solid var(--or);padding-left:14px}
+.regle code{font-family:var(--f-ui);font-style:normal;font-size:13px;background:rgba(255,250,240,.7);border:1px solid var(--filet);border-radius:3px;padding:1px 6px}
+.outils-m{max-width:1000px;margin:30px auto 0;display:flex;flex-wrap:wrap;gap:12px 16px;align-items:end;justify-content:space-between}
+.champ{display:flex;flex-direction:column;gap:6px;min-width:0}
+.champ input,.champ select{font-family:var(--f-ui);font-size:13px;color:var(--noir);background:rgba(255,250,240,.7);border:1px solid var(--noir);border-radius:4px;padding:9px 12px;min-width:0}
+.champ input{width:min(320px,80vw)}
+.catalogue{max-width:1000px;margin:12px auto 0}
+.catalogue table thead th{padding:0}
+.catalogue thead th button{all:unset;cursor:pointer;display:flex;align-items:center;gap:6px;padding:12px 10px}
+.catalogue thead th button:focus-visible{outline:2px solid #c7863f}
+.catalogue .fl{opacity:.35;font-size:10px}
+.catalogue th[aria-sort="ascending"] .fl,.catalogue th[aria-sort="descending"] .fl{opacity:1}
+.catalogue td.nom a{font-weight:600;font-size:21px;color:var(--noir);text-decoration:none;border-bottom:1px solid rgba(27,20,17,.25)}
+.catalogue td.nom a:hover{border-bottom-color:var(--noir)}
+.catalogue td.nom .ext{font-family:var(--f-ui);font-size:10px;color:var(--sepia);margin-left:6px}
+.catalogue td.type{white-space:nowrap;font-size:18px}
+.catalogue td.prix{font-family:var(--f-ui);font-size:12px;color:var(--sepia);font-style:italic;text-align:right;white-space:nowrap}
+.groupe-m{margin-top:20px}
+.groupe-m summary{display:flex;align-items:baseline;gap:12px;cursor:pointer;padding:12px 0;border-bottom:1px solid rgba(51,37,28,.55);list-style:none}
+.groupe-m summary::-webkit-details-marker{display:none}
+.groupe-m summary h3{margin:0;font-weight:600;font-size:28px;color:var(--noir)}
+.groupe-m summary .etiq::before{content:"▸ ";}
+.groupe-m[open] summary .etiq::before{content:"▾ ";}
+
+/* ---------- inventaire */
+.tresor{max-width:780px;margin:8px auto 0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:40px;align-items:center;padding:26px 0;border-top:1px solid var(--filet);border-bottom:1px solid var(--filet)}
+.somme{display:flex;align-items:baseline;gap:10px;font-variant-numeric:tabular-nums}
+.somme b{font-weight:700;font-size:clamp(80px,10vw,120px);line-height:.85;color:var(--noir)}
+.somme span{font-size:32px;color:var(--or);font-weight:700}
+.tresor p{margin:4px 0 0;font-size:19px}
+.objet{display:grid;grid-template-columns:110px minmax(0,1fr) auto;gap:22px;align-items:baseline;padding-block:20px;border-top:1px solid var(--filet)}
+.objet:last-child{border-bottom:1px solid var(--filet)}
+.objet h3{font-weight:600;font-size:25px;margin:0;color:var(--noir)}
+.objet p{margin:4px 0 0;font-size:18px;color:#5c4636}
+.etat{font-family:var(--f-ui);font-size:12px;font-weight:600;white-space:nowrap;text-align:right}
+.etat.libre{color:#7a5410}
+.etat.libre::before{content:"● ";color:var(--or)}
+.etat.pris{color:var(--sepia);font-weight:500}
+
+/* ---------- personnages */
+.membres{max-width:1040px;margin:30px auto 0;display:flex;flex-wrap:wrap;justify-content:center;gap:40px 28px;list-style:none;padding:0}
+.membres>li{width:min(220px,100%)}
+.membre{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:flex;flex-direction:column;align-items:center;text-align:center;gap:7px;padding:10px 6px 14px;border-radius:6px}
+.membre:hover{background:rgba(255,250,240,.35)}
+.membre:focus-visible{outline:2px solid #c7863f}
+.portrait{position:relative;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#3a2c22,#14100c 70%);border:3px solid var(--or);box-shadow:0 0 0 5px rgba(184,137,62,.2),0 12px 24px rgba(40,24,12,.3);display:flex;align-items:center;justify-content:center;margin-bottom:6px}
+.portrait .ini{font-weight:700;font-size:62px;line-height:1;color:#e3bf78}
+.niv{position:absolute;right:-4px;bottom:4px;width:44px;height:44px;border-radius:50%;background:var(--noir);border:2px solid var(--or);color:var(--creme);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--f-ui);line-height:1}
+.niv small{font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:#d9b16b}
+.niv b{font-size:16px;font-weight:600}
+.membre h3{font-weight:700;font-size:30px;line-height:1;margin:0;color:var(--noir)}
+.membre .cl{font-size:19px;font-style:italic;color:#5c4636}
+.membre .in{font-family:var(--f-ui);font-size:12px;color:var(--encre)}
+.memorial{max-width:640px;margin:22px auto 0;text-align:center;padding:26px 24px;border-top:1px solid var(--filet);border-bottom:1px solid var(--filet)}
+.memorial p{margin:8px 0 0;font-size:20px;font-style:italic;color:#5c4636}
+
+/* ---------- panneau personnage */
+.voile{position:fixed;inset:0;z-index:120;background:rgba(10,8,6,.55);display:flex;justify-content:flex-end}
+.panneau{width:min(460px,100%);height:100%;overflow:auto;background:var(--rose) url("parchemin.webp") center/900px;box-shadow:-10px 0 30px rgba(0,0,0,.35);padding:calc(26px + env(safe-area-inset-top,0px)) max(24px,env(safe-area-inset-right,0px)) calc(30px + env(safe-area-inset-bottom,0px)) 24px;display:flex;flex-direction:column;gap:14px}
+.panneau .haut-p{display:flex;align-items:center;gap:18px}
+.panneau .portrait{width:96px;height:96px;margin:0;flex:none}
+.panneau .portrait .ini{font-size:44px}
+.panneau h2{margin:0;font-weight:700;font-size:40px;line-height:1;color:var(--noir)}
+.panneau .x{margin-left:auto;align-self:flex-start;font-family:var(--f-ui);font-size:22px;background:none;border:0;cursor:pointer;color:var(--sepia)}
+.panneau ul{margin:0;padding-left:1.1em}
+.panneau li{margin:4px 0}
+
+/* ---------- guide */
+.guide{display:grid;grid-template-columns:220px minmax(0,1fr);gap:48px;max-width:1080px;margin:0 auto}
+.sommaire{position:sticky;top:96px;align-self:start;display:flex;flex-direction:column;gap:2px;font-family:var(--f-ui);font-size:13px}
+.sommaire a{text-decoration:none;color:var(--encre);padding:7px 10px;border-left:2px solid var(--filet)}
+.sommaire a:hover{border-left-color:var(--noir);background:rgba(255,250,240,.35)}
+.art{min-width:0}
+.art section{padding-block:26px;border-top:1px solid var(--filet)}
+.art section:first-child{border-top:0;padding-top:0}
+.art h2{font-weight:600;font-size:36px;line-height:1.1;margin:0 0 10px;color:var(--noir)}
+.art p{margin:0 0 12px;max-width:66ch}
+.art ol,.art ul{margin:0 0 12px;padding-left:1.2em;max-width:64ch}
+.art li{margin:5px 0}
+.art .avenir{display:inline-block;font-family:var(--f-ui);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#7a2a1a;border:1px dashed #7a2a1a;border-radius:999px;padding:2px 9px;margin-left:8px;vertical-align:4px}
+.art table{max-width:560px}
+
+.chantier{max-width:620px;margin:20px auto 0;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;padding:40px 24px;border:1px dashed rgba(107,79,57,.55);border-radius:6px;background:rgba(243,228,214,.5)}
+.chantier h2{margin:0;font-weight:600;font-size:38px;color:var(--noir)}
+.chantier p{margin:0;font-size:19px;color:#5c4636}
+.ligne-vide{list-style:none;border:0!important}
+.vide-etat{max-width:580px;margin:10px auto;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;padding:34px 24px;border:1px dashed rgba(107,79,57,.5);border-radius:6px;background:rgba(243,228,214,.5)}
+.vide-etat svg{width:52px;height:52px;color:var(--sepia)}
+.vide-etat h3{margin:0;font-weight:600;font-size:30px;line-height:1.1;color:var(--noir)}
+.vide-etat p{margin:0;font-size:19px;color:#5c4636;max-width:48ch}
+.apercu{background:#1b1411;color:rgba(244,234,217,.8);font-family:var(--f-ui);font-size:12px}
+.apercu .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 14px;padding-block:7px}
+.apercu .seg{background:transparent;border-color:rgba(244,234,217,.35)}
+.apercu .seg button{color:rgba(244,234,217,.85);font-size:12px;padding:5px 12px;border-left-color:rgba(244,234,217,.2)}
+.apercu .seg button:hover{background:rgba(244,234,217,.08)}
+.apercu .seg button[aria-pressed="true"]{background:var(--creme);color:var(--noir)}
+/* ---------- pied de page */
+.pied{background:var(--brun);color:rgba(244,234,217,.75)}
+.pied .wrap{padding-block:30px calc(34px + env(safe-area-inset-bottom,0px));display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px}
+.pied .blason{display:flex;align-items:center;gap:12px;font-weight:600;font-size:22px;color:var(--creme)}
+.pied .blason img{height:48px;width:auto}
+.pied nav{display:flex;flex-wrap:wrap;gap:8px 22px}
+.pied a{font-family:var(--f-ui);font-size:13px;color:rgba(244,234,217,.8);text-decoration:none}
+.pied a:hover{color:var(--creme)}
+.pied .mention{width:100%;border-top:1px solid rgba(244,234,217,.18);padding-top:14px;font-family:var(--f-ui);font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media (max-width:1500px){body:not([data-page="carte"]) .maj{display:none}}
+@media (max-width:1100px){.neuf{grid-template-columns:repeat(2,minmax(0,1fr))}.neuf>div:first-child{grid-column:1/-1}.neuf>div:nth-child(2),.neuf>div:nth-child(4){border-left:0}.neuf>div{border-top:1px solid var(--filet)}}
+@media (max-width:900px){
+  .maj{display:none}
+  .atlas{padding-block:14px 14px}
+  .atlas-grille{display:block;height:calc(100vh - var(--haut,100px) - 28px);height:calc(100dvh - var(--haut,100px) - 28px);min-height:420px}
+  .centre{height:100%;padding-top:16px}
+  .atlas .cadre-carte{padding:8px;width:100%}
+  .centre{flex:none}
+  .atlas .cartouche{font-size:14px;padding:3px 14px}
+  .atlas .cartouche .cc{font-size:10px;gap:6px}
+  .col::before,.col::after{display:none}
+  .col-x{display:block;position:sticky;top:-18px;align-self:flex-end;margin:-18px -10px -34px 0;z-index:5;width:36px;height:36px;padding:0;border-radius:50%;background:rgba(244,234,217,.95)}
+  .col{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:80;max-height:72vh;margin:0;border-radius:16px 16px 0 0;box-shadow:0 -12px 34px rgba(0,0,0,.45);padding:22px max(18px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-left,0px));transform:translateY(105%);transition:transform .25s ease;visibility:hidden}
+  .col.ouverte{transform:none;visibility:visible}
+  .col::before,.col::after{display:none}
+  .mob-btns{display:flex;position:absolute;z-index:5;left:50%;bottom:22px;transform:translateX(-50%);gap:8px;white-space:nowrap}
+  .mob-btns .btn{box-shadow:0 4px 14px rgba(0,0,0,.45)}
+  .atlas .zoom-info{bottom:64px}
+  .fiche{position:fixed;left:0;right:0;bottom:0;z-index:70;max-height:64vh;overflow:auto;border:0;border-radius:16px 16px 0 0;background:rgba(244,234,217,.98);box-shadow:0 -10px 30px rgba(0,0,0,.3);padding:0 max(18px,env(safe-area-inset-right,0px)) calc(18px + env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-left,0px));transform:translateY(calc(100% - 58px - env(safe-area-inset-bottom,0px)));transition:transform .25s ease}
+  .fiche.ouverte{transform:none}
+  .poignee{display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:2;margin:0 calc(-1 * max(18px,env(safe-area-inset-left,0px)));padding:16px 18px 12px;background:inherit;border:0;border-bottom:1px solid var(--filet);font-family:var(--f-ui);font-size:14px;font-weight:600;color:var(--noir);cursor:pointer;width:calc(100% + 36px)}
+  .poignee .barre-p{position:absolute;top:6px;left:50%;width:40px;height:4px;margin-left:-20px;border-radius:2px;background:rgba(107,79,57,.45)}
+  .poignee .fl{margin-left:auto;transition:transform .25s}
+  .fiche.ouverte .poignee .fl{transform:rotate(180deg)}
+  .fiche .fermer{display:none!important}
+  .fiche-onglets{margin-top:6px}
+  #p-carte .parchemin{padding-bottom:110px}
+  .zone.plein .fiche{position:fixed;top:auto;left:0;right:0;bottom:0;width:auto;max-height:60vh;z-index:5}
+  .zone.plein .fiche.ferme{display:block}
+  .pc-corps{width:240px}
+  .zone{grid-template-columns:minmax(0,1fr)}
+  .sous-carte{grid-template-columns:minmax(0,1fr)}
+  .guide{grid-template-columns:minmax(0,1fr)}
+  .sommaire{position:static;flex-direction:row;flex-wrap:wrap}
+  .sommaire a{border-left:0;border:1px solid var(--filet);border-radius:999px}
+  .lieux-c{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .parchemin::before,.parchemin::after{display:none}
+}
+@media (max-width:700px){
+  .feuille{box-shadow:0 0 0 4px rgba(239,224,207,.5),0 14px 30px rgba(50,30,15,.25)}
+  .feuille .coin{width:30px;height:30px}
+  .feuille::before{inset:7px}
+  .barre .wrap{gap:12px}
+  .logo span{display:none}
+  .logo img{height:40px}
+  .hero .wrap{padding-block:30px 34px}
+  .hero{--pos:72% 50%}
+  .ligne{grid-template-columns:minmax(0,1fr);gap:10px}
+  .cote{flex-direction:row;align-items:baseline;gap:14px;padding-top:0}
+  .vue{height:64vh}
+  .cadre-carte{padding:10px}
+  .cadre-carte .coin{width:38px;height:38px}
+  .cartouche{font-size:16px;padding:3px 16px 1px}
+  .bilan{grid-template-columns:minmax(0,1fr)}
+  .lieux-c{grid-template-columns:minmax(0,1fr)}
+  .tresor{grid-template-columns:minmax(0,1fr);gap:14px}
+  .objet{grid-template-columns:minmax(0,1fr);gap:4px}
+  .etat{text-align:left}
+  .catalogue td.type,.catalogue th.type-h{display:none}
+  .index li{grid-template-columns:52px minmax(0,1fr)}
+  .index li>:last-child{grid-column:2}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+
+<header class="barre gutter">
+  <div class="wrap">
+    <a class="logo" href="#valgris" data-go="valgris"><img src="logo-256.webp" width="256" height="275" alt="Blason des Elmarith"><span>Les Chroniques de Valgris</span></a>
+    <div class="tabs-z" id="tabs-z">
+      <nav class="tabs" id="tabs" role="tablist" aria-label="Onglets du site">
+        <a role="tab" aria-selected="false" href="#valgris" data-go="valgris">Valgris</a>
+        <a role="tab" aria-selected="false" href="#carte" data-go="carte">Carte</a>
+        <a role="tab" aria-selected="false" href="#rumeurs" data-go="rumeurs">Rumeurs</a>
+        <a role="tab" aria-selected="false" href="#rapports" data-go="rapports">Rapports</a>
+        <a role="tab" aria-selected="false" href="#campement" data-go="campement">Campement</a>
+        <a role="tab" aria-selected="false" href="#marchand" data-go="marchand">Marchand</a>
+        <a role="tab" aria-selected="false" href="#inventaire" data-go="inventaire">Inventaire</a>
+        <a role="tab" aria-selected="false" href="#personnages" data-go="personnages">Personnages</a>
+        <a role="tab" aria-selected="false" href="#guide" data-go="guide">Guide</a>
+      </nav>
+    </div>
+    <div class="maj" id="maj"></div>
+  </div>
+</header>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="orn-coin" viewBox="0 0 60 60"><g fill="none" stroke="#d7ad5e" stroke-width="2" stroke-linecap="round">
+    <path d="M4 56V20Q4 4 20 4h36"/><path d="M10 50V24Q10 10 24 10h26" stroke-width="1.2" opacity=".8"/>
+    <path d="M20 4q2 10-6 14M4 20q10 2 14-6"/><circle cx="18" cy="18" r="3.2" fill="#d7ad5e"/>
+    <path d="M30 4q4 6 10 0M4 30q6 4 0 10" stroke-width="1.4"/></g></symbol></defs></svg>
+<main id="main">
+<!-- ================= CARTE ================= -->
+<!-- ================= VALGRIS ================= -->
+<div class="page" id="p-valgris" data-titre="Valgris" hidden>
+  <div class="valgris gutter">
+    <div class="v-brume" aria-hidden="true"><span class="b1"></span><span class="b2"></span></div>
+    <header class="v-tete">
+      <div class="surtitre">Le récit de la guilde</div>
+      <h1>Valgris</h1>
+      <p>Autrefois, on l'appelait Elmaren. Depuis la Brume, on ne dit plus que Valgris.</p>
+      <div class="v-defile" aria-hidden="true">Faites défiler <span>▾</span></div>
+    </header>
+    <div class="v-fil">
+      <figure class="vcase brume-l">
+        <div class="vcadre"><img src="lore-1.webp" width="1536" height="1024" alt="Un hameau paisible à l&#x27;aube d&#x27;automne, une tour ronde à l&#x27;orée de la forêt ; une brume pâle monte des arbres." loading="eager"></div>
+      </figure>
+      <div class="vtexte apparait"><p class="lettrine-p"><span class="lettrine">E</span>n ce temps-là, Elmaren était une terre douce, de collines et de bois, où la cloche de la vieille tour sonnait chaque soir la fin du labeur.</p><p>Il advint qu'un matin d'automne, une brume descendit de la forêt. Et nul ne prit garde à elle.</p></div>
+      <svg class="fleuron" viewBox="0 0 120 20" aria-hidden="true"><path d="M2 10H44M76 10H118" stroke="currentColor" stroke-width="1"/><path d="M60 3 67 10 60 17 53 10Z" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="60" cy="10" r="2" fill="currentColor"/><circle cx="48" cy="10" r="1.6" fill="currentColor"/><circle cx="72" cy="10" r="1.6" fill="currentColor"/></svg>
+      <figure class="vcase brume-l">
+        <div class="vcadre"><img src="lore-2.webp" width="1536" height="1024" alt="Un mur de brume immense avale les chaumières et la tour ; des villageois fuient avec leurs enfants." loading="eager"></div>
+      </figure>
+      <div class="vtexte apparait"><p>Elle vint sans hâte et sans bruit, et ce qu'elle toucha, elle ne le rendit pas. Avant la nuit, les champs, les routes et les toits avaient disparu.</p><p>Beaucoup s'enfuirent. Beaucoup ne s'enfuirent pas. Longtemps, la cloche sonna encore dans le gris, puis elle se tut.</p></div>
+      <svg class="fleuron" viewBox="0 0 120 20" aria-hidden="true"><path d="M2 10H44M76 10H118" stroke="currentColor" stroke-width="1"/><path d="M60 3 67 10 60 17 53 10Z" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="60" cy="10" r="2" fill="currentColor"/><circle cx="48" cy="10" r="1.6" fill="currentColor"/><circle cx="72" cy="10" r="1.6" fill="currentColor"/></svg>
+      <figure class="vcase brume-l">
+        <div class="vcadre"><img src="lore-3.webp" width="1536" height="1024" alt="Un homme encapuchonné ressort de la brume au crépuscule, une lanterne à la main ; des villageois avec des torches l&#x27;attendent dans la bruyère." loading="lazy"></div>
+      </figure>
+      <div class="vtexte apparait"><p>Il y eut des hommes vaillants pour y retourner chercher les leurs. Ils marchèrent des jours, croyaient-ils, et ressortirent au lieu même où ils étaient entrés, le cœur brisé.</p><p>D'autres allèrent plus loin. Ceux-là, la Brume les garda.</p></div>
+      <svg class="fleuron" viewBox="0 0 120 20" aria-hidden="true"><path d="M2 10H44M76 10H118" stroke="currentColor" stroke-width="1"/><path d="M60 3 67 10 60 17 53 10Z" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="60" cy="10" r="2" fill="currentColor"/><circle cx="48" cy="10" r="1.6" fill="currentColor"/><circle cx="72" cy="10" r="1.6" fill="currentColor"/></svg>
+      <figure class="vcase brume-l">
+        <div class="vcadre"><img src="lore-mal.webp" width="1536" height="1024" alt="Une nuit à la lisière : dans la brume, une ombre immense et indistincte aux deux lueurs pâles ; une petite silhouette tient une torche." loading="lazy"></div>
+      </figure>
+      <div class="vtexte apparait"><p>On dit alors qu'elle n'était pas venue seule. Qu'en son cœur dormait une chose plus vieille qu'Elmaren, qui avait attendu son heure, et que la Brume était son manteau.</p><p>Nul ne la vit jamais. Mais ceux qui veillaient à la lisière parlaient d'une ombre plus noire que la nuit, et de deux lueurs pâles qui les regardaient.</p></div>
+      <svg class="fleuron" viewBox="0 0 120 20" aria-hidden="true"><path d="M2 10H44M76 10H118" stroke="currentColor" stroke-width="1"/><path d="M60 3 67 10 60 17 53 10Z" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="60" cy="10" r="2" fill="currentColor"/><circle cx="48" cy="10" r="1.6" fill="currentColor"/><circle cx="72" cy="10" r="1.6" fill="currentColor"/></svg>
+      <figure class="vcase brume-l">
+        <div class="vcadre"><img src="lore-4.webp" width="1536" height="1024" alt="Une vieille carte poussiéreuse à la lueur d&#x27;une bougie, avec une grande tache blanche au centre." loading="lazy"></div>
+      </figure>
+      <div class="vtexte apparait"><p>Un siècle passa. Ceux qui avaient fui vieillirent en terre étrangère, et leurs enfants oublièrent jusqu'au nom d'Elmaren. On ne disait plus que Valgris.</p><p>Sur les cartes, ce ne fut plus qu'une tache blanche. Et l'on apprit aux enfants à ne jamais regarder du côté du gris quand tombait le soir.</p></div>
+      <svg class="fleuron" viewBox="0 0 120 20" aria-hidden="true"><path d="M2 10H44M76 10H118" stroke="currentColor" stroke-width="1"/><path d="M60 3 67 10 60 17 53 10Z" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="60" cy="10" r="2" fill="currentColor"/><circle cx="48" cy="10" r="1.6" fill="currentColor"/><circle cx="72" cy="10" r="1.6" fill="currentColor"/></svg>
+      <figure class="vcase brume-l">
+        <div class="vcadre"><img src="lore-guilde.webp" width="1536" height="1024" alt="Des silhouettes encapuchonnées penchées sur la vieille carte, à la lueur des bougies ; au centre, des pierres luisent d&#x27;une lumière froide." loading="lazy"></div>
+      </figure>
+      <div class="vtexte apparait"><p>Mais il advint que les descendants des exilés se rassemblèrent en une guilde, qu'ils nommèrent les Elmarith, « ceux d'Elmaren ». Leurs familles gardaient depuis l'exil un trésor dont elles n'avaient jamais révélé l'usage : des pierres d'une lueur froide, devant lesquelles la Brume recule.</p><p>Ils rouvrirent la vieille carte, et jurèrent de rentrer chez eux, de trouver la chose qui s'y cache, et de l'abattre.</p></div>
+      <svg class="fleuron" viewBox="0 0 120 20" aria-hidden="true"><path d="M2 10H44M76 10H118" stroke="currentColor" stroke-width="1"/><path d="M60 3 67 10 60 17 53 10Z" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="60" cy="10" r="2" fill="currentColor"/><circle cx="48" cy="10" r="1.6" fill="currentColor"/><circle cx="72" cy="10" r="1.6" fill="currentColor"/></svg>
+      <figure class="vcase brume-l">
+        <div class="vcadre"><img src="lore-6.webp" width="1536" height="1024" alt="Deux éclaireurs encapuchonnés guident un chariot bâché dans la brume, à la lueur d&#x27;une lanterne." loading="lazy"></div>
+      </figure>
+      <div class="vtexte apparait"><p>Mais la lueur des pierres ne montre que le pas suivant, non la route. Pour trouver leur chemin, les Elmarith firent appel à Tobin et Isaure Merle, frère et sœur, nés à l'ombre de la Brume. Toute leur vie, ils avaient chassé à sa lisière et appris à lire ses repères.</p><p>Ainsi la compagnie s'enfonça dans le gris : les Merle en tête, puis les aventuriers, et derrière eux le chariot d'Odile et les registres d'Aldric. Car nulle quête ne va loin sans pain, sans armes et sans quelqu'un pour en tenir le compte.</p></div>
+      <svg class="fleuron" viewBox="0 0 120 20" aria-hidden="true"><path d="M2 10H44M76 10H118" stroke="currentColor" stroke-width="1"/><path d="M60 3 67 10 60 17 53 10Z" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="60" cy="10" r="2" fill="currentColor"/><circle cx="48" cy="10" r="1.6" fill="currentColor"/><circle cx="72" cy="10" r="1.6" fill="currentColor"/></svg>
+      <figure class="vcase brume-l">
+        <div class="vcadre"><img src="lore-5.webp" width="1536" height="1024" alt="La brume se lève dans la lumière du matin et révèle des villages en ruine envahis par la végétation ; au loin, un mur gris immobile." loading="lazy"></div>
+      </figure>
+      <div class="vtexte apparait"><p>Et voici : là où passaient les pierres, la Brume se levait comme un rideau, et le soleil touchait de nouveau des terres qu'il n'avait pas vues depuis cent ans. Les maisons étaient vides, les tables encore dressées. Mais de leurs anciens habitants, on ne trouva pas un os.</p><p>En chaque lieu reconquis, les Elmarith dressèrent une borne, afin que la Brume n'y revienne jamais.</p></div>
+      <svg class="fleuron" viewBox="0 0 120 20" aria-hidden="true"><path d="M2 10H44M76 10H118" stroke="currentColor" stroke-width="1"/><path d="M60 3 67 10 60 17 53 10Z" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="60" cy="10" r="2" fill="currentColor"/><circle cx="48" cy="10" r="1.6" fill="currentColor"/><circle cx="72" cy="10" r="1.6" fill="currentColor"/></svg>
+      <figure class="vcase brume-l">
+        <div class="vcadre"><img src="lore-7.webp" width="1536" height="1024" alt="Le hameau retapé au crépuscule : feu de camp, chariot, chevaux, et la tour en ruine avec une bannière bleue." loading="lazy"></div>
+      </figure>
+      <div class="vtexte apparait"><p>Au cœur de Valgris, les Merle trouvèrent le vieux hameau et sa tour. La cloche y pendait encore, muette. Là, les Elmarith plantèrent leur première borne, rallumèrent les foyers et rendirent un toit aux maisons.</p><p>Le hameau avait perdu son nom. On l'appela simplement le Camp.</p></div>
+      <svg class="fleuron" viewBox="0 0 120 20" aria-hidden="true"><path d="M2 10H44M76 10H118" stroke="currentColor" stroke-width="1"/><path d="M60 3 67 10 60 17 53 10Z" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="60" cy="10" r="2" fill="currentColor"/><circle cx="48" cy="10" r="1.6" fill="currentColor"/><circle cx="72" cy="10" r="1.6" fill="currentColor"/></svg>
+      <figure class="vcase brume-l">
+        <div class="vcadre"><img src="lore-8.webp" width="1536" height="1024" alt="Quatre aventuriers de dos, à l&#x27;aube, contemplent une terre de forêts, de ruines et de brume." loading="lazy"></div>
+      </figure>
+      <div class="vtexte apparait"><p>Et chaque matin, quand le ciel pâlit au-dessus des collines, une petite compagnie quitte le Camp, une pierre à la main, vers des terres que nul n'a foulées depuis un siècle.</p><p>Certains reviennent chargés d'or, d'autres de récits. Certains ne reviennent pas. Mais la Brume recule.</p></div>
+      
+      <div class="v-fin apparait">
+        <p>Or, une nuit, la cloche du Camp, muette depuis cent ans, sonna d'elle-même. Un seul coup.</p>
+        <p>Et très loin, au fond de la Brume, une autre lui répondit.</p>
+        <a class="btn grand" href="#carte" data-go="carte">Voir la carte</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="p-carte" data-titre="Carte" hidden>
+  <section class="atlas gutter" style="--img:url('entete-carte.webp')" aria-label="Carte du monde">
+    <h1 class="sr">Carte du monde</h1>
+    <div class="atlas-grille" id="c-zone">
+      <aside class="col col-g" id="c-colg" aria-label="Outils de la carte">
+        <button type="button" class="col-x" data-ferme="c-colg" aria-label="Fermer les outils">×</button>
+        <section class="bloc"><h2 class="bloc-t">Naviguer</h2>
+          <div class="groupe zoom-g"><button type="button" class="btn carre" id="c-plus" aria-label="Zoomer">+</button><button type="button" class="btn carre" id="c-moins" aria-label="Dézoomer">−</button><span class="zoom-v" id="c-zi2"></span></div>
+          <button type="button" class="btn large" id="c-tout">Toute la carte</button>
+          <button type="button" class="btn large" id="c-camp">Recentrer sur le camp</button>
+          <form class="aller" id="c-aller"><label for="c-case">Aller à</label><input id="c-case" type="text" placeholder="ex. M7" maxlength="3" autocomplete="off"><button type="submit" class="btn plein">Voir</button></form>
+        </section>
+        <section class="bloc"><h2 class="bloc-t">Afficher</h2>
+          <div class="calques" role="group" aria-label="Calques de la carte">
+            <label for="c-pal">Paliers <select id="c-pal"><option value="proches">proches</option><option value="tous">tous</option><option value="aucun">aucun</option></select></label>
+            <label for="c-ru"><input type="checkbox" id="c-ru" checked>Rumeurs</label>
+            <label for="c-li"><input type="checkbox" id="c-li" checked>Lieux</label>
+          </div>
+        </section>
+        <section class="bloc"><h2 class="bloc-t">Légende</h2><ul class="leg" id="c-legende"></ul></section>
+        <p class="astuce">Glisser pour déplacer, molette ou pincement pour zoomer.</p>
+      </aside>
+      <div class="centre">
+        <div class="cadre-carte" id="c-cadre">
+        <svg class="coin hg" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg><svg class="coin hd" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg><svg class="coin bg" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg><svg class="coin bd" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg>
+        <div class="cartouche"><span class="ct">Carte du monde</span><span class="cc" id="c-chiffres"></span></div>
+        <div class="vue" id="c-vue" aria-label="Carte de Valgris. Glisser pour déplacer, molette ou pincement pour zoomer.">
+          <div class="plan" id="c-plan">
+            <img src="carte.webp" width="2368" height="2088" alt="Carte peinte de Valgris, explorée autour du camp et noyée de brume ailleurs">
+            <svg id="c-svg" viewBox="0 0 2368 2088" width="2368" height="2088"></svg>
+          </div>
+          <div class="zoom-info" id="c-zi"></div>
+          <div class="commandes">
+            <button type="button" class="btn carre seul-plein" id="pe-plus" aria-label="Zoomer">+</button>
+            <button type="button" class="btn carre seul-plein" id="pe-moins" aria-label="Dézoomer">−</button>
+            <button type="button" class="btn seul-plein" id="pe-camp">Le camp</button>
+            <button type="button" class="btn" id="c-pe" aria-pressed="false"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9"/></svg><span>Plein écran</span></button>
+          </div>
+        </div>
+        </div>
+        <div class="mob-btns"><button type="button" class="btn plein" data-ouvre="c-colg">Outils et légende</button><button type="button" class="btn plein" data-ouvre="c-fiche">Lieux et rumeurs</button></div>
+      </div>
+      <aside class="col col-d" id="c-fiche" aria-label="Lieux, rumeurs et fiche de case">
+        <button type="button" class="col-x" data-ferme="c-fiche" aria-label="Fermer le panneau">×</button>
+        <div id="c-liste">
+          <section class="bloc"><h2 class="bloc-t">Lieux connus</h2><ul class="index" id="c-lieux"></ul></section>
+          <section class="bloc"><h2 class="bloc-t">Rumeurs actives</h2><ul class="index" id="c-rumeurs"></ul></section>
+          <p class="astuce">Cliquez une case de la carte pour afficher sa fiche.</p>
+        </div>
+        <div id="fc-case" hidden aria-live="polite"></div>
+      </aside>
+    </div>
+  </section>
+</div>
+
+<!-- ================= RUMEURS ================= -->
+<div class="page" id="p-rumeurs" data-titre="Rumeurs" hidden>
+  <div class="parchemin gutter sur-table">
+    <div class="wrap feuille">
+      <svg class="coin hg" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg><svg class="coin hd" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg><svg class="coin bg" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg><svg class="coin bd" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg>
+      <header class="tete-f">
+        <div class="surtitre">Le panneau du camp</div>
+        <h1>Rumeurs</h1>
+        <p>Ce que les Merle rapportent au camp, case par case. Toutes ne disent pas vrai.</p>
+        <div class="chiffres" id="r-chiffres"></div>
+      </header>
+      <div class="filtres"><div class="seg" role="group" aria-label="Filtrer les rumeurs" id="r-filtres">
+        <button type="button" data-f="toutes">Toutes</button><button type="button" data-f="actives">Actives</button><button type="button" data-f="explorees">Explorées</button>
+      </div></div>
+      <div class="compte" id="r-compte"></div>
+      <ol class="liste" id="r-liste"></ol>
+    </div>
+  </div>
+</div>
+
+<!-- ================= RAPPORTS ================= -->
+<div class="page" id="p-rapports" data-titre="Rapports" hidden>
+  <div class="parchemin gutter sur-table">
+    <div class="wrap feuille">
+      <svg class="coin hg" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg><svg class="coin hd" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg><svg class="coin bg" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg><svg class="coin bd" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg>
+      <header class="tete-f">
+      <div class="surtitre">Le registre d'Aldric</div>
+      <h1>Rapports</h1>
+      <p>Ce que chaque expédition a vu, combattu et rapporté au camp.</p>
+      <div class="chiffres" id="ra-chiffres"></div>
+    
+      </header>
+      <div class="filtres" id="ra-filtres-z"><span class="etiq">Aventurier</span><div class="seg" role="group" aria-label="Filtrer par aventurier" id="ra-filtres"></div>
+        <label class="etiq" for="ra-case" style="margin-left:10px">Case</label><select id="ra-case" class="ui" style="font-size:13px;border:1px solid var(--noir);border-radius:5px;background:rgba(244,234,217,.7);padding:7px 10px"></select></div>
+      <div class="compte" id="ra-compte"></div>
+      <ol class="liste" id="ra-liste"></ol>
+      <div class="titre-s" id="creatures">
+        <svg viewBox="0 0 130 20" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><line x1="4" y1="14" x2="126" y2="14"/><path d="M4 14l-3-2m3 2l-3 2M126 14l3-2m-3 2l3 2"/><g transform="translate(65 6)"><path d="M0-4v8M-4 0h8M-3-3l6 6M3-3l-6 6"/></g></svg>
+        <h2>Ce que la guilde sait</h2>
+        <p>Les créatures déjà affrontées dans Valgris, d'après les rapports.</p>
+      </div>
+      <div class="table-z"><table><thead><tr><th scope="col">Créature</th><th scope="col">Où</th><th scope="col">Session</th><th scope="col">Issue</th></tr></thead><tbody id="ra-creatures"></tbody></table></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= CAMPEMENT ================= -->
+<div class="page" id="p-campement" data-titre="Campement" hidden>
+  <div class="parchemin gutter sur-table">
+    <div class="wrap feuille">
+      <svg class="coin hg" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg><svg class="coin hd" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg><svg class="coin bg" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg><svg class="coin bd" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg>
+      <header class="tete-f">
+      <div class="surtitre">Le hameau de la clairière · J10</div>
+      <h1>Campement</h1>
+      <p>Le seul endroit sûr de Valgris. On en part à l'aube, on y revient toujours.</p>
+      <div class="chiffres"><span>Danger <b>aucun</b></span><span>Repos long <b>possible</b></span><span><b>3</b> figures du camp</span></div>
+    
+      </header>
+      <div class="titre-s"><h2>Les figures du camp</h2></div>
+      <ol class="liste" id="cp-pnj"></ol>
+      <p class="note">Le camp pourra s'agrandir au fil de la campagne. Les améliorations apparaîtront ici.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ================= MARCHAND ================= -->
+<div class="page" id="p-marchand" data-titre="Marchand" hidden>
+  <div class="parchemin gutter sur-table">
+    <div class="wrap feuille">
+      <svg class="coin hg" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg><svg class="coin hd" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg><svg class="coin bg" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg><svg class="coin bd" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg>
+      <header class="tete-f">
+      <div class="surtitre">L'étal d'Odile Brasfort</div>
+      <h1>Marchand</h1>
+      <p>Tout ce qu'un aventurier peut acheter avant de quitter le camp. Odile ne fait jamais crédit.</p>
+      <div class="chiffres" id="m-chiffres"></div>
+    
+      </header>
+      <p class="regle">Pour acheter, écrivez dans #marchand-et-coffre : <code>Achat : objet, prix, personnage</code>. Le MJ de votre prochaine session valide l'achat. Les prix arrivent bientôt.</p>
+      <div class="outils-m">
+        <div class="champ"><label class="etiq" for="m-q">Rechercher</label><input id="m-q" type="search" placeholder="Nom d'un objet…" autocomplete="off"></div>
+        <div class="champ"><label class="etiq" for="m-type">Type</label><select id="m-type"></select></div>
+        <div class="champ"><span class="etiq" id="m-lr">Rareté</span><div class="seg" role="group" aria-labelledby="m-lr" id="m-rar">
+          <button type="button" data-r="">Toutes</button><button type="button" data-r="Courant">Courant</button><button type="button" data-r="Peu courant">Peu courant</button></div></div>
+        <div class="champ"><span class="etiq" id="m-lv">Affichage</span><div class="seg" role="group" aria-labelledby="m-lv" id="m-vue">
+          <button type="button" data-v="types">Par type</button><button type="button" data-v="liste">Liste</button></div></div>
+      </div>
+      <div class="compte" id="m-compte" role="status" style="text-align:left;max-width:1000px;margin:16px auto 0"></div>
+      <div class="catalogue" id="m-cat"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= INVENTAIRE ================= -->
+<div class="page" id="p-inventaire" data-titre="Inventaire" hidden>
+  <div class="parchemin gutter sur-table">
+    <div class="wrap feuille">
+      <svg class="coin hg" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg><svg class="coin hd" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg><svg class="coin bg" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg><svg class="coin bd" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg>
+      <header class="tete-f">
+      <div class="surtitre">La réserve de la tour</div>
+      <h1>Inventaire</h1>
+      <p>Le trésor commun et le coffre de la guilde, tenus par Aldric.</p>
+      <div class="chiffres" id="i-chiffres"></div>
+    
+      </header>
+      <section class="tresor" aria-label="Trésor de la guilde">
+        <div class="somme"><b id="i-somme">0</b><span>po</span></div>
+        <div><div class="etiq">Trésor de la guilde</div><p id="i-phrase"></p><p class="citation" style="margin-top:10px">Un dixième de l'or rapporté rejoint le trésor, arrondi à la pièce inférieure.</p></div>
+      </section>
+      <div class="titre-s"><h2>Le coffre commun</h2><p>Les objets rapportés que personne n'a gardés. Pour en réclamer un : <span class="ui" style="font-size:13px">Réclame : objet, personnage, raison</span> dans #marchand-et-coffre.</p></div>
+      <ol class="liste" id="i-coffre"></ol>
+      <div class="titre-s"><h2>Le livre de comptes</h2></div>
+      <div class="table-z"><table><thead><tr><th scope="col">Session</th><th scope="col">Mouvement</th><th scope="col" class="num">Montant</th></tr></thead><tbody id="i-mvt"></tbody><tfoot><tr><td></td><td><b>Solde du trésor</b></td><td class="num" id="i-solde"></td></tr></tfoot></table></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= PERSONNAGES ================= -->
+<div class="page" id="p-personnages" data-titre="Personnages" hidden>
+  <div class="parchemin gutter sur-table">
+    <div class="wrap feuille">
+      <svg class="coin hg" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg><svg class="coin hd" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg><svg class="coin bg" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg><svg class="coin bd" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg>
+      <header class="tete-f">
+      <div class="surtitre">Le râtelier de la guilde</div>
+      <h1>Personnages</h1>
+      <p>Ceux qui partent du camp à l'aube, et ceux qui n'en sont pas revenus.</p>
+      <div class="chiffres" id="p-chiffres"></div>
+    
+      </header>
+      <div class="filtres" id="p-tri-z"><span class="etiq">Trier par</span><div class="seg" role="group" aria-label="Trier les membres" id="p-tri">
+        <button type="button" data-t="niveau">Niveau</button><button type="button" data-t="sessions">Sessions</button><button type="button" data-t="nom">Nom</button>
+      </div></div>
+      <ul class="membres" id="p-membres"></ul>
+      <div class="titre-s"><h2>Le mémorial</h2></div>
+      <div class="memorial" id="p-memorial"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= GUIDE ================= -->
+<div class="page" id="p-guide" data-titre="Guide" hidden>
+  <div class="parchemin gutter sur-table">
+    <div class="wrap feuille">
+      <svg class="coin hg" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg><svg class="coin hd" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg><svg class="coin bg" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg><svg class="coin bd" viewBox="0 0 60 60" aria-hidden="true"><use href="#orn-coin"/></svg>
+      <header class="tete-f">
+      <div class="surtitre">Pour les nouveaux venus</div>
+      <h1>Guide de la guilde</h1>
+      <p>Comment rejoindre la guilde, partir en expédition et revenir vivant. Page en cours de construction.</p>
+    
+      </header>
+    <div class="chantier">
+      <svg viewBox="0 0 64 64" width="64" height="64" fill="none" stroke="#6b4f39" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 52h40M18 52V30l14-12 14 12v22"/><path d="M26 52V38h12v14"/><path d="M8 20l10-6M56 20l-10-6"/></svg>
+      <div class="etiq">En cours de construction</div>
+      <h2>Le guide arrive bientôt</h2>
+      <p>On y trouvera comment créer son personnage, partir en expédition, lire la carte et les paliers, et les règles de butin, de progression et de mort.</p>
+    </div>
+    </div>
+  </div>
+</div>
+</main>
+
+<footer class="pied gutter">
+  <div class="wrap">
+    <div class="blason"><img src="logo-256.webp" width="256" height="275" alt="" loading="lazy">Les Chroniques de Valgris</div>
+    <nav aria-label="Pied de page">
+      <a href="#valgris" data-go="valgris">Valgris</a><a href="#carte" data-go="carte">Carte</a><a href="#rumeurs" data-go="rumeurs">Rumeurs</a><a href="#rapports" data-go="rapports">Rapports de mission</a><a href="#campement" data-go="campement">Campement</a><a href="#marchand" data-go="marchand">Marchand</a><a href="#inventaire" data-go="inventaire">Inventaire de la guilde</a><a href="#personnages" data-go="personnages">Personnages</a><a href="#guide" data-go="guide">Guide</a>
+    </nav>
+    <div class="mention"><span id="f-maj"></span><span>Campagne West Marches · D&amp;D 2024</span></div>
+  </div>
+</footer>
+
+<div class="voile" id="voile" hidden></div>
+
+<script type="application/json" id="donnees-secours">{"carte": {"maj": {"session": 0, "date": "2026-10-26"}, "camp": "J10", "connues": {"J10": "plaine"}, "revelees": {"0": ["J10"]}, "lieux": [], "rumeurs": [{"num": 2, "titre": "Ce qui respire au fond", "case": null, "date": "2026-10-26", "source": "Isaure Merle", "exploree": null, "texte": "Isaure ne l'a dit qu'à voix basse, au coin du feu : certains soirs sans vent, la Brume bouge quand même, du côté du sud-est, comme une poitrine qui se soulève. « Là-bas, au plus profond. C'est de là que ça vient. » Elle n'a pas voulu en dire plus."}, {"num": 1, "titre": "L'ancienne mine", "case": "L9", "date": "2026-10-26", "source": "Tobin Merle", "exploree": null, "texte": "À moins d'une journée de marche du Camp, Tobin a trouvé l'entrée d'une ancienne mine, étayée de vieux bois qui tient encore. Il n'est pas entré. De l'intérieur montent un bruit d'eau, un air froid, et autre chose : un frottement léger, qui s'arrête quand on se tait."}]}, "rapports": {"rapports": [], "missions": []}, "campement": {"pnj": [{"role": "La marchande", "nom": "Odile Brasfort", "icone": "balance", "texte": "Ancienne cantinière des armées, Odile sait ce dont un aventurier a besoin et ce qu'il est prêt à payer. Son étal tient sous la bâche de son chariot.", "citation": "Je ne fais jamais crédit. Les morts ne remboursent pas.", "lien": ["marchand", "Voir l'étal d'Odile"]}, {"role": "L'intendant de la guilde", "nom": "Aldric Vennemoor", "icone": "registre", "texte": "Méticuleux jusqu'à l'agacement, Aldric tient le registre des expéditions des Elmarith, le coffre commun et le trésor de la guilde.", "citation": "Ce qui n'est pas écrit n'a pas eu lieu.", "lien": ["inventaire", "Ouvrir l'inventaire"]}, {"role": "Les informateurs", "nom": "Tobin et Isaure Merle", "icone": "merle", "texte": "Frère et sœur, braconniers et éclaireurs. Ils battent la campagne et rapportent ce qu'ils voient. Tobin parle volontiers, parfois trop ; Isaure ne dit rien tant qu'elle n'est pas sûre.", "citation": "On dit des choses. Après, c'est à vous d'aller voir.", "lien": ["rumeurs", "Lire les rumeurs"]}]}, "personnages": {"personnages": []}, "inventaire": {"coffre": [], "mouvements": [{"session": 0, "libelle": "Ouverture du trésor de la guilde", "montant": 0}]}, "marchand": {"note": "Prix à venir. Liens vers les fiches AideDD 2024.", "objets": [{"nom": "Amulette de sombre éclat", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/amulette-de-sombre-eclat"}, {"nom": "Amulette mécanique", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/amulette-mecanique"}, {"nom": "Arme en argent", "type": "Arme", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/arme-en-argent"}, {"nom": "Armure fumante", "type": "Armure", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/armure-fumante"}, {"nom": "Armure impeccable", "type": "Armure", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/armure-impeccable"}, {"nom": "Armure rapide", "type": "Armure", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/armure-rapide"}, {"nom": "Baguette du chef d'orchestre", "type": "Baguette", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/baguette-du-chef-d-orchestre"}, {"nom": "Baguette du pyrotechnicien", "type": "Baguette", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/baguette-du-pyrotechnicien"}, {"nom": "Bottes aux empreintes factices", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/bottes-aux-empreintes-factices"}, {"nom": "Bouclier expressif", "type": "Armure", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/bouclier-expressif"}, {"nom": "Bourse à épices d'Huard", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/bourse-a-epices-d-huard"}, {"nom": "Bâton des chants d'oiseaux", "type": "Bâton", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/baton-des-chants-d-oiseaux"}, {"nom": "Bâton floral", "type": "Bâton", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/baton-floral"}, {"nom": "Bâton ostensible", "type": "Bâton", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/baton-ostensible"}, {"nom": "Cadenas sournois", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/cadenas-sournois"}, {"nom": "Canne du vétéran", "type": "Arme", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/canne-du-veteran"}, {"nom": "Cape virevoltante", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/cape-virevoltante"}, {"nom": "Cape à la mode", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/cape-a-la-mode"}, {"nom": "Chandelle des profondeurs", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/chandelle-des-profondeurs"}, {"nom": "Chapeau de magicien", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/chapeau-de-magicien"}, {"nom": "Chapeau de vermine", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/chapeau-de-vermine"}, {"nom": "Chope de sobriété", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/chope-de-sobriete"}, {"nom": "Clef mystérieuse", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/clef-mysterieuse"}, {"nom": "Cor d'alarme silencieuse", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/cor-d-alarme-silencieuse"}, {"nom": "Corde remaillante", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/corde-remaillante"}, {"nom": "Cornet acoustique", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/cornet-acoustique"}, {"nom": "Dé du charlatan", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/de-du-charlatan"}, {"nom": "Grimoire résistant", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/grimoire-resistant"}, {"nom": "Habits autoréparateurs", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/habits-autoreparateurs"}, {"nom": "Heaume effrayant", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/heaume-effrayant"}, {"nom": "Instrument à illusions", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/instrument-a-illusions"}, {"nom": "Instrument à message", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/instrument-a-message"}, {"nom": "Membre artificiel", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/membre-artificiel"}, {"nom": "Orbe boussole", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/orbe-boussole"}, {"nom": "Orbe horloge", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/orbe-horloge"}, {"nom": "Parchemin de sort (sort mineur ou du 1er niveau)", "type": "Parchemin", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/parchemin-de-sort"}, {"nom": "Parfum envoûtant", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/parfum-envoutant"}, {"nom": "Perche du pêcheur", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/perche-du-pecheur"}, {"nom": "Perche rétractable", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/perche-retractable"}, {"nom": "Perle désaltérante", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/perle-desalterante"}, {"nom": "Perle nutritive", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/perle-nutritive"}, {"nom": "Pipe des monstres de fumée", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/pipe-des-monstres-de-fumee"}, {"nom": "Pièce des rivaux", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/piece-des-rivaux"}, {"nom": "Pot d'éveil", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/pot-d-eveil"}, {"nom": "Potion d'escalade", "type": "Potion", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/potion-d-escalade"}, {"nom": "Potion de compréhension", "type": "Potion", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/potion-de-comprehension"}, {"nom": "Potion de guérison", "type": "Potion", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/potion-de-guerison"}, {"nom": "Poupée qui parle", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/poupee-qui-parle"}, {"nom": "Projectile percutant", "type": "Arme", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/projectile-percutant"}, {"nom": "Rubis du mage de guerre", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/rubis-du-mage-de-guerre"}, {"nom": "Serre sylvestre", "type": "Arme", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/serre-sylvestre"}, {"nom": "Épée sélène", "type": "Arme", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/epee-selene"}, {"nom": "Œil artificiel", "type": "Objet merveilleux", "rarete": "Courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/oeil-artificiel"}, {"nom": "Amulette d'antidétection", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/amulette-d-antidetection"}, {"nom": "Amulette de bonne santé", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/amulette-de-bonne-sante"}, {"nom": "Amulette de cicatrisation", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/amulette-de-cicatrisation"}, {"nom": "Anneau de barrière mentale", "type": "Anneau", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/anneau-de-barriere-mentale"}, {"nom": "Anneau de chaleur constante", "type": "Anneau", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/anneau-de-chaleur-constante"}, {"nom": "Anneau de marche sur l'eau", "type": "Anneau", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/anneau-de-marche-sur-l-eau"}, {"nom": "Anneau de nage", "type": "Anneau", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/anneau-de-nage"}, {"nom": "Anneau de saut", "type": "Anneau", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/anneau-de-saut"}, {"nom": "Arme en adamantium", "type": "Arme", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/arme-en-adamantium"}, {"nom": "Arme vigilante", "type": "Arme", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/arme-vigilante"}, {"nom": "Arme, +1", "type": "Arme", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/arme-1-2-ou-3"}, {"nom": "Arme-sortilège (sort mineur ou du 1er niveau)", "type": "Arme", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/arme-sortilege"}, {"nom": "Armure de mithral", "type": "Armure", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/armure-de-mithral"}, {"nom": "Armure du matelot", "type": "Armure", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/armure-du-matelot"}, {"nom": "Armure en adamantium", "type": "Armure", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/armure-en-adamantium"}, {"nom": "Armure-sortilège (sort mineur ou du 1er niveau)", "type": "Armure", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/armure-sortilege"}, {"nom": "Baguette de détection de la magie", "type": "Baguette", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/baguette-de-detection-de-la-magie"}, {"nom": "Baguette de projectiles magiques", "type": "Baguette", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/baguette-de-projectiles-magiques"}, {"nom": "Baguette des secrets", "type": "Baguette", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/baguette-des-secrets"}, {"nom": "Baguette des toiles", "type": "Baguette", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/baguette-des-toiles"}, {"nom": "Baguette du mage de guerre, +1", "type": "Baguette", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/baguette-du-mage-de-guerre-1-2-ou-3"}, {"nom": "Balai dansant de Baba Yaga", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/balai-dansant-de-baba-yaga"}, {"nom": "Balai volant", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/balai-volant"}, {"nom": "Bandages de pancrace, +1", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/bandages-de-pancrace"}, {"nom": "Bandeau d'intelligence", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/bandeau-d-intelligence"}, {"nom": "Baume de Keoghtom", "type": "Potion", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/baume-de-keoghtom"}, {"nom": "Bottes ailées", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/bottes-ailees"}, {"nom": "Bottes de sept lieues", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/bottes-de-sept-lieues"}, {"nom": "Bottes des terres gelées", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/bottes-des-terres-gelees"}, {"nom": "Bottes elfiques", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/bottes-elfiques"}, {"nom": "Bouclier sentinelle", "type": "Armure", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/bouclier-sentinelle"}, {"nom": "Bouclier, +1", "type": "Armure", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/bouclier-1-2-ou-3"}, {"nom": "Bracelets d'archer", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/bracelets-d-archer"}, {"nom": "Broche de défense", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/broche-de-defense"}, {"nom": "Bâton de la vipère", "type": "Bâton", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/baton-de-la-vipere"}, {"nom": "Bâton du python", "type": "Bâton", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/baton-du-python"}, {"nom": "Bâton-sortilège (sort mineur ou du 1er niveau)", "type": "Bâton", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/baton-sortilege"}, {"nom": "Cape de la raie manta", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/cape-de-la-raie-manta"}, {"nom": "Cape de protection", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/cape-de-protection"}, {"nom": "Cape elfique", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/cape-elfique"}, {"nom": "Capuchon de respiration aquatique", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/capuchon-de-respiration-aquatique"}, {"nom": "Carafe intarissable", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/carafe-intarissable"}, {"nom": "Carquois d'Ehlonna", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/carquois-d-ehlonna"}, {"nom": "Chapeau de déguisement", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/chapeau-de-deguisement"}, {"nom": "Chaussons de l'araignée", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/chaussons-de-l-araignee"}, {"nom": "Collier d'adaptation", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/collier-d-adaptation"}, {"nom": "Corde d'ascension", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/corde-d-ascension"}, {"nom": "Cruche alchimique", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/cruche-alchimique"}, {"nom": "Diadème de destruction", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/diademe-de-destruction"}, {"nom": "Figurine merveilleuse (corbeau d'argent)", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/figurine-merveilleuse"}, {"nom": "Flûte des égouts", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/flute-des-egouts"}, {"nom": "Flûte terrifiante", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/flute-terrifiante"}, {"nom": "Gantelets de puissance d'ogre", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/gantelets-de-puissance-d-ogre"}, {"nom": "Gants de chapardeur", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/gants-de-chapardeur"}, {"nom": "Gants de nage et d'escalade", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/gants-de-nage-et-d-escalade"}, {"nom": "Gants piégeurs de projectiles", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/gants-piegeurs-de-projectiles"}, {"nom": "Gemme d'illumination", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/gemme-d-illumination"}, {"nom": "Gemme élémentaire", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/gemme-elementaire"}, {"nom": "Globe flottant", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/globe-flottant"}, {"nom": "Heaume de compréhension des langues", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/heaume-de-comprehension-des-langues"}, {"nom": "Heaume de télépathie", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/heaume-de-telepathie"}, {"nom": "Huile d'insaisissabilité", "type": "Potion", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/huile-d-insaisissabilite"}, {"nom": "Instrument des bardes (bandore de Fochlucan, luth de Doss ou cistre de MacFuirmidh)", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/instrument-des-bardes"}, {"nom": "Javeline de foudre", "type": "Arme", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/javeline-de-foudre"}, {"nom": "Lanterne de révélation", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/lanterne-de-revelation"}, {"nom": "Lentilles de netteté", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/lentilles-de-nettete"}, {"nom": "Lunettes du nyctalope", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/lunettes-du-nyctalope"}, {"nom": "Mante de dame Nature", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/mante-de-dame-nature"}, {"nom": "Médaillon des pensées", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/medaillon-des-pensees"}, {"nom": "Parchemin de sort (sort du 2e ou 3e niveau)", "type": "Parchemin", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/parchemin-de-sort"}, {"nom": "Perle de thaumaturgie", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/perle-de-thaumaturgie"}, {"nom": "Philtre d'amour", "type": "Potion", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/philtre-d-amour"}, {"nom": "Pierre porte-bonheur", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/pierre-porte-bonheur"}, {"nom": "Pierres messagères", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/pierres-messageres"}, {"nom": "Plume de Quaal (ancre, arbre ou éventail)", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/plume-de-quaal"}, {"nom": "Potion d'agrandissement", "type": "Potion", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/potion-d-agrandissement"}, {"nom": "Potion d'amitié avec les animaux", "type": "Potion", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/potion-d-amitie-avec-les-animaux"}, {"nom": "Potion de force de géant (collines)", "type": "Potion", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/potion-de-force-de-geant"}, {"nom": "Potion de guérison (importante)", "type": "Potion", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/potion-de-guerison"}, {"nom": "Potion de respiration aquatique", "type": "Potion", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/potion-de-respiration-aquatique"}, {"nom": "Potion de résistance", "type": "Potion", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/potion-de-resistance"}, {"nom": "Potion de souffle enflammé", "type": "Potion", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/potion-de-souffle-enflamme"}, {"nom": "Potion des pugilistes", "type": "Potion", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/potion-des-pugilistes"}, {"nom": "Potion toxique", "type": "Potion", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/potion-toxique"}, {"nom": "Poudre dessiccative", "type": "Potion", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/poudre-dessiccative"}, {"nom": "Poudre à éternuer", "type": "Potion", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/poudre-a-eternuer"}, {"nom": "Poussière de disparition", "type": "Potion", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/poussiere-de-disparition"}, {"nom": "Projectile, +1", "type": "Arme", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/projectile-1-2-ou-3"}, {"nom": "Regard charmeur", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/regard-charmeur"}, {"nom": "Robe du camelot", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/robe-du-camelot"}, {"nom": "Sac sans fond", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/sac-sans-fond"}, {"nom": "Sac à malices", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/sac-a-malices"}, {"nom": "Sceptre du gardien des pactes, +1", "type": "Sceptre", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/sceptre-du-gardien-des-pactes-1-2-ou-3"}, {"nom": "Sceptre inamovible", "type": "Sceptre", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/sceptre-inamovible"}, {"nom": "Selle du hussard", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/selle-du-hussard"}, {"nom": "Tarot fantasmagorique", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/tarot-fantasmagorique"}, {"nom": "Trident de domination aquatique", "type": "Arme", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/trident-de-domination-aquatique"}, {"nom": "Urne fumigène", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/urne-fumigene"}, {"nom": "Yeux de lynx", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/yeux-de-lynx"}, {"nom": "Épée vengeresse", "type": "Arme", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/epee-vengeresse"}, {"nom": "Éventail enchanté", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/eventail-enchante"}, {"nom": "Œil de guenaude", "type": "Objet merveilleux", "rarete": "Peu courant", "prix": null, "lien": "https://www.aidedd.org/magic-item/fr/oeil-de-guenaude"}]}}</script>
+<script>
+document.documentElement.lang="fr";
+(function(){
+  const F=["carte","rapports","campement","personnages","inventaire","marchand"];
+  const lire=n=>fetch(n+".json",{cache:"no-cache"}).then(r=>{if(!r.ok)throw new Error(n);return r.json()});
+  const secours=()=>JSON.parse(document.getElementById("donnees-secours").textContent);
+  const assembler=o=>{const c=o.carte;
+    return {DATA:{maj:c.maj,camp:c.camp,connues:c.connues,revelees:c.revelees||{},lieux:c.lieux||[],rumeurs:c.rumeurs||[],
+      rapports:o.rapports.rapports||[],missions:o.rapports.missions||[],pnj:o.campement.pnj||[],persos:o.personnages.personnages||[],
+      coffre:o.inventaire.coffre||[],mouvements:o.inventaire.mouvements||[]},
+      MARCHAND:(o.marchand.objets||[]).map(x=>[x.nom,x.type,x.rarete,x.prix??null,x.lien])}};
+  Promise.all(F.map(lire)).then(v=>{const o={};F.forEach((n,k)=>o[n]=v[k]);return o}).catch(secours)
+    .then(o=>{const {DATA,MARCHAND}=assembler(o);demarrer(DATA,MARCHAND)});
+})();
+function demarrer(DATA,MARCHAND){
+
+document.documentElement.lang="fr";
+/* =====================================================================
+   DONNÉES — même découpage que les fichiers data/*.json du futur site
+   ===================================================================== */
+const VIDE=(ic,t,p)=>{const I={registre:'<path d="M14 8h26a4 4 0 0 1 4 4v36H18a4 4 0 0 1-4-4z"/><path d="M14 44a4 4 0 0 1 4-4h26M22 18h14M22 25h14M22 32h9"/>',bulle:'<path d="M10 14h44a4 4 0 0 1 4 4v20a4 4 0 0 1-4 4H30l-10 9v-9H10a4 4 0 0 1-4-4V18a4 4 0 0 1 4-4z"/><circle cx="21" cy="28" r="2"/><circle cx="32" cy="28" r="2"/><circle cx="43" cy="28" r="2"/>',coffre:'<path d="M8 26h48v24H8zM8 26v-6a8 8 0 0 1 8-8h32a8 8 0 0 1 8 8v6"/><path d="M28 26v8h8v-8M8 38h48"/>',ratelier:'<path d="M6 14h52M14 14v8M26 14v8M38 14v8M50 14v8"/><path d="M14 22v26M26 22l-4 24M38 22v26M50 22c-4 8-4 18 0 26"/>'};return `<div class="vide-etat"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[ic]}</svg><h3>${t}</h3><p>${p}</p></div>`};
+
+/* =====================================================================
+   OUTILS COMMUNS
+   ===================================================================== */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const COLS="ABCDEFGHIJKLMNOPQRST", W=20,H=20;
+const parse=s=>{const m=/^([A-Ta-t])\s*(\d{1,2})$/.exec((s||"").trim()); if(!m) return null; const c=COLS.indexOf(m[1].toUpperCase()), r=+m[2]-1; return (r>=0&&r<H)?[c,r]:null};
+const cid=(c,r)=>COLS[c]+(r+1);
+const cube=(c,r)=>{const x=c-(r-(r&1))/2;return [x,-x-r,r]};
+const [CC,CR]=parse(DATA.camp);
+const dist=(a,b)=>{const A=cube(...a),B=cube(...b);return Math.max(...A.map((v,i)=>Math.abs(v-B[i])))};
+const palierC=(c,r)=>Math.max(1,Math.ceil(dist([c,r],[CC,CR])/2));
+const palier=k=>palierC(...parse(k));
+const NIVEAU=["","1-3","3-5","5-7","7-9","9-11","11-13","13-15","15-17","17-19","19-20"];
+const TERRAIN={plaine:"Plaine",foret:"Forêt",collines:"Collines",montagne:"Montagne",marais:"Marais",eau:"Eau"};
+const fJM=new Intl.DateTimeFormat("fr-FR",{day:"numeric",month:"long"});
+const fJMA=new Intl.DateTimeFormat("fr-FR",{day:"numeric",month:"long",year:"numeric"});
+const fJour=new Intl.DateTimeFormat("fr-FR",{weekday:"long",day:"numeric",month:"long"});
+const d=(s,f=fJM)=>f.format(new Date(s+"T12:00:00"));
+const pl=(n,s,p)=>n+" "+(n>1?(p||s+"s"):s);
+const lieuDe=k=>DATA.lieux.find(l=>l.case===k);
+const rapportDe=s=>DATA.rapports.find(r=>r.session===s);
+const sessionsDe=nom=>DATA.rapports.filter(r=>r.participants.some(p=>p[0]===nom));
+const lienCase=k=>`<button type="button" class="lien" data-case="${k}">${k}</button>`;
+const lienRapport=(s,txt)=>`<button type="button" class="lien" data-rapport="${s}">${txt||"Lire le rapport"}</button>`;
+const lienPerso=n=>`<button type="button" class="puce" data-perso="${n}">${n}</button>`;
+const mem={get(k,v){try{const x=localStorage.getItem("camp2-"+k);return x==null?v:JSON.parse(x)}catch(e){return v}},set(k,v){try{localStorage.setItem("camp2-"+k,JSON.stringify(v))}catch(e){}}};
+const FLEURON='';
+$("#maj").innerHTML=DATA.maj.session?`Mis à jour · <b>session ${DATA.maj.session}</b> · ${d(DATA.maj.date)}`:`<b>Lancement</b> · ${d(DATA.maj.date)}`;
+$("#f-maj").textContent=DATA.maj.session?`Dernière mise à jour : après la session ${DATA.maj.session}, le ${d(DATA.maj.date,fJMA)}`:`Lancement de la campagne, le ${d(DATA.maj.date,fJMA)}`;
+
+const majHaut=()=>document.documentElement.style.setProperty("--haut",((document.querySelector(".apercu")?.offsetHeight||0)+document.querySelector(".barre").offsetHeight)+"px");
+majHaut(); addEventListener("resize",majHaut);
+/* =====================================================================
+   CARTE
+   ===================================================================== */
+const Carte=(()=>{
+  const S=56,M=190,R3=Math.sqrt(3),IW=2368,IH=2088;
+  const ctr=(c,r)=>[M+S*R3*(c+0.5*(r&1))+S*R3/2, M+S+S*1.5*r];
+  const at=k=>ctr(...parse(k));
+  const NS="http://www.w3.org/2000/svg", svg=$("#c-svg");
+  const el=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);(p||svg).appendChild(e);return e};
+  const nbs=(c,r)=>{const D=r&1?[[1,0],[1,-1],[0,-1],[-1,0],[0,1],[1,1]]:[[1,0],[0,-1],[-1,-1],[-1,0],[-1,1],[0,1]];return D.map(([a,b])=>[c+a,r+b]).filter(([x,y])=>x>=0&&x<W&&y>=0&&y<H)};
+  const connu=k=>k in DATA.connues;
+  const proche=new Set(Object.keys(DATA.connues));
+  for(const k of Object.keys(DATA.connues)) for(const n of nbs(...parse(k))) proche.add(cid(...n));
+  const gHex=el("g",{}),gId=el("g",{class:"g-id"}),gCo=el("g",{}),gM=el("g",{class:"marques"});
+  const labels=[];
+  const hexes={};
+  for(let r=0;r<H;r++)for(let c=0;c<W;c++){
+    const [x,y]=ctr(c,r),k=cid(c,r),p=palierC(c,r);
+    const pts=[...Array(6)].map((_,i)=>{const a=Math.PI/180*(60*i-30);return (x+S*Math.cos(a)).toFixed(1)+","+(y+S*Math.sin(a)).toFixed(1)}).join(" ");
+    const h=el("polygon",{points:pts,class:"hex","data-id":k},gHex);
+    if(!connu(k)) h.style.fill=`rgba(30,22,14,${(0.022*p).toFixed(3)})`;
+    hexes[k]=h;
+    labels.push([el("text",{x:x+S*0.36,y:y-S*0.47,class:"id-c"},gId),k,k===DATA.camp?null:p,proche.has(k)]);
+  }
+  for(let c=0;c<W;c++){const [x]=ctr(c,0);el("text",{x:x+S*R3/4,y:M-30,class:"coord"},gCo).textContent=COLS[c]}
+  for(let r=0;r<H;r++){const [,y]=ctr(0,r);el("text",{x:M-40,y,class:"coord"},gCo).textContent=r+1}
+  const pic=(g,src,w)=>{const i=el("image",{href:src,x:-w/2,y:-w/2,width:w,height:w},g);i.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href",src);return i};
+  for(const l of DATA.lieux){const [x,y]=at(l.case);
+    if(l.statut==="aperçu"){const g=el("g",{class:"m-apercu",transform:`translate(${x} ${y-6})`},gM);pic(g,"picto-apercu.webp",58)}
+    else{const g=el("g",{class:"m-lieu",transform:`translate(${x} ${y-8})`},gM);pic(g,`lieu-${l.icone}.webp`,56)}}
+  const BULLE="M-22-16h44a8 8 0 0 1 8 8v16a8 8 0 0 1-8 8h-20l-12 11v-11h-12a8 8 0 0 1-8-8v-16a8 8 0 0 1 8-8z";
+  for(const ru of DATA.rumeurs.filter(r=>!r.exploree&&r.case)){const [x,y]=at(ru.case);const g=el("g",{class:"m-rumeur",transform:`translate(${x+16} ${y-26})`},gM);pic(g,"picto-rumeur.webp",54)}
+  {const [x,y]=at(DATA.camp);const g=el("g",{class:"m-camp",transform:`translate(${x} ${y+64})`},gM);const W_=214,H_=42;const ic=el("image",{href:"cadre-camp.webp",x:-W_/2,y:-H_/2,width:W_,height:H_,preserveAspectRatio:"none"},g);ic.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href","cadre-camp.webp");el("text",{y:0},g).textContent="Le Camp"}
+
+  /* fiche */
+  const fiche=$("#c-fiche"); let choisie=null;
+  function choisir(k,ouvrir){
+    if(choisie) hexes[choisie].classList.remove("choisie");
+    choisie=k; hexes[k].classList.add("choisie");
+    const p=palier(k), t=DATA.connues[k], lieu=lieuDe(k), ru=DATA.rumeurs.find(x=>x.case===k);
+    const passages=DATA.rapports.filter(r=>r.trajet.includes(k));
+    const camp=k===DATA.camp;
+    let h=`<div class="etiq">${camp?"Le camp":"Case"}</div><h3>${k}</h3>
+      <div class="sous">${camp?"Le hameau de la clairière, base de la guilde":t?"Explorée":"Dans la brume : personne n'y est encore allé"}</div><dl>
+      <div class="l"><dt>Palier</dt><dd>${camp?"Sûr":`${p} <em>· niveau conseillé ${NIVEAU[p]}</em>`}</dd></div>
+      <div class="l"><dt>Terrain</dt><dd>${t?TERRAIN[t]:"<em>Inconnu</em>"}</dd></div>`;
+    if(lieu) h+=lieu.statut==="aperçu"?`<div class="l"><dt>Lieu</dt><dd>Quelque chose a été aperçu ici. <em>Personne n'est encore allé voir.</em></dd></div>`
+      :`<div class="l"><dt>Lieu</dt><dd><b>${lieu.nom}</b> <span class="pastille p-contour">${lieu.statut}</span><br><em>${lieu.type}</em><br>${lieu.description}<br>${lienRapport(lieu.decouvert,"Rapport de la découverte")}</dd></div>`;
+    if(ru) h+=`<div class="l"><dt>Rumeur</dt><dd>« ${ru.titre} », ${d(ru.date)}${ru.exploree?" · <em>explorée</em>":""}<br><button type="button" class="lien" data-go="rumeurs" data-cible="ru-${ru.num}">Lire la rumeur</button></dd></div>`;
+    if(passages.length) h+=`<div class="l"><dt>Passages</dt><dd><ul class="passages">${passages.map(r=>`<li><span class="ses">Session ${r.session}</span>${lienRapport(r.session,r.titre)}</li>`).join("")}</ul></dd></div>`;
+    $("#fc-case").innerHTML=`<button type="button" class="retour" id="c-retour">← Lieux et rumeurs</button>`+h+"</dl>";
+    $("#fc-case").hidden=false; $("#c-liste").hidden=true; fiche.scrollTop=0;
+    if(mobile()&&ouvrir!==false) ouvrirCol("c-fiche",true);
+  }
+  const mobile=()=>matchMedia("(max-width:900px)").matches;
+  function ouvrirCol(id,on){$$(".col").forEach(c=>{if(c.id!==id)c.classList.remove("ouverte")});$("#"+id).classList.toggle("ouverte",on)}
+  function retour(){if(choisie){hexes[choisie].classList.remove("choisie");choisie=null}$("#fc-case").hidden=true;$("#c-liste").hidden=false}
+  fiche.addEventListener("click",e=>{if(e.target.closest("#c-retour"))retour()});
+  document.addEventListener("click",e=>{const o=e.target.closest("[data-ouvre]");if(o){ouvrirCol(o.dataset.ouvre,true);return}const f=e.target.closest("[data-ferme]");if(f)ouvrirCol(f.dataset.ferme,false)});
+
+  /* déplacement et zoom */
+  const vue=$("#c-vue"),plan=$("#c-plan"),zi=$("#c-zi"); let s=1,tx=0,ty=0,pret=false;
+  const BX0=M-70,BY0=M-108,BX1=M+S*R3*20.5+12,BY1=M+S*2+S*1.5*19+10,BW=BX1-BX0,BH=BY1-BY0;
+  const smin=()=>Math.min(vue.clientWidth/BW,vue.clientHeight/BH)*0.99,SMAX=1.2;
+  function borne(){const vw=vue.clientWidth,vh=vue.clientHeight,w=BW*s,h=BH*s;tx=w<=vw?vw/2-(BX0+BW/2)*s:Math.min(-BX0*s,Math.max(vw-BX1*s,tx));ty=h<=vh?vh/2-(BY0+BH/2)*s:Math.min(-BY0*s,Math.max(vh-BY1*s,ty))}
+  let ajuste=true;
+  function appliquer(){if(!vue.clientWidth)return;if(ajuste){s=smin();tx=vue.clientWidth/2-(BX0+BW/2)*s;ty=vue.clientHeight/2-(BY0+BH/2)*s}borne();svg.classList.toggle("zoom-loin",s<0.58);plan.style.transform=`translate(${tx}px,${ty}px) scale(${s})`;zi.textContent=`Zoom ${Math.round(s/smin()*100)} %`;$("#c-zi2").textContent=zi.textContent}
+  function zoomer(f,px,py){ajuste=false;const ns=Math.min(SMAX,Math.max(smin(),s*f));px??=vue.clientWidth/2;py??=vue.clientHeight/2;tx=px-(px-tx)*ns/s;ty=py-(py-ty)*ns/s;s=ns;appliquer()}
+  const zCamp=()=>Math.min(SMAX,Math.max(smin(),vue.clientWidth/(S*R3*12)));
+  function centrer(k,ns){ajuste=false;const [x,y]=at(k);if(ns)s=Math.min(SMAX,Math.max(smin(),ns));tx=vue.clientWidth/2-x*s;ty=vue.clientHeight/2-y*s;appliquer()}
+  function init(){if(pret||!vue.clientWidth)return;pret=true;ajuste=true;appliquer()}
+  vue.addEventListener("wheel",e=>{if(e.target.closest(".commandes"))return;e.preventDefault();const b=vue.getBoundingClientRect();zoomer(Math.exp(-e.deltaY*0.0015),e.clientX-b.left,e.clientY-b.top)},{passive:false});
+  const ptrs=new Map();let dep=null,bouge=0,pince=null;
+  vue.addEventListener("pointerdown",e=>{if(e.target.closest(".commandes,.mob-btns"))return;vue.setPointerCapture(e.pointerId);ptrs.set(e.pointerId,[e.clientX,e.clientY]);dep=[e.clientX,e.clientY,tx,ty];bouge=0;vue.classList.add("glisse");
+    if(ptrs.size===2){const [a,b]=[...ptrs.values()];pince={d:Math.hypot(a[0]-b[0],a[1]-b[1]),s}}});
+  vue.addEventListener("pointermove",e=>{if(!ptrs.has(e.pointerId))return;ptrs.set(e.pointerId,[e.clientX,e.clientY]);
+    if(ptrs.size===2&&pince){const [a,b]=[...ptrs.values()],bx=vue.getBoundingClientRect();zoomer(pince.s*Math.hypot(a[0]-b[0],a[1]-b[1])/pince.d/s,(a[0]+b[0])/2-bx.left,(a[1]+b[1])/2-bx.top);bouge=99;return}
+    if(dep&&ptrs.size===1){const dx=e.clientX-dep[0],dy=e.clientY-dep[1];bouge=Math.max(bouge,Math.hypot(dx,dy));if(bouge>3)ajuste=false;tx=dep[2]+dx;ty=dep[3]+dy;appliquer()}});
+  function fin(e){const clic=ptrs.size===1&&bouge<6;ptrs.delete(e.pointerId);if(ptrs.size<2)pince=null;if(!ptrs.size){vue.classList.remove("glisse");dep=null}
+    if(clic&&e.type==="pointerup"){const t=document.elementsFromPoint(e.clientX,e.clientY).find(n=>n.dataset&&n.dataset.id);if(t)choisir(t.dataset.id)}}
+  vue.addEventListener("pointerup",fin);vue.addEventListener("pointercancel",fin);
+  $("#c-plus").onclick=$("#pe-plus").onclick=()=>zoomer(1.35);
+  $("#c-moins").onclick=$("#pe-moins").onclick=()=>zoomer(1/1.35);
+  $("#c-camp").onclick=$("#pe-camp").onclick=()=>{centrer(DATA.camp,zCamp());choisir(DATA.camp)};
+  $("#c-tout").onclick=()=>{ajuste=true;appliquer()};
+  $("#c-aller").addEventListener("submit",e=>{e.preventDefault();const inp=$("#c-case"),p=parse(inp.value);if(!p){inp.setCustomValidity("Une case de A1 à T20");inp.reportValidity();return}inp.setCustomValidity("");const k=cid(...p);centrer(k,Math.max(s,zCamp()));choisir(k)});
+  $("#c-case").addEventListener("input",e=>e.target.setCustomValidity(""));
+  new ResizeObserver(()=>{init();appliquer()}).observe(vue);
+  /* calques */
+  const cal=Object.assign({pal:"proches",ru:true,li:true},mem.get("calques2",{}));
+  function majCalques(){
+    labels.forEach(([t,k,p,pr])=>{t.textContent=(p!=null&&(cal.pal==="tous"||(cal.pal==="proches"&&pr)))?`${k} · ${p}`:k});
+    svg.classList.toggle("cache-rumeurs",!cal.ru);svg.classList.toggle("cache-lieux",!cal.li);
+    $("#c-pal").value=cal.pal;$("#c-ru").checked=cal.ru;$("#c-li").checked=cal.li;mem.set("calques2",cal);
+  }
+  $("#c-pal").onchange=e=>{cal.pal=e.target.value;majCalques()};
+  for(const [id,k] of [["c-ru","ru"],["c-li","li"]]) $("#"+id).onchange=e=>{cal[k]=e.target.checked;majCalques()};
+  majCalques();
+  /* plein écran */
+  const zone=$("#c-zone"),bpe=$("#c-pe");
+  function plein(on){on??=!zone.classList.contains("plein");zone.classList.toggle("plein",on);document.documentElement.classList.toggle("plein-actif",on);
+    bpe.setAttribute("aria-pressed",String(on));bpe.querySelector("span").textContent=on?"Quitter":"Plein écran";
+    if(on){if(zone.requestFullscreen&&!document.fullscreenElement)zone.requestFullscreen().catch(()=>{})}else if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});
+    requestAnimationFrame(()=>{if(choisie)centrer(choisie,Math.max(s,zCamp()));else appliquer()})}
+  bpe.onclick=()=>plein();
+  document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement&&zone.classList.contains("plein"))plein(false)});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&zone.classList.contains("plein"))plein(false)});
+  /* chiffres, quoi de neuf, index */
+  const nC=Object.keys(DATA.connues).length, horsCamp=Object.keys(DATA.connues).filter(k=>k!==DATA.camp), pmax=horsCamp.length?Math.max(...horsCamp.map(palier)):"—";
+  const nR=DATA.rumeurs.filter(r=>!r.exploree).length;
+  $("#c-chiffres").innerHTML=`<span><b>${nC}</b>/400 cases explorées</span><span>·</span><span>palier atteint <b>${pmax}</b></span><span>·</span><span><b>${nR}</b> ${nR>1?"rumeurs":"rumeur"}</span>`;
+  const rumA=DATA.rumeurs.filter(r=>!r.exploree).sort((a,b)=>b.date.localeCompare(a.date));
+  $("#c-rumeurs").innerHTML=rumA.length?rumA.map(r=>`<li>${r.case?`<button type="button" class="c" data-case="${r.case}">${r.case}</button>`:`<button type="button" class="c" data-go="rumeurs" data-cible="ru-${r.num}" title="Rumeur sans case précise">?</button>`}<span class="n">${r.titre}<small>${d(r.date)} · ${r.source}</small></span></li>`).join(""):`<li style="display:block;border:0"><p class="vide-mini">Aucune rumeur active.</p></li>`;
+  const lieuxConnus=DATA.lieux.slice().sort((a,b)=>(a.statut==="aperçu")-(b.statut==="aperçu")||a.case.localeCompare(b.case));
+  $("#c-lieux").innerHTML=!lieuxConnus.length?`<li style="display:block;border:0"><p class="vide-mini">Aucun lieu découvert pour l'instant.</p></li>`:lieuxConnus.map(l=>`<li><button type="button" class="c" data-case="${l.case}">${l.case}</button>
+    <span class="n">${l.statut==="aperçu"?"<i>Lieu aperçu, encore inconnu</i>":`${l.nom}<small>${l.type} · découvert en session ${l.decouvert}</small>`}</span>
+    <span class="pastille ${l.statut==="aperçu"?"p-pointille":"p-contour"}">${l.statut}</span></li>`).join("");
+  const LG=[
+    [`<img src="picto-rumeur.webp" width="36" height="36" alt="">`,"Rumeur active"],
+    [`<img src="picto-apercu.webp" width="36" height="36" alt="">`,"Lieu aperçu, encore inconnu"],
+    // un type de lieu n'apparaît que s'il a déjà été découvert (brief, section 3 bis)
+    ...[...new Map(DATA.lieux.filter(l=>l.statut!=="aperçu"&&l.icone).map(l=>[l.icone,l.type])).entries()].sort((a,b)=>a[1].localeCompare(b[1],"fr")).map(([ic,ty])=>[`<img src="lieu-${ic}.webp" width="36" height="36" alt="">`,ty]),
+    [`<svg width="44" height="24" viewBox="0 0 44 24"><text x="22" y="12" text-anchor="middle" dominant-baseline="central" font-family="Montserrat,Arial" font-weight="600" font-size="12" fill="#2a1d14" stroke="rgba(244,234,217,.8)" stroke-width="3" paint-order="stroke">M7 · 3</text></svg>`,"Numéro de case · palier de danger"]];
+  $("#c-legende").innerHTML=LG.map(([s_,t])=>`<li><span class="ic">${s_}</span>${t}</li>`).join("");
+  return {init,aller(k){init();centrer(k,Math.max(s,zCamp()));choisir(k)},choisir,appliquer};
+})();
+
+/* =====================================================================
+   RUMEURS
+   ===================================================================== */
+(()=>{
+  const tri=DATA.rumeurs.slice().sort((a,b)=>b.date.localeCompare(a.date)||b.num-a.num);
+  let f=mem.get("rumeurs","toutes");
+  const act=DATA.rumeurs.filter(r=>!r.exploree).length;
+  $("#r-chiffres").innerHTML=`<span><b>${act}</b> rumeurs actives</span><span><b>${DATA.rumeurs.length-act}</b> explorées</span><span>Prochaine : <b>dimanche soir</b></span>`;
+  function rendre(){
+    const l=tri.filter(r=>f==="toutes"||(f==="actives"?!r.exploree:!!r.exploree));
+    $("#r-liste").innerHTML=!l.length?`<li class="ligne-vide">${VIDE("bulle",f==="explorees"?"Aucune rumeur explorée pour l'instant":"Aucune rumeur pour l'instant",f==="explorees"?"Quand un groupe ira vérifier une rumeur sur place, elle passera ici avec le tampon « Explorée » et un lien vers le rapport.":"Les Merle rapportent une rumeur chaque dimanche soir.")}</li>`:l.map(r=>{return `
+      <li class="ligne${r.exploree?" estompe":""}" id="ru-${r.num}">
+        <div class="cote"><span>Rumeur n° ${r.num}</span><span class="gros">${r.case||"?"}</span><span class="pal">${r.case?"Palier "+palier(r.case):"Sans case précise"}</span></div>
+        <div class="corps"><span class="date">${d(r.date)}</span>
+          <div class="titre-l"><h3>${r.titre}</h3>${r.exploree?`<span class="tampon">Explorée<small>${d(r.exploree.date)}</small></span>`:""}</div>
+          <p>${r.texte}</p><p class="discret">Rapportée par ${r.source}</p>
+          <div class="groupe">${r.case?`<button type="button" class="btn plein" data-case="${r.case}">Voir sur la carte</button>`:""}${r.exploree?lienRapport(r.exploree.session,"Lire le rapport de la session "+r.exploree.session):""}</div>
+        </div></li>`}).join("");
+    $("#r-compte").textContent=`${pl(l.length,"rumeur")} · plus récentes d'abord`;
+    $$("#r-filtres button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.f===f)));
+  }
+  $("#r-filtres").onclick=e=>{const b=e.target.closest("button");if(!b)return;f=b.dataset.f;mem.set("rumeurs",f);rendre()};
+  rendre();
+  window.__rumeursTout=()=>{f="toutes";rendre()};
+})();
+
+/* =====================================================================
+   RAPPORTS
+   ===================================================================== */
+(()=>{
+  const tri=DATA.rapports.slice().sort((a,b)=>b.session-a.session);
+  const noms=[...new Set(DATA.rapports.flatMap(r=>r.participants.map(p=>p[0])))].sort((a,b)=>a.localeCompare(b,"fr"));
+  let f=mem.get("rapports","tous"); if(f!=="tous"&&!noms.includes(f))f="tous";
+  const or=DATA.rapports.reduce((t,r)=>t+r.or,0);
+  $("#ra-chiffres").innerHTML=`<span><b>${DATA.rapports.length}</b> missions</span><span><b>${noms.length}</b> aventuriers partis</span><span><b>${or} po</b> rapportées</span><span><a href="#creatures" class="lien" style="color:var(--creme);border-color:rgba(244,234,217,.4)" data-ancre="creatures">Créatures rencontrées</a></span>`;
+  $("#ra-filtres").innerHTML=["tous",...noms].map(n=>`<button type="button" data-f="${n}">${n==="tous"?"Tous":n}</button>`).join("");
+  const casesR=[...new Set(DATA.rapports.map(r=>r.case))].sort();
+  let fc="";
+  $("#ra-case").innerHTML=`<option value="">Toutes</option>`+casesR.map(k=>{const l=lieuDe(k);return `<option value="${k}">${k}${l&&l.nom?" · "+l.nom:""}</option>`}).join("");
+  $("#ra-case").onchange=e=>{fc=e.target.value;rendre()};
+  $("#ra-filtres-z").hidden=!DATA.rapports.length;
+  function rendre(){
+    const l=tri.filter(r=>(f==="tous"||r.participants.some(p=>p[0]===f))&&(!fc||r.case===fc||r.trajet.includes(fc)));
+    $("#ra-liste").innerHTML=!DATA.rapports.length?`<li class="ligne-vide">${VIDE("registre","Le registre est encore vierge","Le premier rapport apparaîtra ici après la première expédition. Aldric y consignera les cases traversées, les découvertes et le butin.")}</li>`:!l.length?`<li class="ligne-vide">${VIDE("registre","Aucun rapport ne correspond","Retirez un filtre pour revoir tous les rapports.")}</li>`:l.map(r=>{const lieux=DATA.lieux.filter(x=>x.decouvert===r.session);const ru=DATA.rumeurs.find(x=>x.exploree&&x.exploree.session===r.session);return `
+      <li class="ligne" id="ra-${r.session}">
+        <div class="cote"><span>Session ${r.session}</span><span class="gros">${r.case}</span><span class="pal">Palier ${palier(r.case)}</span></div>
+        <article class="corps"><span class="date">${d(r.date,fJMA)}</span><h3>${r.titre}</h3>
+          <div class="groupe" aria-label="Participants">${r.participants.map(p=>`<button type="button" class="puce" data-perso="${p[0]}">${p[0]} <span style="color:var(--sepia)">niv. ${p[1]}</span></button>`).join("")}</div>
+          <p class="resume court" id="res-${r.session}">${r.resume}</p><button type="button" class="lien suite" data-suite="${r.session}" aria-expanded="false" aria-controls="res-${r.session}">Lire la suite</button>
+          <div class="bilan"><div><div class="etiq">Découvertes</div><ul>${r.decouvertes.map(x=>`<li>${x}</li>`).join("")}${lieux.map(x=>`<li>Lieu : ${x.nom} (${lienCase(x.case)})</li>`).join("")}</ul></div>
+            <div><div class="etiq">Butin</div><ul>${r.butin.map(x=>`<li>${x}</li>`).join("")}</ul></div></div>
+          <div class="groupe"><button type="button" class="btn plein" data-case="${r.case}">Voir sur la carte</button><span class="ui" style="font-size:12px;color:var(--sepia)">Trajet : ${r.trajet.join(" → ")}</span>${ru?`<button type="button" class="lien" data-go="rumeurs" data-cible="ru-${ru.num}">Rumeur suivie : « ${ru.titre} »</button>`:""}</div>
+        </article></li>`}).join("");
+    $("#ra-compte").textContent=!DATA.rapports.length?"":`${pl(l.length,"rapport")}${f!=="tous"?" avec "+f:""}${fc?" · case "+fc:""} · du plus récent au plus ancien`;
+    $$("#ra-filtres button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.f===f)));
+  }
+  $("#ra-liste").addEventListener("click",e=>{const b=e.target.closest("[data-suite]");if(!b)return;const p=$("#res-"+b.dataset.suite);const ouvert=p.classList.toggle("court")===false;b.textContent=ouvert?"Réduire":"Lire la suite";b.setAttribute("aria-expanded",String(ouvert))});
+  $("#ra-filtres").onclick=e=>{const b=e.target.closest("button");if(!b)return;f=b.dataset.f;mem.set("rapports",f);rendre()};
+  rendre();
+  window.__rapportsTout=()=>{f="tous";fc="";$("#ra-case").value="";rendre()};
+  $("#ra-creatures").innerHTML=DATA.rapports.slice().sort((a,b)=>a.session-b.session).flatMap(r=>r.creatures.map(c=>`<tr><td>${c.nom}<span class="en">${c.en}</span>${c.nb>1?` <span class="ui" style="font-size:12px;color:var(--sepia)">× ${c.nb}</span>`:""}</td><td>${lienCase(r.case)}</td><td>${lienRapport(r.session,"Session "+r.session)}</td><td>${c.issue}</td></tr>`)).join("")||`<tr><td colspan="4"><i>Aucune créature affrontée pour l'instant.</i></td></tr>`;
+})();
+
+/* =====================================================================
+   CAMPEMENT
+   ===================================================================== */
+(()=>{
+  const IC={balance:'<path d="M0-22v40M-14 18h28M-22-14h44"/><path d="M-22-14l-8 16h16zM22-14l-8 16h16z"/>',
+    registre:'<path d="M-18-22h30a6 6 0 0 1 6 6v38h-30a6 6 0 0 1-6-6z"/><path d="M-18 16a6 6 0 0 1 6-6h30"/><path d="M-10-12h18M-10-4h18M-10 4h12"/>',
+    merle:'<path d="M-20 8c4-14 16-22 28-20 4-6 10-7 14-4l6 2-7 2c1 10-6 20-18 22l-14 10 3-10c-6 0-10-1-12-2z" fill="currentColor" stroke="none"/>'};
+  $("#cp-pnj").innerHTML=DATA.pnj.map(p=>`<li class="ligne"><div><div class="pnj-m" aria-hidden="true"><svg viewBox="-32 -32 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">${IC[p.icone]}</svg></div></div>
+    <div class="corps"><span class="etiq">${p.role}</span><h3>${p.nom}</h3><p>${p.texte}</p><p class="citation">« ${p.citation} »</p>
+    <div class="groupe"><a class="btn plein" href="#${p.lien[0]}" data-go="${p.lien[0]}">${p.lien[1]}</a></div></div></li>`).join("");
+})();
+
+/* =====================================================================
+   MARCHAND
+   ===================================================================== */
+(()=>{
+  const RANG={"Courant":0,"Peu courant":1};const col=new Intl.Collator("fr",{sensitivity:"base"});
+  const types=[...new Set(MARCHAND.map(o=>o[1]))].sort((a,b)=>col.compare(a,b));
+  $("#m-type").innerHTML=`<option value="">Tous les types</option>`+types.map(t=>`<option value="${t}">${t}</option>`).join("");
+  const st=Object.assign({q:"",type:"",rar:"",vue:"types",tri:{k:0,dir:1}},mem.get("marchand",{}),{q:""});
+  const nC=MARCHAND.filter(o=>o[2]==="Courant").length;
+  $("#m-chiffres").innerHTML=`<span><b>${MARCHAND.length}</b> objets</span><span><b>${nC}</b> courants</span><span><b>${MARCHAND.length-nC}</b> peu courants</span><span>Prix <b>à venir</b></span>`;
+  const norm=s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+  const cmp=(a,b)=>{const k=st.tri.k;let r=k===2?RANG[a[2]]-RANG[b[2]]:k===3?(a[3]??1e9)-(b[3]??1e9):col.compare(a[k],b[k]);return (r||col.compare(a[0],b[0]))*(k===0||r?st.tri.dir:1)};
+  const rar=r=>`<span class="pastille ${r==="Courant"?"p-contour":"p-vert"}">${r}</span>`;
+  const ligne=o=>`<tr><td class="nom"><a href="${o[4]}" target="_blank" rel="noopener">${o[0]}</a><span class="ext">fiche AideDD ↗</span></td><td class="type">${o[1]}</td><td>${rar(o[2])}</td><td class="prix">${o[3]==null?"à venir":o[3]+" po"}</td></tr>`;
+  const entete=()=>`<thead><tr>${[["Objet",0,""],["Type",1,"type-h"],["Rareté",2,""],["Prix",3,""]].map(([t,k,c])=>`<th scope="col" class="${c}" data-k="${k}" aria-sort="${st.tri.k===k?(st.tri.dir>0?"ascending":"descending"):"none"}"><button type="button">${t} <span class="fl">${st.tri.k===k&&st.tri.dir<0?"▼":"▲"}</span></button></th>`).join("")}</tr></thead>`;
+  function rendre(){
+    const nq=norm(st.q);
+    const l=MARCHAND.filter(o=>(!nq||norm(o[0]).includes(nq))&&(!st.type||o[1]===st.type)&&(!st.rar||o[2]===st.rar)).sort(cmp);
+    const cat=$("#m-cat");
+    if(!l.length) cat.innerHTML=`<p class="note">Aucun objet ne correspond. Essayez un autre nom ou retirez un filtre.</p>`;
+    else if(st.vue==="liste") cat.innerHTML=`<div class="table-z" style="max-width:none;margin:0"><table>${entete()}<tbody>${l.map(ligne).join("")}</tbody></table></div>`;
+    else{const g={};l.forEach(o=>(g[o[1]]??=[]).push(o));const ouvert=!!(nq||st.type||st.rar);
+      cat.innerHTML=Object.keys(g).sort((a,b)=>g[b].length-g[a].length).map(t=>`<details class="groupe-m"${ouvert||Object.keys(g).length===1?" open":""}><summary><h3>${t}</h3><span class="etiq">${pl(g[t].length,"objet")}</span></summary><div class="table-z" style="max-width:none;margin:0"><table>${entete()}<tbody>${g[t].map(ligne).join("")}</tbody></table></div></details>`).join("")}
+    $("#m-compte").textContent=`${pl(l.length,"objet affiché","objets affichés")} sur ${MARCHAND.length}`;
+    $$("#m-rar button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.r===st.rar)));
+    $$("#m-vue button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.v===st.vue)));
+    $("#m-type").value=st.type; mem.set("marchand",{type:st.type,rar:st.rar,vue:st.vue,tri:st.tri});
+  }
+  $("#m-q").oninput=e=>{st.q=e.target.value;rendre()};
+  $("#m-type").onchange=e=>{st.type=e.target.value;rendre()};
+  $("#m-rar").onclick=e=>{const b=e.target.closest("button");if(!b)return;st.rar=b.dataset.r;rendre()};
+  $("#m-vue").onclick=e=>{const b=e.target.closest("button");if(!b)return;st.vue=b.dataset.v;rendre()};
+  $("#m-cat").addEventListener("click",e=>{const th=e.target.closest("th[data-k]");if(!th)return;const k=+th.dataset.k;st.tri=st.tri.k===k?{k,dir:-st.tri.dir}:{k,dir:1};rendre()});
+  rendre();
+})();
+
+/* =====================================================================
+   INVENTAIRE
+   ===================================================================== */
+(()=>{
+  const t=DATA.mouvements.reduce((s,m)=>s+m.montant,0), libres=DATA.coffre.filter(o=>!o.attribue).length;
+  $("#i-somme").textContent=t; $("#i-solde").textContent=t+" po";
+  $("#i-phrase").textContent=t?`Réunies en ${pl(DATA.mouvements.filter(m=>m.montant>0).length,"versement")}. Leur usage sera décidé avec les améliorations du camp.`:"Le trésor est vide pour l'instant. Il se remplira avec un dixième de l'or rapporté par chaque expédition.";
+  $("#i-chiffres").innerHTML=`<span>Trésor <b>${t} po</b></span><span><b>${DATA.coffre.length}</b> objets au coffre</span><span><b>${libres}</b> disponibles</span>`;
+  $("#i-coffre").innerHTML=!DATA.coffre.length?`<li class="ligne-vide">${VIDE("coffre","Le coffre est vide","Les objets que les expéditions rapportent sans les garder seront rangés ici. Chacun pourra les réclamer pour sa prochaine sortie.")}</li>`:DATA.coffre.map(o=>{const r=rapportDe(o.session);return `<li class="objet"><span class="etiq">Session ${o.session}</span>
+    <div><h3>${o.nom} <span class="pastille ${o.rarete?"p-contour":"p-pointille"}" style="vertical-align:4px">${o.rarete||"Non magique"}</span></h3>
+    <p>${r?`${lienRapport(o.session,r.titre)} · `:""}rapporté par ${lienPerso(o.rapporte)}${o.note?" · "+o.note:""}</p></div>
+    <span class="etat ${o.attribue?"pris":"libre"}">${o.attribue?`Attribué à ${lienPerso(o.attribue)}`:"Disponible"}</span></li>`}).join("");
+  $("#i-mvt").innerHTML=DATA.mouvements.map(m=>`<tr><td class="ui" style="font-size:12px;color:var(--sepia);white-space:nowrap">${m.session?lienRapport(m.session,"Session "+m.session):"Session 0"}</td><td>${m.libelle}</td><td class="num ${m.montant>0?"plus":""}">${m.montant>0?"+":""}${m.montant} po</td></tr>`).join("");
+})();
+
+/* =====================================================================
+   PERSONNAGES (+ panneau de fiche)
+   ===================================================================== */
+const Persos=(()=>{
+  const col=new Intl.Collator("fr");
+  const P=DATA.persos.map(p=>({...p,sessions:sessionsDe(p.nom).length}));
+  const viv=P.filter(p=>p.statut!=="mort"), morts=P.filter(p=>p.statut==="mort");
+  let t=mem.get("persos","niveau");
+  $("#p-chiffres").innerHTML=`<span><b>${viv.length}</b> membres</span><span>Niveau moyen <b>${viv.length?(viv.reduce((s,p)=>s+p.niveau,0)/viv.length).toFixed(1).replace(".",","):"—"}</b></span><span><b>${morts.length}</b> au mémorial</span>`;
+  function rendre(){
+    const l=viv.slice().sort((a,b)=>t==="nom"?col.compare(a.nom,b.nom):(b[t]-a[t])||col.compare(a.nom,b.nom));
+    $("#p-tri-z").hidden=!l.length;
+    $("#p-membres").innerHTML=!l.length?`<li class="ligne-vide" style="width:100%">${VIDE("ratelier","Le râtelier attend ses premiers aventuriers","Les personnages apparaîtront ici après la session 0, avec leur classe, leur niveau et leurs expéditions.")}</li>`:l.map(p=>`<li><button type="button" class="membre" data-perso="${p.nom}" aria-label="Ouvrir la fiche de ${p.nom}">
+      <span class="portrait"><span class="ini" aria-hidden="true">${p.nom[0]}</span><span class="niv"><small>Niv.</small><b>${p.niveau}</b></span></span>
+      <h3>${p.nom}</h3><span class="cl">${p.classe} · ${p.race}</span><span class="in">Joueur ${p.joueur} · ${pl(p.sessions,"session")}</span>
+      <span class="pastille ${p.statut==="recrue"?"p-pointille":"p-sombre"}">${p.statut==="recrue"?"Nouvelle recrue":"En activité"}</span></button></li>`).join("");
+    $$("#p-tri button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.t===t)));
+  }
+  $("#p-tri").onclick=e=>{const b=e.target.closest("button");if(!b)return;t=b.dataset.t;mem.set("persos",t);rendre()};
+  rendre();
+  $("#p-memorial").innerHTML=`<svg width="40" height="54" viewBox="0 0 46 60" fill="none" stroke="#8a6a3a" stroke-width="2" aria-hidden="true"><path d="M23 4c4 6 6 9 6 13a6 6 0 0 1-12 0c0-4 2-7 6-13z" fill="#e8b45a" stroke="#8a5a1a"/><rect x="15" y="24" width="16" height="28" rx="2" fill="#efe2c4"/><path d="M8 56h30"/></svg>`+
+    (morts.length?morts.map(p=>`<p><b>${p.nom}</b>, ${p.classe.toLowerCase()} de niveau ${p.niveau}.</p>`).join(""):`<p>Aucun aventurier n'est encore tombé. Les bougies attendent, et la guilde espère qu'elles attendront longtemps.</p>`);
+  /* panneau */
+  const voile=$("#voile"); let retour=null;
+  function ouvrir(nom){
+    const p=P.find(x=>x.nom===nom); if(!p) return; retour=document.activeElement;
+    const ses=sessionsDe(nom).sort((a,b)=>b.session-a.session), obj=DATA.coffre.filter(o=>o.attribue===nom), rap=DATA.coffre.filter(o=>o.rapporte===nom);
+    voile.innerHTML=`<div class="panneau" role="dialog" aria-modal="true" aria-labelledby="pn-titre">
+      <div class="haut-p"><span class="portrait"><span class="ini" aria-hidden="true">${p.nom[0]}</span><span class="niv"><small>Niv.</small><b>${p.niveau}</b></span></span>
+        <div><h2 id="pn-titre">${p.nom}</h2><div style="font-style:italic;color:#5c4636">${p.classe} · ${p.race}</div><div class="ui" style="font-size:12px;margin-top:4px">Joueur ${p.joueur}</div></div>
+        <button type="button" class="x" aria-label="Fermer la fiche">×</button></div>
+      <div><div class="etiq">Expéditions (${ses.length})</div>${ses.length?`<ul>${ses.map(r=>`<li>Session ${r.session} · ${lienRapport(r.session,r.titre)} · ${lienCase(r.case)}</li>`).join("")}</ul>`:`<p style="margin:4px 0 0"><i>Pas encore parti en expédition.</i></p>`}</div>
+      <div><div class="etiq">Objets reçus du coffre</div>${obj.length?`<ul>${obj.map(o=>`<li>${o.nom}</li>`).join("")}</ul>`:`<p style="margin:4px 0 0"><i>Aucun.</i></p>`}</div>
+      <div><div class="etiq">Objets rapportés au coffre</div>${rap.length?`<ul>${rap.map(o=>`<li>${o.nom} · session ${o.session}</li>`).join("")}</ul>`:`<p style="margin:4px 0 0"><i>Aucun.</i></p>`}</div>
+    </div>`;
+    voile.hidden=false; document.documentElement.classList.add("plein-actif"); voile.querySelector(".x").focus();
+  }
+  function fermer(){voile.hidden=true;voile.innerHTML="";document.documentElement.classList.remove("plein-actif");retour?.focus?.()}
+  voile.addEventListener("click",e=>{if(e.target===voile||e.target.closest(".x"))fermer()});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!voile.hidden)fermer()});
+  return {ouvrir,fermer};
+})();
+
+/* =====================================================================
+   GUIDE
+   ===================================================================== */
+
+/* =====================================================================
+   NAVIGATION ET LIENS CROISÉS
+   ===================================================================== */
+(()=>{
+  const ids=$$(".page").map(p=>p.id.slice(2));
+  const tabs=$("#tabs"), tz=$("#tabs-z");
+  const fade=()=>tz.style.setProperty("--fade",tabs.scrollWidth-tabs.clientWidth-tabs.scrollLeft>4?1:0);
+  tabs.addEventListener("scroll",fade); new ResizeObserver(fade).observe(tabs);
+  function montrer(id,{haut=true,cible=null}={}){
+    if(!ids.includes(id)) id="valgris";
+    $$(".page").forEach(p=>p.hidden=p.id!=="p-"+id);
+    document.body.dataset.page=id;
+    $$(".tabs a").forEach(a=>a.toggleAttribute("aria-current",a.dataset.go===id)||a.setAttribute("aria-current","page"));
+    $$(".tabs a").forEach(a=>{const on=a.dataset.go===id;a.setAttribute("aria-selected",String(on));if(on)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+    const a=$(`.tabs a[data-go="${id}"]`); a?.scrollIntoView({block:"nearest",inline:"nearest"});
+    document.title=$("#p-"+id).dataset.titre+" · Les Chroniques de Valgris";
+    if(id==="carte") requestAnimationFrame(()=>{Carte.init();Carte.appliquer()});
+    try{history.replaceState(null,"","#"+id)}catch(e){}
+    requestAnimationFrame(()=>{
+      if(cible){const c=document.getElementById(cible); if(c){c.scrollIntoView({block:"start"});c.animate?.([{background:"rgba(184,137,62,.22)"},{background:"transparent"}],{duration:1600});return}}
+      if(haut) window.scrollTo(0,0);
+    });
+  }
+  document.addEventListener("click",e=>{
+    const t=e.target.closest("[data-case],[data-rapport],[data-perso],[data-go],[data-ancre]"); if(!t||t.closest(".vue")&&!t.closest(".commandes")&&!t.dataset.go) return;
+    if(t.dataset.perso){e.preventDefault();Persos.ouvrir(t.dataset.perso);return}
+    if(!$("#voile").hidden) Persos.fermer();
+    if(t.dataset.case){e.preventDefault();montrer("carte",{haut:false});requestAnimationFrame(()=>requestAnimationFrame(()=>{Carte.aller(t.dataset.case);window.scrollTo({top:0,behavior:"smooth"})}));return}
+    if(t.dataset.rapport){e.preventDefault();window.__rapportsTout?.();montrer("rapports",{cible:"ra-"+t.dataset.rapport});return}
+    if(t.dataset.ancre){e.preventDefault();document.getElementById(t.dataset.ancre)?.scrollIntoView({block:"start",behavior:"smooth"});return}
+    if(t.dataset.go){e.preventDefault();if(t.dataset.cible&&t.dataset.go==="rumeurs")window.__rumeursTout?.();montrer(t.dataset.go,{cible:t.dataset.cible||null})}
+  });
+  const h=(location.hash||"").slice(1);
+  montrer(ids.includes(h)?h:"valgris",{haut:false});
+})();
+(()=>{
+  const els=$$(".brume-l,.apparait");
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches||!("IntersectionObserver" in window)){els.forEach(c=>c.classList.add("levee"));return}
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("levee");io.unobserve(e.target)}}),{threshold:.3});
+  els.forEach(c=>io.observe(c));
+})();
+
+}
+</script>
+
+</body>
+</html>
