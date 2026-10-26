@@ -1,0 +1,36 @@
+{
+ "maj": {
+  "session": 0,
+  "date": "2026-10-26"
+ },
+ "camp": "J10",
+ "connues": {
+  "J10": "plaine"
+ },
+ "revelees": {
+  "0": [
+   "J10"
+  ]
+ },
+ "lieux": [],
+ "rumeurs": [
+  {
+   "num": 2,
+   "titre": "Ce qui respire au fond",
+   "case": null,
+   "date": "2026-10-26",
+   "source": "Isaure Merle",
+   "exploree": null,
+   "texte": "Isaure ne l'a dit qu'à voix basse, au coin du feu : certains soirs sans vent, la Brume bouge quand même, du côté du sud-est, comme une poitrine qui se soulève. « Là-bas, au plus profond. C'est de là que ça vient. » Elle n'a pas voulu en dire plus."
+  },
+  {
+   "num": 1,
+   "titre": "L'ancienne mine",
+   "case": "L9",
+   "date": "2026-10-26",
+   "source": "Tobin Merle",
+   "exploree": null,
+   "texte": "À moins d'une journée de marche du Camp, Tobin a trouvé l'entrée d'une ancienne mine, étayée de vieux bois qui tient encore. Il n'est pas entré. De l'intérieur montent un bruit d'eau, un air froid, et autre chose : un frottement léger, qui s'arrête quand on se tait."
+  }
+ ]
+}

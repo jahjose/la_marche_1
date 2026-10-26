@@ -1,0 +1,37 @@
+{
+ "pnj": [
+  {
+   "role": "La marchande",
+   "nom": "Odile Brasfort",
+   "icone": "balance",
+   "texte": "Ancienne cantinière des armées, Odile sait ce dont un aventurier a besoin et ce qu'il est prêt à payer. Son étal tient sous la bâche de son chariot.",
+   "citation": "Je ne fais jamais crédit. Les morts ne remboursent pas.",
+   "lien": [
+    "marchand",
+    "Voir l'étal d'Odile"
+   ]
+  },
+  {
+   "role": "L'intendant de la guilde",
+   "nom": "Aldric Vennemoor",
+   "icone": "registre",
+   "texte": "Méticuleux jusqu'à l'agacement, Aldric tient le registre des expéditions des Elmarith, le coffre commun et le trésor de la guilde.",
+   "citation": "Ce qui n'est pas écrit n'a pas eu lieu.",
+   "lien": [
+    "inventaire",
+    "Ouvrir l'inventaire"
+   ]
+  },
+  {
+   "role": "Les informateurs",
+   "nom": "Tobin et Isaure Merle",
+   "icone": "merle",
+   "texte": "Frère et sœur, braconniers et éclaireurs. Ils battent la campagne et rapportent ce qu'ils voient. Tobin parle volontiers, parfois trop ; Isaure ne dit rien tant qu'elle n'est pas sûre.",
+   "citation": "On dit des choses. Après, c'est à vous d'aller voir.",
+   "lien": [
+    "rumeurs",
+    "Lire les rumeurs"
+   ]
+  }
+ ]
+}
